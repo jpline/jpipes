@@ -16,6 +16,8 @@ pipelines:
         readOnly:
           ENV1: value1
           ENV2: value2 
+      runtime:       
+        type: host
     steps:    
       - name: testJob1
         type: bash
@@ -39,6 +41,18 @@ pipelines:
         triggeredBy:
           steps:
             - testJob1
+        setup:
+          runtime:            
+            type: image
+            image:
+              auto:
+                language: nodejs
+                versions: 6.10.*
+             # custom:
+              #  name:
+             #   tag:
+              #  options:
+   
         execution:
           onExecute:
             - echo "ENV1=$ENV1"
