@@ -19,6 +19,12 @@ pipelines:
     steps:    
       - name: testJob1
         type: bash
+        setup:
+          environmentVariables:
+            normal:
+              ENV1: value1_step
+            encrypted:
+              kIF3AkR8/0SbCBkpjf64xmetcDUMMx/CRUPVyApUWcwdvoaEozkGqjKEf415t/Gb8WHL5KDC8SpNP2twrfGNlr22jINf2UzPxCuxohR1aFl6QVCuQirt+kpyMgmRgIPNUZUolpE3qKAl6bf/3DYVBjZPtrhHBbyx7mUEYilza6s5eLRWQ2B+XHeYo51zu+w6jTJXA/CNRkztbV6rMIyxr+0BF+Bu4TTyyUtY6/E5RpaaYGgOEmUxPNuTWnqE+n0zrExSJCJYQu+D2ddosfu/gehV0Oz//uBUxkZcSppXsSl9Pyv+KP74igSra4BHM/iiKYuW4h5hEm6ud3SBF/l7mg==
         triggeredBy:
           resources:
             - sample_scriptrepo
