@@ -1,7 +1,7 @@
 resources:
   - name: sample_scriptrepo
     type: gitRepo
-    repoPath: jplines/sample-script
+    repoPath: jpline/sample-script
     configuration:
       integrationName: github
       branches:
