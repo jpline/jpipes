@@ -24,6 +24,11 @@ resources:
   
 pipelines:
   - name: pipeline1
+    setup:
+      environmentVariables:
+        readOnly:
+          - ENV1: value1
+          - ENV2: value2
     steps:    
       - name: testJob1
         type: bash
@@ -42,8 +47,6 @@ pipelines:
         execution:
           onExecute:
             - echo "hello!"
-            
-  - name: pipeline1
-    steps:
-      - name: test_step_1
+            - echo "ENV1=$ENV1"
+            - echo "ENV2=$ENV2"
 
