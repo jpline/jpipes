@@ -6,21 +6,6 @@ resources:
       integrationName: github
       branches:
         only: master
-      tags:
-        except: none
-        only: none   
-      buildOnCommit: true
-      buildOnPullRequest: true
-      buildOnPullRequestClose: true
-      buildOnRelease: true
-      buildOnTagPush: true
-      buildOnFileCommit: "*test"
-      shallowDepth: 2
-      gitConfig: 
-        - dont_know
-        - dont_know_2
-    initialVersion:
-      sha: master
   
 pipelines:
   - name: pipeline1
@@ -28,19 +13,10 @@ pipelines:
       environmentVariables:
         readOnly:
           - ENV1: value1
-          - ENV2: value2
+          - ENV2: value2 
     steps:    
       - name: testJob1
         type: bash
-        configuration:
-          priority: 4
-        setup:
-          runtime:
-            type: image
-            image:
-             custom:
-               name: drydock/u16all
-               tag: master
         triggeredBy:
           resources:
             - sample_scriptrepo
@@ -49,4 +25,13 @@ pipelines:
             - echo "hello!"
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
-
+            
+      - name: testJob2
+        type: bash
+        triggeredBy:
+          steps:
+            - testJob1
+        execution:
+          onExecute:
+            - echo "ENV1=$ENV1"
+            - echo "ENV2=$ENV2"
