@@ -21,6 +21,8 @@ pipelines:
         type: bash
         setup:
           environmentVariables:
+            normal:
+              ENV3: value3
             encrypted:
               ENV2: d1bCzOYy8NOVwcEiO+XDHibr3k7xz59tg/M7vOaWXDELm7Z7xAQe3nRqFIQyWcKA4XRN4REe6fIRp1Tuw7X6eTWLuqUyhTRIpwzyXFDk91/OYSEXE7Iyd9Hslq8DA33IU4k66Ekrg5/qIvByV10ViV8RVDvXZj1kG29xjKvlVq6QZ6XPvU9cP7jplfrXBQTH42dITSjwEu+/vaobhObcm6xj5AsGDylYxTnJG08/6kurOjeYmlOmnj4JMqUNY8t5GvGl7AE+d4dA9/OdTfxsDZ/SYDALwy/qrtnXOfE7uynvfvl/JYy1T7aXXiYI6zDaJGdxRXpgognn71jvND5mAg==
         triggeredBy:
