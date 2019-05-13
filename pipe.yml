@@ -1,7 +1,7 @@
 resources:
   - name: sample_scriptrepo
     type: gitRepo
-    repoPath: Varsha-Arun/sample-script
+    repoPath: jplines/sample-script
     configuration:
       integrationName: github
       branches:
