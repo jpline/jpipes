@@ -18,6 +18,11 @@ pipelines:
           ENV2: value2 
       runtime:       
         type: host
+        image:
+          auto:
+            language: python
+            versions: 
+              - 3.6
     steps:    
       - name: testJob1
         type: bash
