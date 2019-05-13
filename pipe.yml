@@ -24,7 +24,7 @@ pipelines:
             versions: 
               - 3.6
     steps:    
-      - name: testJob1
+      - name: test-Job1
         type: bash
         setup:
           environmentVariables:
