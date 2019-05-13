@@ -24,7 +24,7 @@ pipelines:
             normal:
               ENV1: value1_step
             encrypted:
-              QEAzAeOwqIgjineWWQdphbOClA41tM3p/NUtcnxxFFXnxMpjUpU90C//WR1WPBFlEw53nSeIo9lCrFPa3587eyq20Un29sdEqaKcKFfB2tZTvmVV5wErS2m4FhRf4bwwxJ6AcFBMoDC6Xkm400SolDTkxFSlIT3n32PYZ/pJLUCDFdv+Lky+p1XJOdokFmnTIn9GAvkfdmBJqITT6VhkqbV8kH7QTRH4kiy1sLCEsaqHQo2vK4QfePgcA6hsrtUJqCYMtQdJDzUu63KKaBIxSoBfOYuKkWKW5H+eT++viZ4HTnW7O3S9R/VXEjr6XztPtTU1YuHH7zDDjFI2Ngo8Vw==
+              ENV2: d1bCzOYy8NOVwcEiO+XDHibr3k7xz59tg/M7vOaWXDELm7Z7xAQe3nRqFIQyWcKA4XRN4REe6fIRp1Tuw7X6eTWLuqUyhTRIpwzyXFDk91/OYSEXE7Iyd9Hslq8DA33IU4k66Ekrg5/qIvByV10ViV8RVDvXZj1kG29xjKvlVq6QZ6XPvU9cP7jplfrXBQTH42dITSjwEu+/vaobhObcm6xj5AsGDylYxTnJG08/6kurOjeYmlOmnj4JMqUNY8t5GvGl7AE+d4dA9/OdTfxsDZ/SYDALwy/qrtnXOfE7uynvfvl/JYy1T7aXXiYI6zDaJGdxRXpgognn71jvND5mAg==
         triggeredBy:
           resources:
             - sample_scriptrepo
