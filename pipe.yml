@@ -14,8 +14,8 @@ pipelines:
     setup:
       environmentVariables:
         readOnly:
-          - ENV1: value1
-          - ENV2: value2 
+          ENV1: value1
+          ENV2: value2 
     steps:    
       - name: testJob1
         type: bash
