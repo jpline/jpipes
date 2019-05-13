@@ -1,0 +1,44 @@
+resources:
+  - name: sample_scriptrepo
+    type: gitRepo
+    repoPath: Varsha-Arun/sample-script
+    configuration:
+      integrationName: github
+      branches:
+        only: master
+      tags:
+        except: none
+        only: none   
+      buildOnCommit: true
+      buildOnPullRequest: true
+      buildOnPullRequestClose: true
+      buildOnRelease: true
+      buildOnTagPush: true
+      buildOnFileCommit: "*test"
+      shallowDepth: 2
+      gitConfig: 
+        - dont_know
+        - dont_know_2
+    initialVersion:
+      sha: master
+  
+pipelines:
+  - name: pipeline1
+    steps:    
+      - name: testJob1
+        type: bash
+        configuration:
+          priority: 4
+        setup:
+          runtime:
+            type: image
+            image:
+             custom:
+               name: drydock/u16all
+               tag: master
+        triggeredBy:
+          resources:
+            - sample_scriptrepo
+        execution:
+          onExecute:
+            - echo "hello!"
