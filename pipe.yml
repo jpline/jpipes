@@ -42,3 +42,5 @@ pipelines:
         execution:
           onExecute:
             - echo "hello!"
+            
+  - name: pipeline-test
