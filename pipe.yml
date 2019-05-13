@@ -43,7 +43,7 @@ pipelines:
           onExecute:
             - echo "hello!"
             
-  - name: pipeline-test
+  - name: pipeline1
     steps:
       - name: test_step_1
 
