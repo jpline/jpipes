@@ -6,6 +6,8 @@ resources:
       integrationName: github
       branches:
         only: master
+    initialVersion:
+      sha: master
   
 pipelines:
   - name: pipeline1
