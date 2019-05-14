@@ -11,12 +11,12 @@ resources:
  
 pipelines:
   - name: pipeline1
-    setup:
-      environmentVariables:
-        readOnly:
-          ENV1: value1
-          ENV2: value2 
-      #runtime:       
+   # setup:
+   #   environmentVariables:
+   #     readOnly:
+    #      ENV1: value1
+    #      ENV2: value2 
+     # #runtime:       
       #  type: image
         #image:
          # auto:
@@ -38,9 +38,10 @@ pipelines:
         setup:
           environmentVariables:
             normal:
+              ENV1: value1
               ENV3: value3
             encrypted:
-              ENV2: d1bCzOYy8NOVwcEiO+XDHibr3k7xz59tg/M7vOaWXDELm7Z7xAQe3nRqFIQyWcKA4XRN4REe6fIRp1Tuw7X6eTWLuqUyhTRIpwzyXFDk91/OYSEXE7Iyd9Hslq8DA33IU4k66Ekrg5/qIvByV10ViV8RVDvXZj1kG29xjKvlVq6QZ6XPvU9cP7jplfrXBQTH42dITSjwEu+/vaobhObcm6xj5AsGDylYxTnJG08/6kurOjeYmlOmnj4JMqUNY8t5GvGl7AE+d4dA9/OdTfxsDZ/SYDALwy/qrtnXOfE7uynvfvl/JYy1T7aXXiYI6zDaJGdxRXpgognn71jvND5mAg==
+              ENV2: JgEdhfxEX+NGc4RBx7SEbmiBHpHrVUDjmOvvDF3pHTqMvp9nfL/QBdL0+neIu9vWW2xl8JnVEz0LL+jhBJo+ThclfOqzJ5OeUq3qRPLniEpsg8DxZvaWx6goRd+B5OjAfW75fT290bL+JIv/A9GIuqVo87IKMhSpWzevNDlgehN1KWK8ttjOi51OQdxAuJ4v7opJiiRI0ERh3fUIozMQ44SRapZ1tVY9BO5NViW2yCo+fnfUVXAhP783+lyJmJHpjdn9+60/NfMFez7kieHkKUtEuOy7u7y8wLusA2UPbXQji8S45qFtCKddgdXsKhZkQOdFFH82jialXp66BeUWPw==
         triggeredBy:
           resources:
             - sample_scriptrepo
@@ -51,21 +52,27 @@ pipelines:
             - echo "hello!"
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
+            - echo "ENV3=$ENV3"
           onSuccess:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
+            - echo "ENV3=$ENV3"
           onComplete:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
+            - echo "ENV3=$ENV3"
           onStart:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
+            - echo "ENV3=$ENV3"
           onFailure:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
+            - echo "ENV3=$ENV3"
           onCancel:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
+            - echo "ENV3=$ENV3"
             
       - name: testJobTest2
         type: bash
