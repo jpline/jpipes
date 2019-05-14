@@ -18,11 +18,11 @@ pipelines:
           ENV2: value2 
       runtime:       
         type: image
-        image:
-          auto:
-            language: nodeJs
-            versions: 
-              - 8.15.0
+        #image:
+         # auto:
+          #  language: nodeJs
+          #  versions: 
+          #    - 8.15.0
           # custom:
            # name: drydock/u16alltestnodejs
            # tag: hello
@@ -67,21 +67,13 @@ pipelines:
       - name: testJob3
         type: bash
         triggeredBy:
-          steps:
-            - testJob1
+          resources:
+            - sample_scriptrepo
         execution:
           onExecute:
             - echo "cyclic3"
-            
-      - name: testJob4
-        type: bash
-        triggeredBy:
-          steps:
-            - testJob3
-            - testJob2
-        execution:
-          onExecute:
-            - echo "end game"       
+        outputResources:
+          - sample_scriptrepo
             
   - name: pipeline2
     steps:    
