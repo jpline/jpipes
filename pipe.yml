@@ -45,13 +45,14 @@ pipelines:
           type: image
           image:
            
-          # auto:
-          #    language: nodeJs
-           #   versions: 
-            #   - 8.15.0
-            custom:
-              name: drydock/u16nodall
-              tag: latest
+            auto:
+              language: nodeJs
+              versions: 
+                - 8.15.0
+            #custom:
+              
+              #name: drydock/u16nodall
+              #tag: latest
                #options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
         requires:
           resources:
