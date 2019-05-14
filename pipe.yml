@@ -35,15 +35,15 @@ pipelines:
          # priority: <[0-10000]>
         #  timeoutSeconds: 7/8
          # nodePool: testing__u16nodepool
-       # setup:
+        setup:
        #   environmentVariables:
         #    normal:
          #     ENV1: value1
          #     ENV3: value3
          #     STEP_TYPE: test
-        #runtime:       
-          #type: image
-          #image:
+          runtime:       
+            type: host
+            #image:
            
             #auto:
               #language: nodeJs
