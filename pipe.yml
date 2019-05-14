@@ -46,7 +46,7 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             
-      - name: testJobTest
+      - name: testJobTest2
         type: bash
         #triggeredBy:
          # steps:
@@ -56,6 +56,15 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
+            
+      - name: testJobTest
+        type: bash
+        #triggeredBy:
+         # steps:
+         #   - testJob1
+        execution:
+          onExecute:
+            - echo "ENV1=$ENV1"
             
   - name: pipeline2
     steps:    
