@@ -19,14 +19,14 @@ pipelines:
       runtime:       
         type: image
         image:
-        #  auto:
-         #   language: nodeJs
-          #  versions: 
-           #   - 8.15.0
-           custom:
-            name: drydock/u16alltestnodejs
-            tag: hello
-            options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
+          auto:
+            language: nodeJs
+            versions: 
+              - 8.15.0
+          # custom:
+           # name: drydock/u16alltestnodejs
+           # tag: hello
+           # options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     steps:    
       - name: testJob1
         type: bash
@@ -39,8 +39,6 @@ pipelines:
         triggeredBy:
           resources:
             - sample_scriptrepo
-          steps:
-            - step_pl2
         execution:
           onExecute:
             - printenv
@@ -61,15 +59,31 @@ pipelines:
                 language: nodeJs
                 versions: 
                   - 8.15.0
-             # custom:
-              #  name:
-             #   tag:
-              #  options:
-   
         execution:
           onExecute:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
+            
+      - name: testJob3
+        type: bash
+        triggeredBy:
+          steps:
+            - testJob1
+        setup:
+        execution:
+          onExecute:
+            - echo "cyclic3"
+            
+      - name: testJob4
+        type: bash
+        triggeredBy:
+          steps:
+            - testJob3
+            - testJob2
+        setup:
+        execution:
+          onExecute:
+            - echo "end game"       
             
   - name: pipeline2
     steps:    
@@ -87,6 +101,3 @@ pipelines:
         execution:
           onExecute:
             - printenv
-            - echo "hello!"
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
