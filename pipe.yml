@@ -16,10 +16,10 @@ pipelines:
    #     readOnly:
     #      ENV1: value1
     #      ENV2: value2 
-     # #runtime:       
-      #  type: image
-        #image:
-         # auto:
+       runtime:       
+         type: host
+         #image:
+         #auto:
           #  language: nodeJs
           #  versions: 
           #    - 8.15.0
