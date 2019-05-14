@@ -51,7 +51,6 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
-            - e
           onSuccess:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
