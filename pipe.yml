@@ -34,7 +34,7 @@ pipelines:
          # affinityGroup: bldGroup 
          # priority: <[0-10000]>
          # timeoutSeconds: <job timeout limit>
-          nodePool: testu16nodepool
+          nodePool: testing__u16nodepool
         setup:
           environmentVariables:
             normal:
