@@ -46,7 +46,7 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             
-      - name: 6754
+      - name: ^998
         type: bash
         triggeredBy:
           steps:
