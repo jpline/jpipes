@@ -22,7 +22,7 @@ pipelines:
           auto:
             language: nodeJs
             versions: 
-              - 6.16.0
+              - 8.15.0
     steps:    
       - name: testJob1
         type: bash
