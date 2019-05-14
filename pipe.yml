@@ -28,7 +28,7 @@ pipelines:
            # tag: hello
            # options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     steps:    
-      - name: /^9
+      - name: /^test
         type: bash
         setup:
           environmentVariables:
