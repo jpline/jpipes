@@ -28,7 +28,7 @@ pipelines:
            # tag: hello
            # options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     steps:    
-      - name: testJob1
+      - name: testJobTest
         type: bash
         setup:
           environmentVariables:
@@ -46,7 +46,7 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             
-      - name: testJob1
+      - name: testJobTest
         type: bash
         triggeredBy:
           steps:
