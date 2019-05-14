@@ -20,9 +20,9 @@ pipelines:
         type: image
         image:
           auto:
-            language: node_js
+            language: nodeJs
             versions: 
-              - 8.15
+              - 6.16.0
     steps:    
       - name: testJob1
         type: bash
