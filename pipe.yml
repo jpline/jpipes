@@ -11,13 +11,13 @@ resources:
  
 pipelines:
   - name: pipeline1
-    setup:
+    #setup:
    #   environmentVariables:
    #     readOnly:
     #      ENV1: value1
     #      ENV2: value2 
-      runtime:       
-        type: host
+    #  runtime:       
+    #    type: host
          #image:
          #auto:
           #  language: nodeJs
@@ -43,15 +43,15 @@ pipelines:
          #     STEP_TYPE: test
         runtime:       
           type: image
-          #image:
+          image:
            
           # auto:
           #    language: nodeJs
            #   versions: 
             #   - 8.15.0
-             #custom:
-              # name: drydock/u16nodall
-               #tag: latest
+            custom:
+              name: drydock/u16nodall
+              tag: latest
                #options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
         requires:
           resources:
