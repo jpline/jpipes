@@ -43,6 +43,11 @@ pipelines:
          #     STEP_TYPE: test
         runtime:       
           type: image
+          image:
+          auto:
+            language: nodeJs
+            versions: 
+              - 8.15.0
         triggeredBy:
           resources:
             - sample_scriptrepo
