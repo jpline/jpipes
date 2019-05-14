@@ -42,13 +42,13 @@ pipelines:
          #     ENV3: value3
          #     STEP_TYPE: test
           runtime:       
-            type: host
-            #image:
+            type: image
+            image:
            
-            #auto:
-              #language: nodeJs
-              #versions: 
-                #- 8.15.0
+              auto:
+                language: nodeJs
+                versions: 
+                  - 8.15.0
             #custom:
               
               #name: drydock/u16nodall
