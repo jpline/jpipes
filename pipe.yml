@@ -47,7 +47,7 @@ pipelines:
             - echo "ENV2=$ENV2"
             
       - name: ENV1
-        type: resource
+        type: steps
         triggeredBy:
           steps:
             - testJob1
