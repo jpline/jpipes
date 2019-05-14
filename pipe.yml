@@ -28,7 +28,7 @@ pipelines:
            # tag: hello
            # options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     steps:    
-      - name: testJob1
+      - name: test%$^#Job1
         type: bash
         setup:
           environmentVariables:
@@ -56,17 +56,6 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
-            
-      - name: testJob3
-        type: bash
-        triggeredBy:
-          resources:
-            - sample_scriptrepo
-        execution:
-          onExecute:
-            - echo "cyclic3"
-       # outputResources:
-        #  - sample_scriptrepo
             
   - name: pipeline2
     steps:    
