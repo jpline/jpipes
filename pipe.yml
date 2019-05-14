@@ -8,6 +8,16 @@ resources:
         only: master
     initialVersion:
       sha: master
+      
+  - name: sample_scriptrepo
+    type: gitRepo
+    repoPath: jpline/sample-script
+    configuration:
+      integrationName: github
+      branches:
+        only: master
+    initialVersion:
+      sha: master
   
 pipelines:
   - name: pipeline1
@@ -82,10 +92,6 @@ pipelines:
                 language: nodeJs
                 versions: 
                   - 8.15.0
-        triggeredBy:
-          steps:
-            - testJob1
-            - testJob2
         execution:
           onExecute:
             - echo "cyclic"
