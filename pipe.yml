@@ -11,11 +11,11 @@ resources:
  
 pipelines:
   - name: pipeline1
-    #setup:
-      #environmentVariables:
-      #  readOnly:
-       #   ENV1: value1
-       #   ENV2: value2 
+    setup:
+      environmentVariables:
+        readOnly:
+          ENV1: value1
+          ENV2: value2 
       #runtime:       
       #  type: image
         #image:
@@ -48,6 +48,21 @@ pipelines:
           onExecute:
             - printenv
             - echo "hello!"
+            - echo "ENV1=$ENV1"
+            - echo "ENV2=$ENV2"
+          onSuccess:
+            - echo "ENV1=$ENV1"
+            - echo "ENV2=$ENV2"
+          onComplete:
+            - echo "ENV1=$ENV1"
+            - echo "ENV2=$ENV2"
+          onStart:
+            - echo "ENV1=$ENV1"
+            - echo "ENV2=$ENV2"
+          onFailure:
+            - echo "ENV1=$ENV1"
+            - echo "ENV2=$ENV2"
+          onCancel:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             
