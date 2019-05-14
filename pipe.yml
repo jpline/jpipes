@@ -52,9 +52,9 @@ pipelines:
             type: image
             image:
               auto:
-                language: python
+                language: node_js
                 versions: 
-                  - 3.6
+                  - 8.15
              # custom:
               #  name:
              #   tag:
