@@ -51,14 +51,6 @@ pipelines:
         triggeredBy:
           steps:
             - testJob1
-        setup:
-          runtime:            
-            type: image
-            image:
-              auto:
-                language: nodeJs
-                versions: 
-                  - 8.15.0
         execution:
           onExecute:
             - echo "ENV1=$ENV1"
