@@ -35,12 +35,12 @@ pipelines:
          # priority: <[0-10000]>
         #  timeoutSeconds: 7/8
          # nodePool: testing__u16nodepool
-        setup:
-          environmentVariables:
-            normal:
-              ENV1: value1
-              ENV3: value3
-              STEP_TYPE: test
+       # setup:
+       #   environmentVariables:
+        #    normal:
+         #     ENV1: value1
+         #     ENV3: value3
+         #     STEP_TYPE: test
         triggeredBy:
           resources:
             - sample_scriptrepo
@@ -51,6 +51,7 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
+            - e
           onSuccess:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
