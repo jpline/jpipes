@@ -69,7 +69,6 @@ pipelines:
         triggeredBy:
           steps:
             - testJob1
-        setup:
         execution:
           onExecute:
             - echo "cyclic3"
@@ -80,7 +79,6 @@ pipelines:
           steps:
             - testJob3
             - testJob2
-        setup:
         execution:
           onExecute:
             - echo "end game"       
