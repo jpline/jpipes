@@ -29,7 +29,7 @@ pipelines:
            # options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     steps:    
       - name: testJob1
-        type: steps
+        type: bash
         setup:
           environmentVariables:
             normal:
