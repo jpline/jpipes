@@ -41,6 +41,8 @@ pipelines:
          #     ENV1: value1
          #     ENV3: value3
          #     STEP_TYPE: test
+        runtime:       
+          type: image
         triggeredBy:
           resources:
             - sample_scriptrepo
