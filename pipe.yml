@@ -20,7 +20,7 @@ pipelines:
         type: image
         image:
           auto:
-            language: nodejs
+            language: nodeJs
             versions: 
               - 6.16.0
     steps:    
@@ -52,7 +52,7 @@ pipelines:
             type: image
             image:
               auto:
-                language: nodejs
+                language: nodeJs
                 versions: 
                   - 8.15.0
              # custom:
