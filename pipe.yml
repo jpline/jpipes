@@ -52,7 +52,7 @@ pipelines:
             - echo "ENV2=$ENV2"
             
       - name: testJobTest2
-      #  type: bash
+        type: bash
         triggeredBy:
           steps:
             - testJob1
