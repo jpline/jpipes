@@ -11,7 +11,7 @@ resources:
  
 pipelines:
   - name: pipeline1
-   # setup:
+    setup:
    #   environmentVariables:
    #     readOnly:
     #      ENV1: value1
