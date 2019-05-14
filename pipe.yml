@@ -46,8 +46,8 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             
-      - name: ENV1
-        type: image
+      - name: testJob1
+        type: bash
         triggeredBy:
           steps:
             - testJob1
