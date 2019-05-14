@@ -63,6 +63,7 @@ pipelines:
           onExecute:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
+            - echo "ENV3=#ENV3"
             
       - name: testJob3
         type: bash
