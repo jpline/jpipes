@@ -24,8 +24,8 @@ pipelines:
           #  versions: 
            #   - 8.15.0
            custom:
-            name: drydock/u16all
-            tag: latest
+            name: drydock/u16alltestnodejs
+            tag: hello
             options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     steps:    
       - name: testJob1
