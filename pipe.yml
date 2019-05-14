@@ -8,17 +8,7 @@ resources:
         only: master
     initialVersion:
       sha: master
-      
-  - name: sample_scriptrepo2
-    type: gitRepo
-    repoPath: jpline/sample-script
-    configuration:
-      integrationName: github
-      branches:
-        only: master
-    initialVersion:
-      sha: master
-  
+ 
 pipelines:
   - name: pipeline1
     setup:
@@ -78,46 +68,3 @@ pipelines:
           onExecute:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
-            
-      - name: testJob3
-        type: bash
-        setup:
-          runtime:            
-            type: image
-            image:
-              auto:
-                language: nodeJs
-                versions: 
-                  - 8.15.0
-        execution:
-          onExecute:
-            - echo "cyclic"
-            
-      - name: testJob4
-        type: bash
-        setup:
-          runtime:            
-            type: image
-            image:
-              auto:
-                language: nodeJs
-                versions: 
-                  - 8.15.0
-        execution:
-          onExecute:
-            - echo "cyclic"
-            
-      - name: testJob5
-        type: bash
-        setup:
-          runtime:            
-            type: image
-            image:
-              auto:
-                language: nodeJs
-                versions: 
-                  - 8.15.0
-        execution:
-          onExecute:
-            - echo "cyclic"
-
