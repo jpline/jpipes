@@ -53,9 +53,9 @@ pipelines:
               # name: drydock/u16nodall
                #tag: latest
                #options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
-        triggeredBy:
+        requires:
           resources:
-            - sample_scriptrepo
+            #- sample_scriptrepo
         execution:
           onExecute:
             - printenv
