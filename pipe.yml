@@ -47,7 +47,7 @@ pipelines:
             - echo "ENV2=$ENV2"
             
       - name: ENV1
-        type: runsh
+        type: resource
         triggeredBy:
           steps:
             - testJob1
