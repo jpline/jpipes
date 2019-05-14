@@ -30,11 +30,11 @@ pipelines:
     steps:    
       - name: testJob1
         type: bash
-       # configuration:
+        configuration:
          # affinityGroup: bldGroup 
          # priority: <[0-10000]>
          # timeoutSeconds: <job timeout limit>
-          #nodePool: testing__u16nodepool
+          nodePool: testing__u16nodepool
         setup:
           environmentVariables:
             normal:
