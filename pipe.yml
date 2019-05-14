@@ -28,7 +28,7 @@ pipelines:
            # tag: hello
            # options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     steps:    
-      - name: test%$^#Job1
+      - name: /^9
         type: bash
         setup:
           environmentVariables:
