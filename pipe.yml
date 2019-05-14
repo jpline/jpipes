@@ -46,8 +46,8 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             
-      #- name: testJobTest2
-        type: bash
+      - name: testJobTest2
+      #  type: bash
         triggeredBy:
           steps:
             - testJob1
