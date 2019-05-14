@@ -48,9 +48,9 @@ pipelines:
             
       - name: testJobTest
         type: bash
-        triggeredBy:
-          steps:
-            - testJob1
+        #triggeredBy:
+         # steps:
+         #   - testJob1
         execution:
           onExecute:
             - echo "ENV1=$ENV1"
