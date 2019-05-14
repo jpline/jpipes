@@ -47,6 +47,7 @@ pipelines:
         execution:
           onExecute:
             - printenv
+            - uywgeytt2udfyte3dyfytdfyvdytfwydwuye2jdy2fdwdvhgdhdvhwfdwye
             - echo "hello!"
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
