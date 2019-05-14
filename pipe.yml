@@ -30,10 +30,10 @@ pipelines:
     steps:    
       - name: testJob1
         type: bash
-       # configuration:
+        configuration:
          # affinityGroup: bldGroup 
          # priority: <[0-10000]>
-         # timeoutSeconds: <job timeout limit>
+          timeoutSeconds: 1m
          # nodePool: testing__u16nodepool
         setup:
           environmentVariables:
@@ -50,6 +50,7 @@ pipelines:
             - echo "hello!"
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
+            - sleep 10m
             
       - name: testJobTest2
         type: bash
