@@ -41,8 +41,6 @@ pipelines:
               ENV1: value1
               ENV3: value3
               STEP_TYPE: test
-            secure:
-              ENV2: MkJu4c/PIiBnwp8dc5MJ4RALaVyW4FQLSk4ssCWQC7jcYJgiOmxOgfp5lvwruEC36U/7A1FG+747MwV2edUuJND1SpNBGl6Np/O4BQYl/Pwpr4G8agzcMIbSA4pMIowOz5jLPC+EBpbKEIgiwhNeXUeEy8yXcJ1GzPYvgpMsLPajzhuW52kJjhy6aynulv9zAVJVjHQWREqJDql4H/C91NNdgdbELQz3qO0t8egtT+7kIApfcsAFJlxKi7VIjFzCB95NP3WZ2yJpuVHeRse7JILR2v5w2TcYwNejVxn1TwSQKUVB4iKNd7WzlV7mPXxWTwyWo48iEnY8vZAw==
         triggeredBy:
           resources:
             - sample_scriptrepo
