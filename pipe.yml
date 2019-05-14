@@ -54,6 +54,7 @@ pipelines:
         execution:
           onExecute:
             - printenv
+            - node -v
             - echo "hello!"
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
