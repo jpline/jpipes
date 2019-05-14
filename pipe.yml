@@ -92,3 +92,17 @@ pipelines:
         execution:
           onExecute:
             - echo "cyclic"
+            
+      - name: testJob4
+        type: bash
+        setup:
+          runtime:            
+            type: image
+            image:
+              auto:
+                language: nodeJs
+                versions: 
+                  - 8.15.0
+        execution:
+          onExecute:
+            - echo "cyclic"
