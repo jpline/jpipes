@@ -73,8 +73,8 @@ pipelines:
         execution:
           onExecute:
             - echo "cyclic3"
-        outputResources:
-          - sample_scriptrepo
+       # outputResources:
+        #  - sample_scriptrepo
             
   - name: pipeline2
     steps:    
