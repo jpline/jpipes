@@ -43,11 +43,12 @@ pipelines:
          #     STEP_TYPE: test
         runtime:       
           type: image
-          image:
-            auto:
-              language: nodeJs
-              versions: 
-               - 8.15.0
+          #image:
+           
+          # auto:
+          #    language: nodeJs
+           #   versions: 
+            #   - 8.15.0
              #custom:
               # name: drydock/u16nodall
                #tag: latest
