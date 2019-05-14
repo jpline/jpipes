@@ -68,3 +68,24 @@ pipelines:
           onExecute:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
+            
+      - name: testJob3
+        type: bash
+        triggeredBy:
+          steps:
+            - testJob1
+        setup:
+          runtime:            
+            type: image
+            image:
+              auto:
+                language: nodeJs
+                versions: 
+                  - 8.15.0
+        triggeredBy:
+          steps:
+            - testJob1
+            - testJob2
+        execution:
+          onExecute:
+            - echo "cyclic"
