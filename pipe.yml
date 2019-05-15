@@ -1,5 +1,5 @@
 resources:
-  - name: sample_scriptrepo
+  - name: sample_scriptrepo-test
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
