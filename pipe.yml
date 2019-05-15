@@ -19,6 +19,13 @@ pipelines:
             - sample_scriptrepo
           integrations:
             - dockerInt
+        runtime:            
+            type: image
+              custom:
+                name: shippabledocker/sample_node_pvt
+                tag: master
+                options: 'privileged: true'
+
         execution:
           onExecute:
             - printenv
