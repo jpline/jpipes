@@ -1,5 +1,15 @@
 resources:
-  - name: sample_scriptrepo-test
+  - name: sample_scriptrepo
+    type: gitRepo
+    repoPath: jpline/sample-script
+    configuration:
+      integrationName: github
+      branches:
+        only: master
+    initialVersion:
+      sha: master
+  
+  - name: testRepo
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
@@ -25,7 +35,6 @@ pipelines:
         triggeredBy:
           resources:
             - sample_scriptrepo
-            - test
           integrations:
             - dockerInt
         runtime:            
