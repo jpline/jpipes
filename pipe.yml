@@ -9,7 +9,7 @@ resources:
     initialVersion:
       sha: master
   
-  - name: sample_scriptrepo
+  - name: sample_scriptrepo2
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
@@ -17,7 +17,7 @@ resources:
       branches:
         only: master
     initialVersion:
-      sha: master
+      sha: pipe
  
 pipelines:
   - name: pipeline1
