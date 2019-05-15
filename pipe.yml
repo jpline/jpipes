@@ -9,7 +9,7 @@ resources:
     initialVersion:
       sha: master
   
-  - name: testRepo
+  - name: test-Repo
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
