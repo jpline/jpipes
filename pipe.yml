@@ -10,7 +10,7 @@ resources:
       sha: master
   
   - name: testRepo
-    type: image
+    type: testgit
     repoPath: jpline/sample-script
     configuration:
       integrationName: github
