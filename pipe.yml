@@ -9,8 +9,8 @@ resources:
     initialVersion:
       sha: master
   
-  - name: test-Repo
-    type: gitRepo
+  - name: testRepo
+    type: image
     repoPath: jpline/sample-script
     configuration:
       integrationName: github
