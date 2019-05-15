@@ -15,9 +15,9 @@ resources:
     configuration:
       integrationName: dockerInt
       branches:
-        only: pipe2
+        only: pipe
     initialVersion:
-      sha: pipe2
+      sha: pipe
  
 pipelines:
   - name: pipeline1
