@@ -3,7 +3,7 @@ resources:
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
-      integrationName: github
+      integrationName: github-varsha
       branches:
         only: master
     initialVersion:
