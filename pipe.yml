@@ -10,12 +10,12 @@ resources:
       sha: master
       
   - name: imageDoc
-     type: image
-     imageName: shippabledocker/sample_node
-     configuration:
-       integrationName: dockerInt
-     initialVersion:
-       imageTag: latest
+    type: image
+    imageName: shippabledocker/sample_node
+    configuration:
+      integrationName: dockerInt
+    initialVersion:
+      imageTag: latest
  
 pipelines:
   - name: pipeline1
