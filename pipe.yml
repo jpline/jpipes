@@ -97,7 +97,7 @@ pipelines:
         type: bash
         triggeredBy:
           resources:
-            - sample_scriptrepo2
+            - sampleScriptPipe
           steps:
             - testJob1
         execution:
