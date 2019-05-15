@@ -20,11 +20,12 @@ pipelines:
           integrations:
             - dockerInt
         runtime:            
-            type: image
-              custom:
-                name: shippabledocker/sample_node_pvt
-                tag: master
-                options: 'privileged: true'
+          type: image
+          image:
+            custom:
+              name: shippabledocker/sample_node_pvt
+              tag: master
+              options: 'privileged: true'
 
         execution:
           onExecute:
