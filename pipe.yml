@@ -25,6 +25,7 @@ pipelines:
         triggeredBy:
           resources:
             - sample_scriptrepo
+            - test
           integrations:
             - dockerInt
         runtime:            
