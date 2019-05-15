@@ -16,16 +16,16 @@ pipelines:
    #     readOnly:
     #      ENV1: value1
     #      ENV2: value2 
-      runtime:       
-        type: image
-        image:
+    #  runtime:       
+      #  type: image
+      #  image:
          #auto:
           #  language: nodeJs
           #  versions: 
           #    - 8.15.0
-          custom:
-            name: drydock/u16nodall
-            tag: latest
+        #  custom:
+          #  name: drydock/u16nodall
+          #  tag: latest
              #options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     steps:    
       - name: testJob1
@@ -35,28 +35,28 @@ pipelines:
          # priority: <[0-10000]>
         #  timeoutSeconds: 7/8
          # nodePool: testing__u16nodepool
-        setup:
+        #setup:
        #   environmentVariables:
         #    normal:
          #     ENV1: value1
          #     ENV3: value3
          #     STEP_TYPE: test
-          runtime:       
-            type: image
-            image:
+         # runtime:       
+         #   type: image
+          #  image:
            
-              auto:
-                language: nodeJs
-                versions: 
-                  - 8.15.0
+            #  auto:
+             #   language: nodeJs
+              #  versions: 
+              #    - 8.15.0
             #custom:
               
               #name: drydock/u16nodall
               #tag: latest
                #options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
-        #requires:
-        #  resources:
-        #    - sample_scriptrepo
+        requires:
+          resources:
+            - sample_scriptrepo
         execution:
           onExecute:
             - printenv
