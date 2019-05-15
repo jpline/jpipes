@@ -15,9 +15,9 @@ resources:
     configuration:
       integrationName: github
       branches:
-        only: pipe
+        only: pipe2
     initialVersion:
-      sha: pipe
+      sha: pipe2
  
 pipelines:
   - name: pipeline1
