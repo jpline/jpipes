@@ -78,6 +78,8 @@ pipelines:
       - name: testJobTest2
         type: bash
         triggeredBy:
+          resources:
+            - sample_scriptrepo2
           steps:
             - testJob1
         execution:
