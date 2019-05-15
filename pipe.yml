@@ -90,7 +90,7 @@ pipelines:
         type: bash
         triggeredBy:
           steps:
-            - testJob1
+            - testJob1test
         execution:
           onExecute:
             - echo "ENV1=$ENV1"
