@@ -8,7 +8,14 @@ resources:
         only: pipe
     initialVersion:
       sha: master
-
+      
+  - name: imageDoc
+     type: image
+     imageName: shippabledocker/sample_node
+     configuration:
+       integrationName: dockerInt
+     initialVersion:
+       imageTag: latest
  
 pipelines:
   - name: pipeline1
@@ -71,6 +78,7 @@ pipelines:
         triggeredBy:
           resources:
             - sample_scriptrepo
+            - imageDoc
           steps:
             - testJob1
         execution:
