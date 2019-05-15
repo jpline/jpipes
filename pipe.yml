@@ -13,7 +13,7 @@ resources:
     type: image
     imageName: shippabledocker/sample_node
     configuration:
-      integrationName: dockerInte
+      integrationName: artifacty
     initialVersion:
       imageTag: latest
  
