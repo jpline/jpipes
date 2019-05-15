@@ -3,7 +3,7 @@ resources:
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
-      integrationName: github-varsha
+      integrationName: github
       branches:
         only: master
     initialVersion:
@@ -13,7 +13,7 @@ resources:
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
-      integrationName: github
+      integrationName: dockerInt
       branches:
         only: pipe2
     initialVersion:
