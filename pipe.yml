@@ -28,13 +28,13 @@ pipelines:
               options: 'privileged: true'
 
         execution:
-          onExecute:
-            - printenv
-            - node -v
-            - echo "hello!"
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
+          #onExecute:
+           # - printenv
+            #- node -v
+            #- echo "hello!"
+            #- echo "ENV1=$ENV1"
+            #- echo "ENV2=$ENV2"
+            #- echo "ENV3=$ENV3"
           onSuccess:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
