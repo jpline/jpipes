@@ -23,12 +23,12 @@ resources:
     #  tags:
      #   except: <regular expression>
       #  only: <regular expression>
-     # buildOn:
-      #   commit: true
-      #   pullRequest: true
-      #   pullRequestClose: true
-       #  release: true
-      #   tagPush: true
+      buildOn:
+         commit: true
+         pullRequest: true
+         pullRequestClose: true
+         release: true
+         tagPush: true
 
      # shallowDepth: <Positive Integer> #used to set the depth at which the repo is (shallow)cloned/fetched
     #  gitConfig: #used to set the git configs globally before the repo is cloned
