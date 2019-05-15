@@ -9,26 +9,7 @@ resources:
     initialVersion:
       sha: master
   
-  - name: sampleScriptPipe
-    type: gitRepo
-    repoPath: jpline/sample-script
-    configuration:
-      integrationName: github
-      files:
-        except: test.sh
-        only: echo.sh
-      branches:
-        except: pipe
-        only: master
-    #  tags:
-     #   except: <regular expression>
-      #  only: <regular expression>
-      buildOn:
-         commit: false
-         pullRequest: false
-         pullRequestClose: false
-         release: false
-         tagPush: false
+  
 
      # shallowDepth: <Positive Integer> #used to set the depth at which the repo is (shallow)cloned/fetched
     #  gitConfig: #used to set the git configs globally before the repo is cloned
@@ -97,7 +78,7 @@ pipelines:
         type: bash
         triggeredBy:
           resources:
-            - sampleScriptPipe
+            - sample_scriptrepo
           steps:
             - testJob1
         execution:
