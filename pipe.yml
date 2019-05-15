@@ -8,15 +8,7 @@ resources:
         only: pipe
     initialVersion:
       sha: master
-  
-  
 
-     # shallowDepth: <Positive Integer> #used to set the depth at which the repo is (shallow)cloned/fetched
-    #  gitConfig: #used to set the git configs globally before the repo is cloned
-     #   - <git config>
-      #  - <git config>
-    initialVersion:
-      sha: pipe
  
 pipelines:
   - name: pipeline1
