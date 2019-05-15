@@ -57,6 +57,8 @@ pipelines:
         requires:
           resources:
             - sample_scriptrepo
+          integrations:
+            - dockerInt
         execution:
           onExecute:
             - printenv
