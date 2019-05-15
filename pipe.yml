@@ -58,7 +58,7 @@ pipelines:
             
       - name: testJobTest2
         type: bash
-        triggeredBy:
+        requires:
           steps:
             - testJob1
         execution:
