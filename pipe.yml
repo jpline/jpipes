@@ -15,7 +15,7 @@ resources:
     configuration:
       integrationName: github
       branches:
-        only: master
+        only: pipe
     initialVersion:
       sha: pipe
  
