@@ -5,7 +5,8 @@ resources:
     configuration:
       integrationName: github
       branches:
-        only: master
+        #only: master
+        except: pipe
       files:
         except: node.sh
         only: echo.sh
