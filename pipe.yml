@@ -6,7 +6,7 @@ resources:
       integrationName: github
       branches:
         except: test_*
-        only: master_*
+      #  only: master_*
       files:
         except: tes*
       #  only: node_*
