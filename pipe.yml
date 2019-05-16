@@ -11,7 +11,7 @@ resources:
       
   - name: imageDoc
     type: image
-    imageName: shippabledocker/sample_node
+    imageName: shippabledocker/sample-node
     configuration:
       integrationName: dockerInt
     initialVersion:
