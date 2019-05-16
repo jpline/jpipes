@@ -7,9 +7,9 @@ resources:
       branches:
         #only: master
         except: pipe
-      files:
-        except: node.sh
-        only: echo.sh
+      #files:
+      #  except: node.sh
+      #  only: echo.sh
     initialVersion:
       sha: master
       
