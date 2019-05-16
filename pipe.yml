@@ -9,7 +9,7 @@ resources:
       #  only: master_*
       files:
         except: tes*
-      #  only: node_*
+        only: nod*
       #tags:
         #except: test_*
         #only: tag*
