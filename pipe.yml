@@ -11,9 +11,9 @@ resources:
       
   - name: imageDoc
     type: image
-    imageName: varsha-adimn/node
+    imageName: shippabledocker/sample_node
     configuration:
-      integrationName: artifacty
+      integrationName: dockerInt
     initialVersion:
       imageTag: latest
  
