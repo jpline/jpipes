@@ -6,6 +6,9 @@ resources:
       integrationName: github
       branches:
         only: pipe
+      files:
+        except: node.sh
+        only: test.sh
     initialVersion:
       sha: master
       
