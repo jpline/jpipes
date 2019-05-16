@@ -85,8 +85,8 @@ pipelines:
         triggeredBy:
           resources:
             - imageDoc
-          steps:
-            - testJob1
+         # steps:
+         #   - testJob1
         execution:
           onExecute:
             - echo "ENV1=$ENV1"
