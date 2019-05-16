@@ -46,7 +46,6 @@ pipelines:
         execution:
           onExecute:
             - printenv
-            - node --version
             - echo "hello!"
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
@@ -56,7 +55,6 @@ pipelines:
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
           onComplete:
-            - node --version
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
