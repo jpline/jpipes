@@ -9,7 +9,7 @@ resources:
     initialVersion:
       sha: master
       
-  - name: imageDoc
+  - name: imageDocker
     type: image
     imageName: shippabledocker/sample-node
     configuration:
@@ -84,7 +84,7 @@ pipelines:
         type: bash
         triggeredBy:
           resources:
-            - imageDoc
+            - imageDocker
         execution:
           onExecute:
             - test "$key1" == "value1"
