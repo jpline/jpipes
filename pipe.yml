@@ -7,12 +7,12 @@ resources:
       branches:
         except: test_*
       #  only: master_*
-      files:
+      #files:
+       # except: tes*
+       # only: nod*
+      tags:
         except: tes*
-        only: nod*
-      #tags:
-        #except: test_*
-        #only: tag*
+       # only: tag*
     initialVersion:
       sha: master
       
