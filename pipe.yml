@@ -8,6 +8,7 @@ resources:
         only: master
       files:
         except: node.sh
+        only: echo.sh
     initialVersion:
       sha: master
       
