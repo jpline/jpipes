@@ -7,8 +7,8 @@ resources:
       branches:
         except: test_*
         only: master_*
-      #files:
-      #  except: test_*
+      files:
+        except: tes*
       #  only: node_*
       #tags:
         #except: test_*
