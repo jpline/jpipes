@@ -80,12 +80,22 @@ pipelines:
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
             
-      - name: testJobTest2
+      - name: step_2
         type: bash
         triggeredBy:
           resources:
-            - sample_scriptrepo
             - imageDoc
+          steps:
+            - testJob1
+        execution:
+          onExecute:
+            - echo "ENV1=$ENV1"
+            - echo "ENV2=$ENV2"
+            - echo "ENV3=$ENV3"
+            
+      - name: step_3
+        type: bash
+        triggeredBy:
           steps:
             - testJob1
         execution:
