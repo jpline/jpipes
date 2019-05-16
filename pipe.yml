@@ -5,11 +5,14 @@ resources:
     configuration:
       integrationName: github
       branches:
-        #only: master
-        except: pipe
+        except: test_*
+        #only: master_*
       #files:
-      #  except: node.sh
-      #  only: echo.sh
+      #  except: test_*
+      #  only: node_*
+      #tags:
+        #except: test_*
+        #only: tag*
     initialVersion:
       sha: master
       
