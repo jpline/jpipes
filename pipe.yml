@@ -49,9 +49,9 @@ pipelines:
           onExecute:
             - printenv
             - echo "hello!"
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
+            - [ "$key1" == "value1" ]
+            - [ "$key2" == "value2" ]
+            - [ "$key3" == "value3" ]
             - echo "STEP_TYPE=$STEP_TYPE"
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
