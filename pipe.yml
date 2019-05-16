@@ -132,10 +132,32 @@ pipelines:
       - name: step_pl2
         type: bash
         configuration:
+          priority: 
+       # triggeredBy:
+        #  resources:
+         #   - sample_scriptrepo
+        execution:
+          onExecute:
+            - printenv
+  
+      - name: step2_pl2
+        type: bash
+        configuration:
           priority: 1
         triggeredBy:
-          resources:
-            - sample_scriptrepo
+          steps:
+            - step_pl2
+        execution:
+          onExecute:
+            - printenv
+             
+      - name: step3_pl2
+        type: bash
+        configuration:
+          priority: 2
+        triggeredBy:
+          steps:
+            - step_pl2
         execution:
           onExecute:
             - printenv
