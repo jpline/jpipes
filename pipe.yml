@@ -28,7 +28,9 @@ pipelines:
               ENV1: value1
               ENV3: value3
               STEP_TYPE: test
-              RUNNING_IN_CONTAINER: container
+              PIPELINE_NAME: pipe1
+              STEP_NAME: step1
+         #     RUNNING_IN_CONTAINER: container #this throw error when i update this
             secure:
               ENV2: EpEMlpUSs85U6Y5WmsV5xXUr/GkDpuKP0qH6yy4qPoTbZUSRwmIwWhez+bNSmDJe7lkZN1+syxU1LFmt09QqtSVQpy69brIW1L6vLaHVtBn7hcYGC3dJhmvXUYn/ohpasFj/sab6lwXHQSs+nRYyFRF+ICRzoTB6M17JW/KoLpqJrLL1hBYC1gPSXuWgJT/ZqKWcg+GWhCZT1o9L6IrHrgaMYR3aSmWwGAZoUBWGuTw7/datT6NDhxD6nX64dRdcR+4X0yRnTLPzbxqiMC9qTBw4ChIw5CenyH0tE/AF6YlhoavkyyRBkgd18AQKVNpQneaRN7htnIe+fLEsbKEkwQ==
         triggeredBy:
@@ -51,7 +53,9 @@ pipelines:
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
             - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "RUNNING_IN_CONTAINER=$RUNNING_IN_CONTAINER"
+            - echo "PIPELINE_NAME=$PIPELINE_NAME"
+            - echo "STEP_NAME=$STEP_NAME"
+          #  - echo "RUNNING_IN_CONTAINER=$RUNNING_IN_CONTAINER"
           onSuccess:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
@@ -61,7 +65,8 @@ pipelines:
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
             - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "RUNNING_IN_CONTAINER=$RUNNING_IN_CONTAINER"
+            - echo "PIPELINE_NAME=$PIPELINE_NAME"
+            - echo "STEP_NAME=$STEP_NAME"
           onStart:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
