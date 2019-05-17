@@ -136,6 +136,36 @@ pipelines:
             - echo "STEP_TYPE=$STEP_TYPE"
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
+          onStart:
+            - echo "on start"
+            - test "$ENV1" == "value1"
+            - test "$ENV2" == "value2"
+            - test "$SECURE_ENV3" == "secure_value3" 
+            - test "$SECURE_ENV1" == "secure_value1"
+          onSuccess:
+            - echo "on success!"
+            - test "$ENV1" == "value1"
+            - test "$ENV2" == "value2"
+            - test "$SECURE_ENV3" == "secure_value3" 
+            - test "$SECURE_ENV1" == "secure_value1"
+          onFailure:
+            - echo "something went wrong"
+            - test "$ENV1" == "value1"
+            - test "$ENV2" == "value2"
+            - test "$SECURE_ENV3" == "secure_value3" 
+            - test "$SECURE_ENV1" == "secure_value1"
+          onComplete: 
+            - echo "step is done!"
+            - test "$ENV1" == "value1"
+            - test "$ENV2" == "value2"
+            - test "$SECURE_ENV3" == "secure_value3" 
+            - test "$SECURE_ENV1" == "secure_value1"
+          onCancel:
+            - echo "cancelled this job"
+            - test "$ENV1" == "value1"
+            - test "$ENV2" == "value2"
+            - test "$SECURE_ENV3" == "secure_value3" 
+            - test "$SECURE_ENV1" == "secure_value1"
             
       - name: step_4
         type: bash
@@ -152,6 +182,7 @@ pipelines:
             - echo "STEP_TYPE=$STEP_TYPE"
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
+          
             
   - name: pipeline2
     steps:    
