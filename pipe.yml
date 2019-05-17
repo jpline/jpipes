@@ -36,7 +36,7 @@ pipelines:
         setup:
           environmentVariables:
             normal:
-              XUNIT_FILE=shippable/testresults/result.xml
+              XUNIT_FILE: shippable/testresults/result.xml
               ENV1: value1
               ENV3: value3
               STEP_TYPE: update
