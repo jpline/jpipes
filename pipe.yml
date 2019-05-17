@@ -32,7 +32,7 @@ pipelines:
       - name: testJob1
         type: bash
         configuration:
-          timeoutSeconds: efer3
+          timeoutSeconds: 0.5
         setup:
           environmentVariables:
             normal:
