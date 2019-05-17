@@ -27,9 +27,9 @@ resources:
       imageTag: latest
  
 pipelines:
-  - name: pipeline1
+  - name: pipeline1Test
     steps:  
-      - name: testJob1
+      - name: testJob1Test
         type: bash
         configuration:
           timeoutSeconds: 10000000
@@ -100,7 +100,7 @@ pipelines:
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
             
-      - name: step_2
+      - name: step_2Test
         type: bash
         triggeredBy:
           resources:
@@ -155,7 +155,7 @@ pipelines:
             
   - name: pipeline2Test
     steps:    
-      - name: step_pl2
+      - name: step_pl2Test
         type: bash
         execution:
           onExecute:
