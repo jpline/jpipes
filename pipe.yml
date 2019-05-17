@@ -25,6 +25,14 @@ resources:
       integrationName: dockerInt
     initialVersion:
       imageTag: latest
+      
+  - name: imageDocker
+    type: image
+    imageName: shippabledocker/sample-python
+    configuration:
+      integrationName: dockerInt
+    initialVersion:
+      imageTag: latest
  
 pipelines:
   - name: pipeline1
