@@ -53,10 +53,13 @@ pipelines:
         runtime:            
           type: image
           image:
-            custom:
-              name: drydock/u16all
-              tag: v7.2.4
-              options: 'privileged: true'
+            auto:
+              language: nodeJs
+              version: v8.15.0
+           # custom:
+            #  name: drydock/u16all
+             # tag: v7.2.4
+              #options: 'privileged: true'
         execution:
           onExecute:
             - printenv
