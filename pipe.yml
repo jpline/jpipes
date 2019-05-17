@@ -32,7 +32,7 @@ pipelines:
       - name: testJob1
         type: bash
         configuration:
-          timeoutSeconds: 0.5
+          timeoutSeconds: 360
         setup:
           environmentVariables:
             normal:
@@ -104,6 +104,20 @@ pipelines:
         triggeredBy:
           resources:
             - imageDocker
+        execution:
+          onExecute:
+            - printenv
+            - test "$key1" == "value1"
+            - test "$key2" == "value2"
+            
+      - name: step_3
+        type: bash
+        configuration:
+          priority: 4
+          timeoutSeconds: 360
+        triggeredBy:
+          steps:
+            - testJob1
         setup:
           environmentVariables:
             normal:
@@ -119,20 +133,6 @@ pipelines:
             - test "$key2" == "value2"
             - test "$SECURE_ENV3" == "secure_value3" 
             - test "$SECURE_ENV1" == "secure_value1"
-            
-      - name: step_3
-        type: bash
-        configuration:
-          priority: 4
-          timeoutSeconds: -626
-        triggeredBy:
-          steps:
-            - testJob1
-        execution:
-          onExecute:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
             - echo "STEP_TYPE=$STEP_TYPE"
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
