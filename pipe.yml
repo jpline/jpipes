@@ -124,6 +124,7 @@ pipelines:
         type: bash
         configuration:
           priority: 4
+          timeoutSeconds: ydtwyr2
         triggeredBy:
           steps:
             - testJob1
