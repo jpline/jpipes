@@ -101,11 +101,16 @@ pipelines:
         triggeredBy:
           resources:
             - imageDocker
+        setup:
+          environmentVariables:
+            normal:
+              ENV1: "'value1 value2 ... valuen'"
+              ENV2: "value2 value3 value4"
         execution:
           onExecute:
             - printenv
-            - test "$key1" == "value1"
-            - test "$key2" == "value2"
+            - echo "ENV1=$ENV1"
+            - echo "ENV2=$ENV2"
             
       - name: step_3
         type: bash
