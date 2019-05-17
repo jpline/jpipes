@@ -77,6 +77,9 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
+            - echo "STEP_TYPE=$STEP_TYPE"
+            - echo "PIPELINE_NAME=$PIPELINE_NAME"
+            - echo "STEP_NAME=$STEP_NAME"
           onComplete:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
@@ -148,9 +151,6 @@ pipelines:
     steps:    
       - name: step_pl2
         type: bash
-       # triggeredBy:
-        #  resources:
-         #   - sample_scriptrepo
         execution:
           onExecute:
             - printenv
