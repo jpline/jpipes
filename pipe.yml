@@ -66,6 +66,11 @@ pipelines:
             - echo "STEP_TYPE=$STEP_TYPE"
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
+            - mkdir -p shippable/testresults
+            - mkdir -p shippable/codecoverage
+            - grunt
+            - ./node_modules/.bin/istanbul cover grunt -- -u tdd
+            - ./node_modules/.bin/istanbul report cobertura --dir shippable/codecoverage/
           #  - echo "RUNNING_IN_CONTAINER=$RUNNING_IN_CONTAINER"
           onSuccess:
             - echo "ENV1=$ENV1"
