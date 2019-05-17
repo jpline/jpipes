@@ -26,7 +26,7 @@ resources:
     initialVersion:
       imageTag: latest
       
-  - name: imageDocker
+  - name: imageDocker2
     type: image
     imageName: shippabledocker/sample-python
     configuration:
