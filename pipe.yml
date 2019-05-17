@@ -32,7 +32,7 @@ pipelines:
       - name: testJob1
         type: bash
         configuration:
-          timeoutSeconds: 10000000
+          timeoutSeconds: ydtwyr2
         setup:
           environmentVariables:
             normal:
