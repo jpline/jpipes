@@ -129,8 +129,8 @@ pipelines:
         execution:
           onExecute:
             - printenv
-            - test "$key1" == "value1"
-            - test "$key2" == "value2"
+            - test "$KEY1" == "value1"
+            - test "$KEY2" == "value2"
             - test "$SECURE_ENV3" == "secure_value3" 
             - test "$SECURE_ENV1" == "secure_value1"
             - echo "STEP_TYPE=$STEP_TYPE"
