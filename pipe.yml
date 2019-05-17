@@ -1,5 +1,5 @@
 resources:
-  - name: sample_scriptrepo
+  - name: sample_scriptrepoTest
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
@@ -18,7 +18,7 @@ resources:
     buildOn:
       tagPush: true
       
-  - name: imageDocker
+  - name: imageDockerTest
     type: image
     imageName: shippabledocker/sample-node
     configuration:
@@ -47,7 +47,7 @@ pipelines:
               ENV2: EpEMlpUSs85U6Y5WmsV5xXUr/GkDpuKP0qH6yy4qPoTbZUSRwmIwWhez+bNSmDJe7lkZN1+syxU1LFmt09QqtSVQpy69brIW1L6vLaHVtBn7hcYGC3dJhmvXUYn/ohpasFj/sab6lwXHQSs+nRYyFRF+ICRzoTB6M17JW/KoLpqJrLL1hBYC1gPSXuWgJT/ZqKWcg+GWhCZT1o9L6IrHrgaMYR3aSmWwGAZoUBWGuTw7/datT6NDhxD6nX64dRdcR+4X0yRnTLPzbxqiMC9qTBw4ChIw5CenyH0tE/AF6YlhoavkyyRBkgd18AQKVNpQneaRN7htnIe+fLEsbKEkwQ==
         triggeredBy:
           resources:
-            - sample_scriptrepo
+            - sample_scriptrepoTest
           integrations:
             - dockerInt
         runtime:            
@@ -104,7 +104,7 @@ pipelines:
         type: bash
         triggeredBy:
           resources:
-            - imageDocker
+            - imageDockerTest
         setup:
           environmentVariables:
             normal:
@@ -121,13 +121,13 @@ pipelines:
             - test "$SECURE_ENV3" == "secure_value3" 
             - test "$SECURE_ENV1" == "secure_value1"
             
-      - name: step_3
+      - name: step_3Test
         type: bash
         configuration:
           priority: 4
         triggeredBy:
           steps:
-            - testJob1
+            - testJob1Test
         execution:
           onExecute:
             - echo "ENV1=$ENV1"
@@ -137,13 +137,13 @@ pipelines:
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
             
-      - name: step_4
+      - name: step_4Test
         type: bash
         configuration:
           priority: 5
         triggeredBy:
           steps:
-            - testJob1
+            - testJob1Test
         execution:
           onExecute:
             - echo "ENV1=$ENV1"
@@ -153,7 +153,7 @@ pipelines:
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
             
-  - name: pipeline2
+  - name: pipeline2Test
     steps:    
       - name: step_pl2
         type: bash
@@ -161,24 +161,24 @@ pipelines:
           onExecute:
             - printenv
   
-      - name: step2_pl2
+      - name: step2_pl2Test
         type: bash
         configuration:
           priority: 1
         triggeredBy:
           steps:
-            - step_pl2
+            - step_pl2Test
         execution:
           onExecute:
             - printenv
              
-      - name: step3_pl2
+      - name: step3_pl2Test
         type: bash
         configuration:
           priority: 2
         triggeredBy:
           steps:
-            - step_pl2
+            - step_pl2Test
         execution:
           onExecute:
             - printenv
