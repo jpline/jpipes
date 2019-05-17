@@ -138,22 +138,6 @@ pipelines:
             - echo "STEP_TYPE=$STEP_TYPE"
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
-      
-      - name: step_4
-        type: bash
-        configuration:
-          priority: 8
-        triggeredBy:
-          resources:
-            - imageDocker
-        execution:
-          onExecute:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-            - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "PIPELINE_NAME=$PIPELINE_NAME"
-            - echo "STEP_NAME=$STEP_NAME"
             
   - name: pipeline2
     steps:    
