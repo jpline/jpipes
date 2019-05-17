@@ -33,6 +33,14 @@ resources:
       integrationName: dockerInt
     initialVersion:
       imageTag: latest
+      
+  - name: imageDocker2
+    type: image
+    imageName: shippabledocker/sample-php
+    configuration:
+      integrationName: dockerInt
+    initialVersion:
+      imageTag: latest
  
 pipelines:
   - name: pipeline1
