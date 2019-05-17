@@ -31,6 +31,8 @@ pipelines:
     steps:  
       - name: testJob1
         type: bash
+        configuration:
+          timeoutSeconds: 4000
         setup:
           environmentVariables:
             normal:
