@@ -17,14 +17,6 @@ resources:
       sha: master
     buildOn:
       tagPush: true
-      
-  - name: imageDocker
-    type: image
-    imageName: shippabledocker/sample-node
-    configuration:
-      integrationName: dockerInt
-    initialVersion:
-      imageTag: latest
  
 pipelines:
   - name: pipeline1
@@ -68,6 +60,7 @@ pipelines:
             - echo "STEP_TYPE=$STEP_TYPE"
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
+            - compare_git -- resource sample_scriptrepo --path ./test.sh --commit-range HEAD~2..HEAD 
           #  - echo "RUNNING_IN_CONTAINER=$RUNNING_IN_CONTAINER"
           onSuccess:
             - echo "ENV1=$ENV1"
