@@ -227,12 +227,11 @@ pipelines:
           #  - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
             
             - encrypt_file keys.json --key pub.pem
+           # - cat key
             - cat encrypted
-            - cat pub.pem
+            #- cat pub.pem
             - echo "all keys in keys.json should be dispalyed above"
-            - decrypt_file pub.pem decrypted
+            
+            - decrypt_file encrypted --key key.pem
             - cat decrypted
-            
-            
-            
-            
+       
