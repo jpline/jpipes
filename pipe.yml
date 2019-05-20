@@ -224,7 +224,6 @@ pipelines:
             - bump_semver v1.0.0 major 
             - echo "expected result v2.0.0 for above command"
             - whoami
-            - ifconfig
             - pwd
             - hostname
             
