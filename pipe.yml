@@ -235,26 +235,15 @@ pipelines:
             
             - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
             
-            - echo "$int_pemkey_key" > /tmp/pvt.pem
-            - cat /tmp/pvt.pem
+            - echo "Hello World" > inputfile.txt
+            - openssl req -x509  -days 365 -newkey rsa:2048 -keyout private.pem -out public.pem -nodes
+            - encrypt_file --key public.pem --output encrypted_file inputfile.txt
+            - cat encrypted_file
+            - decrypt_file --key private.pem --output decrypted_file.txt encrypted_file
             
-            - pushd $res_utility_repo_resourcePath
-            - echo "$res_utility_repo_sysPrivateDeployKey" > /tmp/key.pem
+            - cat decrypted_file
+            - cat inputfile.txt
             
-            - chmod 400 /tmp/key.pem
-            - echo "$res_utility_repo_sysPublicDeployKey" > /tmp/pub.pem
-            - cat /tmp/key.pem
-            - cat /tmp/pub.pem
-            
-            - echo "Hello World" > /tmp/inputfile.txt
-            - encrypt_file --key /tmp/pub.pem --output /tmp/encrypted_file /tmp/inputfile.txt
-            - cat /tmp/encrypted_file
-            - cat /tmp/pub.pem
-            
-            - decrypt_file --key /tmp/key.pem --output /tmp/decrypted_file.txt /tmp/encrypted_file
-            - cat /tmp/decrypted_file.txt
-            - cat /tmp/key.pem
-            
-            - popd
+            - rm *.txt *.pem encrypted_file
           
        
