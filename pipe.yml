@@ -227,12 +227,17 @@ pipelines:
             
             - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
             
-          #  - encrypt_file keys.json --key pub.pem
-           ## - cat key
+            - pushd $res_utility_repo_resPath
+            - cat test.sh
+            
+           # - encrypt_file --key ~/.ssh/id_rsa.pub --output encrypted_outputfile.txt clear_inputfile.txt
+           # - cat key
            # - cat encrypted
             ##- cat pub.pem
            # - echo "all keys in keys.json should be dispalyed above"
             
+            - decrypt_file --key ~/.ssh/id_rsa --output decrypted_output.txt encrypted_outputfile.txt
+            - cat key
           #  - decrypt_file encrypted --key key.pem
           #  - cat decrypted
        
