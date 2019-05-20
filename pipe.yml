@@ -6,25 +6,6 @@ resources:
       integrationName: github
       branches:
         except: test_*
-      #  only: master_*
-      #files:
-       # except: tes*
-       # only: nod*
-      tags:
-        except: tes*
-       # only: tag*
-    initialVersion:
-      sha: test
-    buildOn:
-      tagPush: true
-  
-  - name: utility_repo
-    type: gitRepo
-    repoPath: jpline/sample-script
-    configuration:
-      integrationName: github
-      branches:
-        only: test
     initialVersion:
       sha: test
       
@@ -42,14 +23,14 @@ pipelines:
       - name: testJob1
         type: bash
         configuration:
-          timeoutSeconds: 360
+          timeoutSeconds: 50000 #standard max timeout seconds is 3600 seconds it is exceeding that. "0.9" and "aaa" 
         setup:
           environmentVariables:
             normal:
               ENV1: value1
               ENV3: value3
               ENV4: $ENV3
-              STEP_TYPE: update
+              STEP_TYPE: update #standard variable shouldnot allowed to change . a warnign or error should be shown
               PIPELINE_NAME: update
               STEP_NAME: update
          #     RUNNING_IN_CONTAINER: container #this throw error when i update this
@@ -58,20 +39,29 @@ pipelines:
         triggeredBy:
           resources:
             - sample_scriptrepo
+            - test #should throw error doesnot exist
+          integrations:
+            - dockerInt #shouldnot allow integrations in triggered by
         requires:
           integrations:
             - dockerInt
         runtime:            
-          type: image
+          type: host #should throw error i have mentioned host and added image
           image:
             custom:
               name: drydock/u16all
               tag: v7.2.4
               options: 'privileged: true'
+          type: image #should throw error i have already mentioned as host
+          image:
+            custom:
+              name: drydock/u16all
+              tag: v7.2.4
+              options: 'privileged: true'
+           
         execution:
           onExecute:
             - printenv
-            - echo "hello!"
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
@@ -80,34 +70,10 @@ pipelines:
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
           #  - echo "RUNNING_IN_CONTAINER=$RUNNING_IN_CONTAINER"
-          onSuccess:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-            - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "PIPELINE_NAME=$PIPELINE_NAME"
-            - echo "STEP_NAME=$STEP_NAME"
-          onComplete:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-            - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "PIPELINE_NAME=$PIPELINE_NAME"
-            - echo "STEP_NAME=$STEP_NAME"
-          onStart:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-          onFailure:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-          onCancel:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
+          onExecute:
+            - echo "duplicate on execute should fail" #onexecute 2 times should throw error
             
-      - name: step_2
+      - name: testJob1
         type: bash
         triggeredBy:
           resources:
@@ -123,116 +89,15 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             
-      - name: step_3
-        type: bash
-        configuration:
-          priority: 4
-          timeoutSeconds: 360
-        triggeredBy:
-          steps:
-            - testJob1
-        setup:
-          environmentVariables:
-            normal:
-              ENV1: value1
-              ENV2: value2
-            encrypted:
-              SECURE_ENV1: AEb8pmfA/dlxbrphotPCm4t6p9QCbsnMxREHbGaAE0k6ce6wU8NAU4cNTqa4vtM3iYBHe2cUQfcVY9xRSvJig8HQ8McEqBN1gEPhsUwiDXLYmjV7qRihZfRJdRwykkXd9TE6aghY4fgtxhvpqaLfSxa1RBu/7reOxLljBwzNff2Yaqj09glxXd8wo4RRwYXX17FBwaY8Jc88dyTVKEHPEmgi9hId4+Nr3U4WhHkXUZaE1ZiTjbNCbsDq530UK4s8vKO0fpOUT4uIeMZr52KPe6wRvYqf1ykU+NgzVPK2ClFzSc8AQiEKqxCuFrQY0j9qM74JfMIrOamWBvWEc9uenw==
-              SECURE_ENV3: KsG4kx2e6vuqJPx0m4PUnEG2kTxVxhDOaKiksfdefibTQtX49GmdMu4dAdxq0R2x8sh6pP6PYynPK4e/j5HQPOYfWRiMEdLwJ2p1UPcFcNfDq6Q5kWB8MDmQP6OikVguNOj8Iu/yicpca+ilNzMRTmVNX5jyn6bjySaIlXeyrGZYaWex3XxxcZfuM8544tktEUiHwMBTPEZV8aL9d1K5dco67IQFgdRfDtnkCfvresi+uTCvE3GULO2vbloXz+J1Bcc/pm+ufUyh2m1ivvsA3nhBFYTcyGz5AWm2qEI/v0ujK9fMLkgLMnjOl3l/X7dI6n8lvHFoI7QYDlpYt4cR3Q==
-        execution:
-          onExecute:
-            - printenv
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-            - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "PIPELINE_NAME=$PIPELINE_NAME"
-            - echo "STEP_NAME=$STEP_NAME"
-          onStart:
-            - echo "on start"
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-          onSuccess:
-            - echo "on success!"
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-          onFailure:
-            - echo "something went wrong"
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-          onComplete: 
-            - echo "step is done!"
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-          onCancel:
-            - echo "cancelled this job"
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-            
-      - name: step_4
-        type: bash
-        configuration:
-          priority: 5
-        triggeredBy:
-          steps:
-            - testJob1
-        execution:
-          onExecute:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-            - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "PIPELINE_NAME=$PIPELINE_NAME"
-            - echo "STEP_NAME=$STEP_NAME"
+
        
   - name: pipeline2
     steps:    
-      - name: step_pl2
+      - name: testJob1
         type: bash
         execution:
           onExecute:
             - printenv
   
-      - name: utility_step
-        type: bash
-        triggeredBy:
-          resources:
-            - utility_repo
-       # runtime:            
-        #  type: image
-        #  image:
-         #   custom:
-         #     name: drydock/u16all
-          #    tag: v7.2.4
-          #    options: 'privileged: true'
-        execution:
-          onExecute:
-            - docker pull drydock/u16node:master
-            - echo "verify all utility functions"
-            - bump_semver v1.0.0 major 
-            - echo "expected result v2.0.0 for above command"
-            
-            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
-            
-            - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
-            
-          #  - encrypt_file keys.json --key pub.pem
-           ## - cat key
-           # - cat encrypted
-            ##- cat pub.pem
-           # - echo "all keys in keys.json should be dispalyed above"
-            
-          #  - decrypt_file encrypted --key key.pem
-          #  - cat decrypted
+
        
