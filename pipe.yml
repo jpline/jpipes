@@ -229,12 +229,15 @@ pipelines:
             - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
             
             - pushd $res_utility_repo_resourcePath
-            - echo "$res_utility_repo_sysPrivateDeployKey" >> /tmp/private.pem
+            - echo "$res_utility_repo_sysPrivateDeployKey" > /tmp/private.pem
             - chmod 400 /tmp/private.pem
-            - echo "$res_utility_repo_sysPublicDeployKey" >> /tmp/public_key.pub
+            - echo "$res_utility_repo_sysPublicDeployKey" > /tmp/public_key.pub
+            - cat /tmp/private.pem
+            - cat /tmp/public_key.pub
             
             - encrypt_file --key /tmp/public_key.pub --output encrypted_outputfile.txt test.sh
             - cat encrypted_outputfile.txt
+            
            # - cat key
            # - cat encrypted
             ##- cat pub.pem
