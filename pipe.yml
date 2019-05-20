@@ -240,11 +240,14 @@ pipelines:
             - cat /tmp/key.pem
             - cat /tmp/pub.pem
             
-            - encrypt_file --key /tmp/pub.pem --output encrypted_outputfile.txt test.sh
-            - cat encrypted_outputfile.txt
+            - echo "Hello World" > /tmp/inputfile.txt
+            - encrypt_file --key /tmp/pub.pem --output /tmp/encrypted_file /tmp/inputfile.txt
+            - cat /tmp/encrypted_file
+            - cat /tmp/pub.pem
             
-            - decrypt_file --key /tmp/key.pem --output decrypted_output.txt encrypted_outputfile.txt
-            - cat decrypted_output.txt
+            - decrypt_file --key /tmp/key.pem --output /tmp/decrypted_file.txt /tmp/encrypted_file
+            - cat /tmp/decrypted_file.txt
+            - cat /tmp/key.pem
             
             - popd
           
