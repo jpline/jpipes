@@ -228,7 +228,7 @@ pipelines:
             
             - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
             
-            - pushd $res_utility_repo_resPath
+            - pushd $res_utility_repo_resourcePath
             - cat test.sh
             
            # - encrypt_file --key ~/.ssh/id_rsa.pub --output encrypted_outputfile.txt clear_inputfile.txt
