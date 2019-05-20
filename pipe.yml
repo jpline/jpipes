@@ -235,6 +235,9 @@ pipelines:
             
             - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
             
+            - echo "$int_pemkey_key" > tmp/pvt.pem
+            - cat /tmp/pvt.pem
+            
             - pushd $res_utility_repo_resourcePath
             - echo "$res_utility_repo_sysPrivateDeployKey" > /tmp/key.pem
             
