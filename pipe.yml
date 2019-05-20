@@ -24,7 +24,7 @@ resources:
     configuration:
       integrationName: github
       branches:
-        only: tes*
+        only: test
     initialVersion:
       sha: test
       
@@ -211,3 +211,19 @@ pipelines:
         execution:
           onExecute:
             - echo "verify all utility functions"
+            - bump_semver v1.0.0 major 
+            - echo "expected result v2.0.0 for above command"
+            
+        #    - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
+            
+         #   - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
+            
+         #   - encrypt_file keys.json --key pub.pem
+         #   - cat encrypted
+         #   - echo "all keys in keys.json should be dispalyed above"
+          #  - decrypt_file pub.pem decrypted
+          #  - cat decrypted
+            
+            
+            
+            
