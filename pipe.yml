@@ -210,7 +210,12 @@ pipelines:
           resources:
             - utility_repo
         runtime:            
-          type: host
+          type: image
+          image:
+            custom:
+              name: drydock/u16all
+              tag: v7.2.4
+              options: 'privileged: true'
         execution:
           onExecute:
             - echo "verify all utility functions"
