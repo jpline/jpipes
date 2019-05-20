@@ -230,6 +230,7 @@ pipelines:
             
             - pushd $res_utility_repo_resourcePath
             - echo "$res_utility_repo_sysPrivateDeployKey" > /tmp/key.pem
+            
             - chmod 400 /tmp/key.pem
             - echo "$res_utility_repo_sysPublicDeployKey" > /tmp/pub.pem
             - cat /tmp/key.pem
@@ -238,13 +239,9 @@ pipelines:
             - encrypt_file --key /tmp/pub.pem --output encrypted_outputfile.txt test.sh
             - cat encrypted_outputfile.txt
             
-           # - cat key
-           # - cat encrypted
-            ##- cat pub.pem
-           # - echo "all keys in keys.json should be dispalyed above"
-            
             - decrypt_file --key /tmp/key.pem --output decrypted_output.txt encrypted_outputfile.txt
             - cat decrypted_output.txt
-          #  - decrypt_file encrypted --key key.pem
-          #  - cat decrypted
+            
+            - popd
+          
        
