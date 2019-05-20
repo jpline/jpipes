@@ -23,7 +23,7 @@ pipelines:
       - name: testJob1Test
         type: bash
         configuration:
-          timeoutSeconds: 50000 #standard max timeout seconds is 3600 seconds it is exceeding that. "0.9" and "aaa" 
+          timeoutSeconds: "aaa" #"0.9" also should not work
         setup:
           environmentVariables:
             normal:
