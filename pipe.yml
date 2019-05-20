@@ -14,9 +14,19 @@ resources:
         except: tes*
        # only: tag*
     initialVersion:
-      sha: master
+      sha: test
     buildOn:
       tagPush: true
+  
+  - name: utility_repo
+    type: gitRepo
+    repoPath: jpline/sample-script
+    configuration:
+      integrationName: github
+      branches:
+        only: tes*
+    initialVersion:
+      sha: test
       
   - name: imageDocker
     type: image
@@ -184,8 +194,7 @@ pipelines:
             - echo "STEP_TYPE=$STEP_TYPE"
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
-          
-            
+       
   - name: pipeline2
     steps:    
       - name: step_pl2
@@ -194,24 +203,11 @@ pipelines:
           onExecute:
             - printenv
   
-      - name: step2_pl2
+      - name: utility_step
         type: bash
-        configuration:
-          priority: 1
         triggeredBy:
-          steps:
-            - step_pl2
+          resources:
+            - utility_repo
         execution:
           onExecute:
-            - printenv
-             
-      - name: step3_pl2
-        type: bash
-        configuration:
-          priority: 2
-        triggeredBy:
-          steps:
-            - step_pl2
-        execution:
-          onExecute:
-            - printenv
+            - echo "verify all utility functions"
