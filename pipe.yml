@@ -209,6 +209,8 @@ pipelines:
         triggeredBy:
           resources:
             - utility_repo
+        runtime:            
+          type: host
         execution:
           onExecute:
             - echo "verify all utility functions"
