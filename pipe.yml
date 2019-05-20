@@ -209,6 +209,9 @@ pipelines:
         triggeredBy:
           resources:
             - utility_repo
+        requires:
+          integrations:
+            - pemkey
        # runtime:            
         #  type: image
         #  image:
