@@ -1,5 +1,5 @@
 resources:
-  - name: sample_scriptrepo
+  - name: sample_scriptrepoTest
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
@@ -9,7 +9,7 @@ resources:
     initialVersion:
       sha: test
       
-  - name: imageDocker
+  - name: imageDockerTest
     type: image
     imageName: shippabledocker/sample-node
     configuration:
@@ -18,9 +18,9 @@ resources:
       imageTag: latest
  
 pipelines:
-  - name: pipeline1
+  - name: pipelineTest1
     steps:  
-      - name: testJob1
+      - name: testJob1Test
         type: bash
         configuration:
           timeoutSeconds: 50000 #standard max timeout seconds is 3600 seconds it is exceeding that. "0.9" and "aaa" 
@@ -38,7 +38,7 @@ pipelines:
               ENV2: EpEMlpUSs85U6Y5WmsV5xXUr/GkDpuKP0qH6yy4qPoTbZUSRwmIwWhez+bNSmDJe7lkZN1+syxU1LFmt09QqtSVQpy69brIW1L6vLaHVtBn7hcYGC3dJhmvXUYn/ohpasFj/sab6lwXHQSs+nRYyFRF+ICRzoTB6M17JW/KoLpqJrLL1hBYC1gPSXuWgJT/ZqKWcg+GWhCZT1o9L6IrHrgaMYR3aSmWwGAZoUBWGuTw7/datT6NDhxD6nX64dRdcR+4X0yRnTLPzbxqiMC9qTBw4ChIw5CenyH0tE/AF6YlhoavkyyRBkgd18AQKVNpQneaRN7htnIe+fLEsbKEkwQ==
         triggeredBy:
           resources:
-            - sample_scriptrepo
+            - sample_scriptrepoTest
             - test #should throw error doesnot exist
           integrations:
             - dockerInt #shouldnot allow integrations in triggered by
@@ -73,11 +73,11 @@ pipelines:
           onExecute:
             - echo "duplicate on execute should fail" #onexecute 2 times should throw error
             
-      - name: testJob1
+      - name: testJob1Test
         type: bash
         triggeredBy:
           resources:
-            - imageDocker
+            - imageDockerTest
         setup:
           environmentVariables:
             normal:
@@ -91,9 +91,9 @@ pipelines:
             
 
        
-  - name: pipeline2
+  - name: pipeline2Test
     steps:    
-      - name: testJob1
+      - name: testJob1Test
         type: bash
         execution:
           onExecute:
