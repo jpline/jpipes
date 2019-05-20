@@ -58,6 +58,7 @@ pipelines:
         triggeredBy:
           resources:
             - sample_scriptrepo
+        requires:
           integrations:
             - dockerInt
         runtime:            
