@@ -1,9 +1,9 @@
 resources:
-  - name: utility_repo1
+  - name: utility_repo
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
-      integrationName: github
+      integrationName: varsha_github
       branches:
         only: test
     initialVersion:
@@ -18,13 +18,48 @@ pipelines:
           timeoutSeconds: 360
         triggeredBy:
           resources:
-            - utility_repo1
+            - utility_repo
         execution:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
-            - bump_semver v0.0.1 patch
-            - compare_git --resource utility_repo1 --commit-range HEAD~3..HEAD test.sh
+            - bump_sermer v0.0.1 patch
+            
+            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
+            
+            - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
+            
+            - switch_env nodejs 8.16.0
+            
+            - pushd $res_utility_repo_resourcePath
+            
+            - read_json keys.json "DOCKER_USERNAME"
+            
+            - openssl genrsa -out key.pem 1024 
+            - openssl rsa -in key.pem -text -noout
+            - openssl rsa -in key.pem -pubout -out pub.pem 
+            - openssl rsa -in pub.pem -pubin -text -noout 
+            
+            - encrypt_string "secretValue" --key pub.pem
+            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
+            - echo "$encrypted"
+            - decrypt_string "$encrypted" --key key.pem
+            
+            - encrypt_file --output encrypted.txt cryptIn.txt --key pub.pem
+            - cat encrypted.txt
+            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
+            - cat decrypted.txt
+            
+            - replace_envs example.env sample.env
+            
+            - cat sample.env
+            - cat example.env
+  
+            - cache_files echo.sh my_file
+            - restore_cache my_file echo.sh
+            
+            - popd
+            
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
             
@@ -35,13 +70,48 @@ pipelines:
           nodePool: kermit_centos_pool
         triggeredBy:
           resources:
-            - utility_repo1
+            - utility_repo
         execution:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
-            - bump_semver v0.0.1 patch
-            - compare_git --resource utility_repo1 --commit-range HEAD~3..HEAD test.sh
+            - bump_sermer v0.0.1 patch
+            
+            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
+            
+            - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
+            
+            - switch_env nodejs 8.16.0
+            
+            - pushd $res_utility_repo_resourcePath
+            
+            - read_json keys.json "DOCKER_USERNAME"
+            
+            - openssl genrsa -out key.pem 1024 
+            - openssl rsa -in key.pem -text -noout
+            - openssl rsa -in key.pem -pubout -out pub.pem 
+            - openssl rsa -in pub.pem -pubin -text -noout 
+            
+            - encrypt_string "secretValue" --key pub.pem
+            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
+            - echo "$encrypted"
+            - decrypt_string "$encrypted" --key key.pem
+            
+            - encrypt_file --output encrypted.txt cryptIn.txt --key pub.pem
+            - cat encrypted.txt
+            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
+            - cat decrypted.txt
+            
+            - replace_envs example.env sample.env
+            
+            - cat sample.env
+            - cat example.env
+  
+            - cache_files echo.sh my_file
+            - restore_cache my_file echo.sh
+            
+            - popd
+            
           onComplete:
             - echo "Oh Yeah Done centOS 7!"
       
@@ -52,13 +122,48 @@ pipelines:
           nodePool: kermit_ubuntu18
         triggeredBy:
           resources:
-            - utility_repo1
+            - utility_repo
         execution:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
             - bump_sermer v0.0.1 patch
-            - compare_git --resource utility_repo1 --commit-range HEAD~3..HEAD test.sh
+            
+            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
+            
+            - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
+            
+            - switch_env nodejs 8.16.0
+            
+            - pushd $res_utility_repo_resourcePath
+            
+            - read_json keys.json "DOCKER_USERNAME"
+            
+            - openssl genrsa -out key.pem 1024 
+            - openssl rsa -in key.pem -text -noout
+            - openssl rsa -in key.pem -pubout -out pub.pem 
+            - openssl rsa -in pub.pem -pubin -text -noout 
+            
+            - encrypt_string "secretValue" --key pub.pem
+            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
+            - echo "$encrypted"
+            - decrypt_string "$encrypted" --key key.pem
+            
+            - encrypt_file --output encrypted.txt cryptIn.txt --key pub.pem
+            - cat encrypted.txt
+            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
+            - cat decrypted.txt
+            
+            - replace_envs example.env sample.env
+            
+            - cat sample.env
+            - cat example.env
+  
+            - cache_files echo.sh my_file
+            - restore_cache my_file echo.sh
+            
+            - popd
+            
           onComplete:
             - echo "Oh Yeah Done ubuntu 18!"
  
