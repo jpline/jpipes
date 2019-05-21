@@ -96,6 +96,8 @@ pipelines:
           resources:
             - utility_repo
         requires:
+          resources:
+            - state_reso
           integrations:
             - notifySlack
         execution:
@@ -148,6 +150,8 @@ pipelines:
           timeoutSeconds: 360
           nodePool: kermit_ubuntu18
         requires:
+          resources:
+            - state_reso
           integrations:
             - notifySlack
         triggeredBy:
