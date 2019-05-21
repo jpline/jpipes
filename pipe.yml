@@ -24,11 +24,6 @@ pipelines:
             - printenv
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
-           # - bump_semver # error: Invalid action given in the argument.
-           # - bump_semver minor #error: Invalid action given in the argument.
-            - bump_semver v minor
-            - bump_semver 3.0.3 rc
-            - bump_semver iiii 
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
             
@@ -45,11 +40,6 @@ pipelines:
             - printenv
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
-            - bump_semver 
-            - bump_semver minor
-            - bump_semver v minor
-            - bump_semver 3.0.3 rc
-            - bump_semver iiii 
           onComplete:
             - echo "Oh Yeah Done centOS 7!"
       
@@ -66,10 +56,5 @@ pipelines:
             - printenv
             - bump_semver v1.0.1 major
             - bump_sermer v0.0.1 patch
-            - bump_sermer
-            - bump_sermer minor
-            - bump_semver v minor
-            - bump_sermer 3.0.3 rc
-            - bump_sermer iiii 
           onComplete:
             - echo "Oh Yeah Done ubuntu 18!"
