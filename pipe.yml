@@ -249,6 +249,9 @@ pipelines:
             - popd
             
             - replicate_resource imageDocker imagePython
+            
+            - send_notification notifySlack
+            
         outputResources:
           - imagePython
             
