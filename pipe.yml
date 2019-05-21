@@ -252,6 +252,9 @@ pipelines:
             
             - send_notification notifySlack
             - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
+            
+            - cache_files pipe.yml my_file
+
          #   - replicate_resource imageDocker imagePython
          
         outputResources:
