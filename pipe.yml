@@ -226,18 +226,19 @@ pipelines:
             - echo "verify all utility functions"
             - bump_semver v1.0.0 major 
             - echo "expected result v2.0.0 for above command"
-            - whoami
-            - pwd
-            - hostname
-            
-            - whereis compare_git 
             - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
             
             - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
             
-            
             - pushd $res_utility_repo_resourcePath
             - read_json keys.json "DOCKER_USERNAME"
+            
+            - replace env example.env sample.env
+            
+            - cat sample.env
+            - cat example.env
+            
+            - printenv
             - popd
           
-       
+            
