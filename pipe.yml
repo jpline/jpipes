@@ -1,9 +1,9 @@
 resources:
-  - name: sample_scriptrepo
+  - name: utility_repo
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
-      integrationName: varsha_github
+      integrationName: github
       branches:
         only: test
     initialVersion:
@@ -18,12 +18,13 @@ pipelines:
           timeoutSeconds: 360
         triggeredBy:
           resources:
-            - sample_scriptrepo
+            - utility_repo
         execution:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
+            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
             
@@ -34,12 +35,13 @@ pipelines:
           nodePool: kermit_centos_pool
         triggeredBy:
           resources:
-            - sample_scriptrepo
+            - utility_repo
         execution:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
+            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
           onComplete:
             - echo "Oh Yeah Done centOS 7!"
       
@@ -50,11 +52,12 @@ pipelines:
           nodePool: kermit_ubuntu18
         triggeredBy:
           resources:
-            - sample_scriptrepo
+            - utility_repo
         execution:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
             - bump_sermer v0.0.1 patch
+            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
           onComplete:
             - echo "Oh Yeah Done ubuntu 18!"
