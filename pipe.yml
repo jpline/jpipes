@@ -249,6 +249,9 @@ pipelines:
             - cat example.env
   
             - cache_files echo.sh my_file
+            - cat my_file
+            - restore_cache my_file echo.sh
+
             
             - popd
             
