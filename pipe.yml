@@ -16,12 +16,10 @@ pipelines:
         type: bash
         configuration:
           timeoutSeconds: 360
-          nodePool: u16NodePool
+          nodePool: kermit_ubuntu_pool
         triggeredBy:
           resources:
             - sample_scriptrepo
-          integrations:
-            - dockerInt
         execution:
           onExecute:
             - printenv
@@ -62,7 +60,7 @@ pipelines:
         type: bash
         configuration:
           timeoutSeconds: 360
-          nodePool: c7NodePool
+          nodePool: kermit_centos_pool
         triggeredBy:
           resources:
             - sample_scriptrepo
