@@ -23,7 +23,7 @@ pipelines:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
-            - bump_sermer v0.0.1 patch
+            - bump_semver v0.0.1 patch
             
             - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
             
@@ -75,7 +75,7 @@ pipelines:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
-            - bump_sermer v0.0.1 patch
+            - bump_semver v0.0.1 patch
             
             - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
             
@@ -127,7 +127,7 @@ pipelines:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
-            - bump_sermer v0.0.1 patch
+            - bump_semver v0.0.1 patch
             
             - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
             
