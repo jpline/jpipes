@@ -1,5 +1,5 @@
 resources:
-  - name: utility_repo
+  - name: utility_repo1
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
@@ -18,13 +18,13 @@ pipelines:
           timeoutSeconds: 360
         triggeredBy:
           resources:
-            - utility_repo
+            - utility_repo1
         execution:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
-            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
+            - compare_git --resource utility_repo1 --commit-range HEAD~3..HEAD test.sh
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
             
@@ -35,13 +35,13 @@ pipelines:
           nodePool: kermit_centos_pool
         triggeredBy:
           resources:
-            - utility_repo
+            - utility_repo1
         execution:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
-            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
+            - compare_git --resource utility_repo1 --commit-range HEAD~3..HEAD test.sh
           onComplete:
             - echo "Oh Yeah Done centOS 7!"
       
@@ -52,13 +52,13 @@ pipelines:
           nodePool: kermit_ubuntu18
         triggeredBy:
           resources:
-            - utility_repo
+            - utility_repo1
         execution:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
             - bump_sermer v0.0.1 patch
-            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
+            - compare_git --resource utility_repo1 --commit-range HEAD~3..HEAD test.sh
           onComplete:
             - echo "Oh Yeah Done ubuntu 18!"
  
