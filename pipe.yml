@@ -233,7 +233,7 @@ pipelines:
             - pushd $res_utility_repo_resourcePath
             - read_json keys.json "DOCKER_USERNAME"
             
-            - replace env example.env sample.env
+            - replace_env example.env sample.env
             
             - cat sample.env
             - cat example.env
