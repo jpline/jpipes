@@ -232,7 +232,7 @@ pipelines:
            # - docker pull drydock/u16node:master
             - printenv
             - echo "verify all utility functions"
-            - bump_semver v8.0.0 minor
+            - bump_semver v8.2.0 patch
             - echo "expected result v2.0.0 for above command"
             - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
             
@@ -251,10 +251,8 @@ pipelines:
             - popd
             
             - send_notification notifySlack
-            - replicate_resource imageDocker imagePython
-            
-            
-            
+         #   - replicate_resource imageDocker imagePython
+         
         outputResources:
           - imagePython
             
