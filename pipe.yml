@@ -23,15 +23,36 @@ pipelines:
           onExecute:
             - printenv
             - bump_semver v1.0.1 major
-            - bump_sermer v0.0.1 patch
-            - bump_sermer
-            - bump_sermer minor
+            - bump_semver v0.0.1 patch
+            - bump_semver 
+            - bump_semver minor
             - bump_semver v minor
-            - bump_sermer 3.0.3 rc
-            - bump_sermer iiii 
+            - bump_semver 3.0.3 rc
+            - bump_semver iiii 
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
             
+      - name: utility_c7
+        type: bash
+        configuration:
+          timeoutSeconds: 360
+          nodePool: kermit_centos_pool
+        triggeredBy:
+          resources:
+            - sample_scriptrepo
+        execution:
+          onExecute:
+            - printenv
+            - bump_semver v1.0.1 major
+            - bump_semver v0.0.1 patch
+            - bump_semver 
+            - bump_semver minor
+            - bump_semver v minor
+            - bump_semver 3.0.3 rc
+            - bump_semver iiii 
+          onComplete:
+            - echo "Oh Yeah Done centOS 7!"
+      
       - name: utility_u18
         type: bash
         configuration:
@@ -52,24 +73,3 @@ pipelines:
             - bump_sermer iiii 
           onComplete:
             - echo "Oh Yeah Done ubuntu 18!"
-
-      - name: utility_c7
-        type: bash
-        configuration:
-          timeoutSeconds: 360
-          nodePool: kermit_centos_pool
-        triggeredBy:
-          resources:
-            - sample_scriptrepo
-        execution:
-          onExecute:
-            - printenv
-            - bump_semver v1.0.1 major
-            - bump_sermer v0.0.1 patch
-            - bump_sermer
-            - bump_sermer minor
-            - bump_semver v minor
-            - bump_sermer 3.0.3 rc
-            - bump_sermer iiii 
-          onComplete:
-            - echo "Oh Yeah Done centOS 7!"
