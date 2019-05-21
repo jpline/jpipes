@@ -238,7 +238,7 @@ pipelines:
             
             - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
             
-            - switch_env nodeJs 8.16.0
+            - switch_env nodejs 8.16.0
             
             - pushd $res_utility_repo_resourcePath
             - read_json keys.json "DOCKER_USERNAME"
