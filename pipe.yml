@@ -102,10 +102,10 @@ pipelines:
             - pushd $res_utility_repo_resourcePath
             
             - save_run_state test.sh my_file
-            - restore_run_state my_file test.sh
+            #- restore_run_state my_file test.sh
             
             - save_resource_state state_reso echo.sh my_file
-            - restore_resource_state state_reso my_file echo.sh
+           # - restore_resource_state state_reso my_file echo.sh
 
             - popd
 
@@ -225,8 +225,10 @@ pipelines:
             - echo "STEP_TYPE=$STEP_TYPE"
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
-            - echo "imagetag=$imageTag"
+            - echo "imageTag=$imageTag"
+            - cat /jfrog/pipelines/pipeline1/runs/54/workspace/run.env
             - restore_run_state my_file test.sh
+            - restore_resource_state state_reso my_file echo.sh
        
   - name: pipeline2
     steps:    
@@ -292,7 +294,7 @@ pipelines:
   
             - cache_files echo.sh my_file
             - restore_cache my_file echo.sh
-
+            
             
             - popd
             
