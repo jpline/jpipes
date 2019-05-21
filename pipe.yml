@@ -248,12 +248,14 @@ pipelines:
             - cat sample.env
             - cat example.env
   
+            - cache_files echo.sh my_file
+            
             - popd
             
             - send_notification notifySlack
             - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
             
-            - cache_files pipe.yml my_file
+            
 
          #   - replicate_resource imageDocker imagePython
          
