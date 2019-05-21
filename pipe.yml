@@ -277,10 +277,10 @@ pipelines:
             - echo "$encrypted"
             - decrypt_string "$encrypted" --key key.pem
             
-            - encrypt_file --output encrypted.txt cryptIn.txt --key pub.pem
-            - cat encrypted.txt
-            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
-            - cat decrypted.txt
+           # - encrypt_file --output encrypted.txt cryptIn.txt --key pub.pem
+           # - cat encrypted.txt
+           # - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
+           # - cat decrypted.txt
             
             - replace_envs example.env sample.env
             
@@ -294,7 +294,7 @@ pipelines:
             - popd
             
             - send_notification notifySlack
-            - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
+           # - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
             
             - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git"
 
