@@ -46,7 +46,7 @@ pipelines:
             - echo "$encrypted"
             - decrypt_string "$encrypted" --key key.pem
             
-            - encrypt_file --output encrypted.txt cryptIn.txt --key pub.pem
+            - encrypt_file --output encrypted.txt crypt.txt --key pub.pem
             - cat encrypted.txt
             - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
             - cat decrypted.txt
@@ -99,7 +99,7 @@ pipelines:
             - echo "$encrypted"
             - decrypt_string "$encrypted" --key key.pem
             
-            - encrypt_file --output encrypted.txt cryptIn.txt --key pub.pem
+            - encrypt_file --output encrypted.txt crypt.txt --key pub.pem
             - cat encrypted.txt
             - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
             - cat decrypted.txt
@@ -152,7 +152,7 @@ pipelines:
             - echo "$encrypted"
             - decrypt_string "$encrypted" --key key.pem
             
-            - encrypt_file --output encrypted.txt cryptIn.txt --key pub.pem
+            - encrypt_file --output encrypted.txt crypt.txt --key pub.pem
             - cat encrypted.txt
             - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
             - cat decrypted.txt
