@@ -18,6 +18,9 @@ resources:
     buildOn:
       tagPush: true
   
+  - name: state_reso
+    type: state
+    
   - name: utility_repo
     type: gitRepo
     repoPath: jpline/sample-script
@@ -66,6 +69,8 @@ pipelines:
         triggeredBy:
           resources:
             - sample_scriptrepo
+            - utility_repo
+            - state_reso
         requires:
           integrations:
             - dockerInt
@@ -88,6 +93,20 @@ pipelines:
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
           #  - echo "RUNNING_IN_CONTAINER=$RUNNING_IN_CONTAINER"
+          
+          # ===================== RUN STATE =========================
+            - add_run_variable imageTag="firstTest"
+            
+            - pushd $res_utility_repo_resourcePath
+            
+            - save_run_state test.sh my_file
+            - restore_run_state my_file test.sh
+            
+            - save_resource_state state_reso echo.sh my_file
+            - restore_resource_state state_reso my_file echo.sh
+
+            - popd
+
           onSuccess:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
