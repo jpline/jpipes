@@ -295,7 +295,6 @@ pipelines:
             - cache_files echo.sh my_file
             - restore_cache my_file echo.sh
             
-            
             - popd
             
             - send_notification notifySlack
@@ -307,4 +306,4 @@ pipelines:
          
         outputResources:
           - imagePython
-            
+           
