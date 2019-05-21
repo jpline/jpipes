@@ -37,7 +37,7 @@ pipelines:
         type: bash
         configuration:
           timeoutSeconds: 360
-          nodePool: u18NodePool
+          nodePool: kermit_ubuntu18
         triggeredBy:
           resources:
             - sample_scriptrepo
