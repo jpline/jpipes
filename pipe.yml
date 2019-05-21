@@ -261,8 +261,19 @@ pipelines:
             
             - switch_env nodejs 8.16.0
             
+            - openssl genrsa -out key.pem 1024 
+            - openssl rsa -in key.pem -text -noout 
+            - openssl rsa -in key.pem -pubout -out pub.pem 
+            - openssl rsa -in pub.pem -pubin -text -noout
+            
+
             - pushd $res_utility_repo_resourcePath
             - read_json keys.json "DOCKER_USERNAME"
+            
+            - encrypt_file --output encrypted.txt cryptIn.txt --key pub.pem
+            - cat encrypted.txt
+            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
+            - cat decrypted.txt
             
             - replace_envs example.env sample.env
             
