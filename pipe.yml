@@ -70,10 +70,12 @@ pipelines:
           resources:
             - sample_scriptrepo
             - utility_repo
-            - state_reso
+            
         requires:
           integrations:
             - dockerInt
+          resources:
+            - state_reso
         runtime:            
           type: image
           image:
