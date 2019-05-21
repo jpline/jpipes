@@ -245,9 +245,10 @@ pipelines:
             
             - cat sample.env
             - cat example.env
-            
-            - printenv
+  
             - popd
+            
+            - replicate_resource imageDocker imagePython
         outputResources:
           - imagePython
             
