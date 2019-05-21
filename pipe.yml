@@ -21,6 +21,7 @@ pipelines:
             - utility_repo
         execution:
           onExecute:
+            - docker pull drydock/u16node:master
             - printenv
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
@@ -74,6 +75,7 @@ pipelines:
         execution:
           onExecute:
             - printenv
+            - docker pull drydock/u16node:master
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
             
@@ -126,6 +128,7 @@ pipelines:
         execution:
           onExecute:
             - printenv
+            - docker pull drydock/u16node:master
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
             
