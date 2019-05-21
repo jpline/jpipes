@@ -41,8 +41,6 @@ pipelines:
         triggeredBy:
           resources:
             - sample_scriptrepo
-          integrations:
-            - dockerInt
         execution:
           onExecute:
             - printenv
@@ -64,8 +62,6 @@ pipelines:
         triggeredBy:
           resources:
             - sample_scriptrepo
-          integrations:
-            - dockerInt
         execution:
           onExecute:
             - printenv
