@@ -10,7 +10,7 @@ resources:
       sha: test
 
 pipelines:
-  - name: pipeline1
+  - name: Varsha-pipeline
     steps:  
       - name: utility_u16
         type: bash
