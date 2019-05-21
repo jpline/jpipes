@@ -72,13 +72,6 @@ pipelines:
         triggeredBy:
           resources:
             - utility_repo
-        runtime:            
-            type: image
-            image:
-              custom:
-                name: drydock/c7node
-                tag: master
-                options: 'privilege: true'
         execution:
           onExecute:
             - printenv
