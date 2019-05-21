@@ -296,7 +296,7 @@ pipelines:
             - send_notification notifySlack
             - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
             
-            
+            - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git"
 
          #   - replicate_resource imageDocker imagePython
          
