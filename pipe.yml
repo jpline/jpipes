@@ -225,6 +225,7 @@ pipelines:
             - echo "STEP_TYPE=$STEP_TYPE"
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
+            - echo "imagetag=$imageTag"
        
   - name: pipeline2
     steps:    
