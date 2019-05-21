@@ -33,7 +33,7 @@ pipelines:
             - switch_env nodejs 8.16.0
             
             - pushd $res_utility_repo_resourcePath
-            
+            - ls -la
             - read_json keys.json "DOCKER_USERNAME"
             
             - openssl genrsa -out key.pem 1024 
@@ -72,10 +72,17 @@ pipelines:
         triggeredBy:
           resources:
             - utility_repo
+        runtime:            
+            type: image
+            image:
+              custom:
+                name: drydock/c7node
+                tag: master
+                options: 'privilege: true'
         execution:
           onExecute:
             - printenv
-            - docker pull drydock/u16node:master
+            - docker pull drydock/c7node:master
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
             
