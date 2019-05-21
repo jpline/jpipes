@@ -24,7 +24,7 @@ pipelines:
             - printenv
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
-            - bump_semver 
+           # - bump_semver # error: Invalid action given in the argument.
             - bump_semver minor
             - bump_semver v minor
             - bump_semver 3.0.3 rc
