@@ -220,6 +220,7 @@ pipelines:
         requires:
           integrations:
             - pemkey
+            - notifySlack
        # runtime:            
         #  type: image
         #  image:
