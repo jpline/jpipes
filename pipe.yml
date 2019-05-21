@@ -102,6 +102,17 @@ pipelines:
           onExecute:
             - printenv
             - docker pull drydock/c7node:master
+            - add_run_variable imageTag="firstTest"
+            
+            - pushd $res_utility_repo_resourcePath
+            
+            - save_run_state test.sh my_file
+            - restore_run_state my_file test.sh
+            
+            - save_resource_state state_reso echo.sh my_file
+            - restore_resource_state state_reso my_file echo.sh
+            - popd
+            
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
             
@@ -146,6 +157,17 @@ pipelines:
           onExecute:
             - printenv
             - docker pull drydock/u16node:master
+            - add_run_variable imageTag="firstTest"
+            
+            - pushd $res_utility_repo_resourcePath
+            
+            - save_run_state test.sh my_file
+            - restore_run_state my_file test.sh
+            
+            - save_resource_state state_reso echo.sh my_file
+            - restore_resource_state state_reso my_file echo.sh
+            - popd
+            
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
             
