@@ -251,6 +251,7 @@ pipelines:
             - popd
             
             - send_notification notifySlack
+            - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
          #   - replicate_resource imageDocker imagePython
          
         outputResources:
