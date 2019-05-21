@@ -23,6 +23,8 @@ pipelines:
           resources:
             - utility_repo
         requires:
+          resources:
+            - state_reso
           integrations:
             - notifySlack
         execution:
