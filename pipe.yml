@@ -3,208 +3,80 @@ resources:
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
-      integrationName: github
+      integrationName: varsha_github
       branches:
-        except: test_*
-      #  only: master_*
-      #files:
-       # except: tes*
-       # only: nod*
-      tags:
-        except: tes*
-       # only: tag*
+        only: test
     initialVersion:
-      sha: master
-    buildOn:
-      tagPush: true
- 
+      sha: test
+
 pipelines:
   - name: pipeline1
     steps:  
-      - name: testJob1
+      - name: utility_u16
         type: bash
         configuration:
           timeoutSeconds: 360
-        setup:
-          environmentVariables:
-            normal:
-              ENV1: value1
-              ENV3: value3
-              ENV4: $ENV3
-              STEP_TYPE: update
-              PIPELINE_NAME: update
-              STEP_NAME: update
-         #     RUNNING_IN_CONTAINER: container #this throw error when i update this
-            secure:
-              ENV2: EpEMlpUSs85U6Y5WmsV5xXUr/GkDpuKP0qH6yy4qPoTbZUSRwmIwWhez+bNSmDJe7lkZN1+syxU1LFmt09QqtSVQpy69brIW1L6vLaHVtBn7hcYGC3dJhmvXUYn/ohpasFj/sab6lwXHQSs+nRYyFRF+ICRzoTB6M17JW/KoLpqJrLL1hBYC1gPSXuWgJT/ZqKWcg+GWhCZT1o9L6IrHrgaMYR3aSmWwGAZoUBWGuTw7/datT6NDhxD6nX64dRdcR+4X0yRnTLPzbxqiMC9qTBw4ChIw5CenyH0tE/AF6YlhoavkyyRBkgd18AQKVNpQneaRN7htnIe+fLEsbKEkwQ==
+          nodePool: u16NodePool
         triggeredBy:
           resources:
             - sample_scriptrepo
           integrations:
             - dockerInt
-        runtime:            
-          type: image
-          image:
-            custom:
-              name: drydock/u16all
-              tag: v7.2.4
-              options: 'privileged: true'
         execution:
           onExecute:
             - printenv
-            - echo "hello!"
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-            - echo "ENV4=$ENV4"
-            - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "PIPELINE_NAME=$PIPELINE_NAME"
-            - echo "STEP_NAME=$STEP_NAME"
-            - compare_git -- resource sample_scriptrepo --path ./test.sh --commit-range HEAD~2..HEAD 
-          #  - echo "RUNNING_IN_CONTAINER=$RUNNING_IN_CONTAINER"
-          onSuccess:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-            - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "PIPELINE_NAME=$PIPELINE_NAME"
-            - echo "STEP_NAME=$STEP_NAME"
+            - bump_semver v1.0.1 major
+            - bump_sermer v0.0.1 patch
+            - bump_sermer
+            - bump_sermer minor
+            - bump_semver v minor
+            - bump_sermer 3.0.3 rc
+            - bump_sermer iiii 
           onComplete:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-            - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "PIPELINE_NAME=$PIPELINE_NAME"
-            - echo "STEP_NAME=$STEP_NAME"
-          onStart:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-          onFailure:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-          onCancel:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
+            - echo "Oh Yeah Done ubuntu 16!"
             
-      - name: step_2
+      - name: utility_u18
         type: bash
+        configuration:
+          timeoutSeconds: 360
+          nodePool: u18NodePool
         triggeredBy:
           resources:
-            - imageDocker
-        setup:
-          environmentVariables:
-            normal:
-              ENV1: "'value1 value2 ... valuen'"
-              ENV2: "value2 value3 value4"
+            - sample_scriptrepo
+          integrations:
+            - dockerInt
         execution:
           onExecute:
             - printenv
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            
-      - name: step_3
+            - bump_semver v1.0.1 major
+            - bump_sermer v0.0.1 patch
+            - bump_sermer
+            - bump_sermer minor
+            - bump_semver v minor
+            - bump_sermer 3.0.3 rc
+            - bump_sermer iiii 
+          onComplete:
+            - echo "Oh Yeah Done ubuntu 18!"
+
+      - name: utility_c7
         type: bash
         configuration:
-          priority: 4
           timeoutSeconds: 360
+          nodePool: c7NodePool
         triggeredBy:
-          steps:
-            - testJob1
-        setup:
-          environmentVariables:
-            normal:
-              ENV1: value1
-              ENV2: value2
-            encrypted:
-              SECURE_ENV1: AEb8pmfA/dlxbrphotPCm4t6p9QCbsnMxREHbGaAE0k6ce6wU8NAU4cNTqa4vtM3iYBHe2cUQfcVY9xRSvJig8HQ8McEqBN1gEPhsUwiDXLYmjV7qRihZfRJdRwykkXd9TE6aghY4fgtxhvpqaLfSxa1RBu/7reOxLljBwzNff2Yaqj09glxXd8wo4RRwYXX17FBwaY8Jc88dyTVKEHPEmgi9hId4+Nr3U4WhHkXUZaE1ZiTjbNCbsDq530UK4s8vKO0fpOUT4uIeMZr52KPe6wRvYqf1ykU+NgzVPK2ClFzSc8AQiEKqxCuFrQY0j9qM74JfMIrOamWBvWEc9uenw==
-              SECURE_ENV3: KsG4kx2e6vuqJPx0m4PUnEG2kTxVxhDOaKiksfdefibTQtX49GmdMu4dAdxq0R2x8sh6pP6PYynPK4e/j5HQPOYfWRiMEdLwJ2p1UPcFcNfDq6Q5kWB8MDmQP6OikVguNOj8Iu/yicpca+ilNzMRTmVNX5jyn6bjySaIlXeyrGZYaWex3XxxcZfuM8544tktEUiHwMBTPEZV8aL9d1K5dco67IQFgdRfDtnkCfvresi+uTCvE3GULO2vbloXz+J1Bcc/pm+ufUyh2m1ivvsA3nhBFYTcyGz5AWm2qEI/v0ujK9fMLkgLMnjOl3l/X7dI6n8lvHFoI7QYDlpYt4cR3Q==
+          resources:
+            - sample_scriptrepo
+          integrations:
+            - dockerInt
         execution:
           onExecute:
             - printenv
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-            - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "PIPELINE_NAME=$PIPELINE_NAME"
-            - echo "STEP_NAME=$STEP_NAME"
-          onStart:
-            - echo "on start"
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-          onSuccess:
-            - echo "on success!"
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-          onFailure:
-            - echo "something went wrong"
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-          onComplete: 
-            - echo "step is done!"
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-          onCancel:
-            - echo "cancelled this job"
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
-            - test "$SECURE_ENV3" == "secure_value3" 
-            - test "$SECURE_ENV1" == "secure_value1"
-            
-      - name: step_4
-        type: bash
-        configuration:
-          priority: 5
-        triggeredBy:
-          steps:
-            - testJob1
-        execution:
-          onExecute:
-            - echo "ENV1=$ENV1"
-            - echo "ENV2=$ENV2"
-            - echo "ENV3=$ENV3"
-            - echo "STEP_TYPE=$STEP_TYPE"
-            - echo "PIPELINE_NAME=$PIPELINE_NAME"
-            - echo "STEP_NAME=$STEP_NAME"
-          
-            
-  - name: pipeline2
-    steps:    
-      - name: step_pl2
-        type: bash
-        execution:
-          onExecute:
-            - printenv
-  
-      - name: step2_pl2
-        type: bash
-        configuration:
-          priority: 1
-        triggeredBy:
-          steps:
-            - step_pl2
-        execution:
-          onExecute:
-            - printenv
-             
-      - name: step3_pl2
-        type: bash
-        configuration:
-          priority: 2
-        triggeredBy:
-          steps:
-            - step_pl2
-        execution:
-          onExecute:
-            - printenv
+            - bump_semver v1.0.1 major
+            - bump_sermer v0.0.1 patch
+            - bump_sermer
+            - bump_sermer minor
+            - bump_semver v minor
+            - bump_sermer 3.0.3 rc
+            - bump_sermer iiii 
+          onComplete:
+            - echo "Oh Yeah Done centOS 7!"
