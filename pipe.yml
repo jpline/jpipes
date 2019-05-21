@@ -221,23 +221,24 @@ pipelines:
           integrations:
             - pemkey
             - notifySlack
-       # runtime:            
-        #  type: image
-        #  image:
-         #   custom:
-         #     name: drydock/u16all
-          #    tag: v7.2.4
-          #    options: 'privileged: true'
+        runtime:            
+          type: image
+          image:
+            auto:
+              language: python
+              version: 3.6
         execution:
           onExecute:
            # - docker pull drydock/u16node:master
             - printenv
             - echo "verify all utility functions"
-            - bump_semver v1.0.0 major 
+            - bump_semver v8.0.0 minor
             - echo "expected result v2.0.0 for above command"
             - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
             
             - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
+            
+            - switch_env nodeJs 8.16.0
             
             - pushd $res_utility_repo_resourcePath
             - read_json keys.json "DOCKER_USERNAME"
