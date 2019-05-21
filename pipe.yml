@@ -9,6 +9,9 @@ resources:
     initialVersion:
       sha: test
 
+  - name: state_reso
+    type: state
+    
 pipelines:
   - name: Varsha_pipeline
     steps:  
