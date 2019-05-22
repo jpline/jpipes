@@ -27,6 +27,14 @@ resources:
       integrationName: dockerInt
     initialVersion:
       imageTag: latest
+  
+  - name: imagePython_1
+    type: image
+    imageName: shippabledocker/sample-python
+    configuration:
+      integrationName: dockerInt
+    initialVersion:
+      imageTag: latest
       
 pipelines:
   - name: Varsha_pipeline
@@ -42,7 +50,7 @@ pipelines:
           resources:
             - state_reso
             - imageDocker_1
-            - imagePython
+          #  - imagePython
           integrations:
             - notifySlack
             - varshaJira
@@ -107,7 +115,7 @@ pipelines:
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
         outputResources:
-          - imagePython
+          - imagePython_1
             
       - name: utility_c7
         type: bash
