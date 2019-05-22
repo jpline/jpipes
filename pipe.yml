@@ -31,7 +31,7 @@ resources:
   
   - name: imagePython_1
     type: image
-    imageName: shippabledocker/sample-python
+    imageName: shippabledocker/u16phpall
     configuration:
       integrationName: dockerInt
     initialVersion:
@@ -116,7 +116,7 @@ pipelines:
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
         outputResources:
-          - imagePython_1
+          - imagePython
             
       - name: utility_c7
         type: bash
