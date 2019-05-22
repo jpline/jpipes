@@ -27,7 +27,6 @@ pipelines:
             - state_reso
           integrations:
             - notifySlack
-          
         execution:
           onExecute:
             - docker pull drydock/u16node:master
@@ -99,8 +98,8 @@ pipelines:
         requires:
           resources:
             - state_reso
-          steps:
-            - utility_u16
+      #    steps:
+      #      - utility_u16
           integrations:
             - notifySlack
         execution:
@@ -160,8 +159,8 @@ pipelines:
         triggeredBy:
           resources:
             - utility_repo
-          steps:
-            - utility_u16
+         # steps:
+          #  - utility_u16
         execution:
           onExecute:
             - printenv
