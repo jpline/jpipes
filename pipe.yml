@@ -188,7 +188,7 @@ pipelines:
             
             - execute_command echo $res_utility_repo_resourcePath
           onComplete:
-            - echo "Oh Yeah Done centOS 7!"
+            - echo "Oh Yeah Done centOS 7!!"
       
       - name: utility_u18
         type: bash
