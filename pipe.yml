@@ -22,9 +22,10 @@ resources:
   
   - name: imagePython
     type: image
-    imageName: shippabledocker/sample-python
+    imageName: shippabledocker/u16phpall
     configuration:
       integrationName: dockerInt
+      autoPull: false
     initialVersion:
       imageTag: latest
   
