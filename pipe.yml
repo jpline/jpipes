@@ -27,8 +27,7 @@ pipelines:
             - state_reso
           integrations:
             - notifySlack
-          steps:
-            - utility_u18
+          
         execution:
           onExecute:
             - docker pull drydock/u16node:master
@@ -100,7 +99,8 @@ pipelines:
         requires:
           resources:
             - state_reso
-          
+          steps:
+            - utility_u16
           integrations:
             - notifySlack
         execution:
