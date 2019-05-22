@@ -121,7 +121,7 @@ pipelines:
         type: bash
         configuration:
           timeoutSeconds: 360
-          nodePool: kermit_centos_pool
+         # nodePool: kermit_centos_pool
         triggeredBy:
           resources:
             - utility_repo
@@ -193,7 +193,7 @@ pipelines:
         type: bash
         configuration:
           timeoutSeconds: 360
-          nodePool: kermit_ubuntu18
+        #  nodePool: kermit_ubuntu18
         requires:
           resources:
             - state_reso
