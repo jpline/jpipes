@@ -12,7 +12,7 @@ resources:
   - name: state_reso
     type: state
     
-  - name: imageDocker
+  - name: imageDocker_1
     type: image
     imageName: shippabledocker/sample-node
     configuration:
