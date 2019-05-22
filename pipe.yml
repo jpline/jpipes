@@ -52,7 +52,6 @@ pipelines:
             - state_reso
             - imageDocker_1
             - imagePython_2
-            - imagePython_3
           integrations:
             - notifySlack
             - varshaJira
@@ -117,7 +116,7 @@ pipelines:
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
         outputResources:
-          - imagePython_2
+          - imagePython_3
             
       - name: utility_c7
         type: bash
