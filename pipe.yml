@@ -84,7 +84,7 @@ pipelines:
            # - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
             - execute_command echo $res_utility_repo_resourcePath
           #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
-         #   - replicate_resource imageDocker imagePython #throws error
+            - replicate_resource imageDocker imagePython #throws error
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
             
