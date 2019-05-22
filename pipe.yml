@@ -20,7 +20,7 @@ resources:
     initialVersion:
       imageTag: latest
   
-  - name: imagePython
+  - name: imagePython_2
     type: image
     imageName: shippabledocker/u16phpall
     configuration:
@@ -29,7 +29,7 @@ resources:
     initialVersion:
       imageTag: latest
   
-  - name: imagePython_1
+  - name: imagePython_3
     type: image
     imageName: shippabledocker/u16phpall
     configuration:
@@ -51,7 +51,8 @@ pipelines:
           resources:
             - state_reso
             - imageDocker_1
-            - imagePython
+            - imagePython_2
+            - imagePython_3
           integrations:
             - notifySlack
             - varshaJira
@@ -112,11 +113,11 @@ pipelines:
              # - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
             - execute_command echo $res_utility_repo_resourcePath
           #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
-            - replicate_resource imageDocker_1 imagePython #throws error
+            - replicate_resource imageDocker_1 imagePython_3 #throws error
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
         outputResources:
-          - imagePython
+          - imagePython_2
             
       - name: utility_c7
         type: bash
