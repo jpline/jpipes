@@ -107,7 +107,7 @@ pipelines:
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
         outputResources:
-          - testing
+          - imagePython
             
       - name: utility_c7
         type: bash
