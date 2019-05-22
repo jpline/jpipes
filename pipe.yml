@@ -80,9 +80,8 @@ pipelines:
             
             - popd
             - send_notification notifySlack
-            - send_notification varsha-jira --project-id 10000 --type Task --summary "no issue" --description "testing api"
-            - send_notification jira --project-id test --type test --summary "testing" --description "testing description"
-           # - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
+            - send_notification varshaJira --project-id 10000 --type Task --summary "no issue" --description "testing api"
+             # - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
             - execute_command echo $res_utility_repo_resourcePath
           #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
             - replicate_resource imageDocker imagePython #throws error
