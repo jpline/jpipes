@@ -12,6 +12,22 @@ resources:
   - name: state_reso
     type: state
     
+  - name: imageDocker
+    type: image
+    imageName: shippabledocker/sample-node
+    configuration:
+      integrationName: dockerInt
+    initialVersion:
+      imageTag: latest
+  
+  - name: imagePython
+    type: image
+    imageName: shippabledocker/sample-python
+    configuration:
+      integrationName: dockerInt
+    initialVersion:
+      imageTag: latest
+      
 pipelines:
   - name: Varsha_pipeline
     steps:  
@@ -88,6 +104,8 @@ pipelines:
             - replicate_resource imageDocker imagePython #throws error
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
+        outputResources:
+          - testing
             
       - name: utility_c7
         type: bash
