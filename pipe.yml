@@ -108,21 +108,11 @@ pipelines:
             
             - popd
             - send_notification notifySlack
-            - send_notification varshaJira --project-id TES --type Bug --summary "no issue" --description "{
-          "type": "doc",
-          "version": 1,
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "description"
-                }
-              ]
-            }
-          ]
-        }"
+            - send_notification varshaJira --project-id=TES --type=Bug --summary="no issue" --descriptionn="test api step_id=$STEP_ID" || true
+        #    - shipctl notify test-jira-res --project-id=MYAP  --description="failure in $BUILD_NUMBER" --summary="something went wrong" || true
+#               # no summary
+#             - shipctl notify test-jira-res --project-id=MYAP --type=Bug --description="failure in $BUILD_NUMBER" || true
+
              # - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
             - execute_command echo $res_utility_repo_resourcePath
           #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
