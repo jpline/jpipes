@@ -109,14 +109,12 @@ pipelines:
             - popd
             - send_notification notifySlack
             - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
-        #    - shipctl notify test-jira-res --project-id=MYAP  --description="failure in $BUILD_NUMBER" --summary="something went wrong" || true
-#               # no summary
-#             - shipctl notify test-jira-res --project-id=MYAP --type=Bug --description="failure in $BUILD_NUMBER" || true
-
-             # - write_output imagePython "imageTag=master" "sha=$res_utility_repo_commitSha"
             - execute_command echo $res_utility_repo_resourcePath
           #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
             - replicate_resource imageDocker_1 imagePython_2 #throws error
+            - retry_command npm install
+            - mkdir -p shippable/testresults && mkdir -p shippable/codecoverage
+            - save_tests $res_src_resourcePath/shippable/testresults/testresults.xml
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
        # outputResources:
@@ -267,4 +265,3 @@ pipelines:
             - execute_command echo $res_utility_repo_resourcePath
           onComplete:
             - echo "Oh Yeah Done ubuntu 18!"
- 
