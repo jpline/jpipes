@@ -8,9 +8,6 @@ resources:
         only: test
     initialVersion:
       sha: test
-
-  - name: state_reso
-    type: state
     
   - name: imageDocker_1
     type: image
@@ -49,7 +46,6 @@ pipelines:
             - utility_repo
         requires:
           resources:
-            - state_reso
             - imageDocker_1
             - imagePython_2
           integrations:
@@ -132,8 +128,6 @@ pipelines:
           resources:
             - utility_repo
         requires:
-          resources:
-            - state_reso
           steps:
             - utility_u16
           integrations:
@@ -201,8 +195,6 @@ pipelines:
           timeoutSeconds: 360
         #  nodePool: kermit_ubuntu18
         requires:
-          resources:
-            - state_reso
           integrations:
             - notifySlack
         triggeredBy:
