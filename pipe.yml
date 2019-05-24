@@ -60,9 +60,7 @@ pipelines:
             
             - save_run_state test.sh my_file
             - restore_run_state my_file test.sh
-            
-            - save_resource_state state_reso echo.sh my_file
-            - restore_resource_state state_reso my_file echo.sh
+           
             - popd
             
             - printenv
