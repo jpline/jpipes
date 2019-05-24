@@ -17,6 +17,14 @@ resources:
     initialVersion:
       imageTag: latest
   
+  - name: imagePrivate
+    type: image
+    imageName: shippabledocker/sample_node_pvt
+    configuration:
+      integrationName: dockerInt
+    initialVersion:
+      imageTag: masterpyt
+      
   - name: imagePython_2
     type: image
     imageName: shippabledocker/u16phpall
@@ -44,6 +52,7 @@ pipelines:
         triggeredBy:
           resources:
             - utility_repo
+            - imagePrivate
         requires:
           resources:
             - imageDocker_1
