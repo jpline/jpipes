@@ -33,6 +33,13 @@ resources:
       integrationName: dockerInt
     initialVersion:
       imageTag: latest
+  
+  - name: webhookIntExt
+    type: webhook
+    configuration:
+      integrationName: varsha_externalWebhook
+    initialVersion:
+      payload: "sample_one"
  
 pipelines:
   - name: pipeline_Varsha1
@@ -66,7 +73,7 @@ pipelines:
         requires:
           integrations:
             - dockerInt
-        
+            - varsha_externalWebhook
         execution:
           onExecute:
             - printenv
@@ -114,14 +121,17 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
+        outputResources:
+          - webhookIntExt
             
       - name: step_2
         type: bash
         triggeredBy:
           resources:
             - imageDocker
-          steps: 
-            - testJob1
+            - webhookIntExt
+         # steps: 
+           # - testJob1
         setup:
           environmentVariables:
             normal:
