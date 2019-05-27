@@ -130,8 +130,8 @@ pipelines:
           resources:
             - imageDocker
             - webhookIntExt
-         # steps: 
-           # - testJob1
+          steps: 
+            - testJob1
         setup:
           environmentVariables:
             normal:
