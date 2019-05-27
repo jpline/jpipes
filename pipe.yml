@@ -129,7 +129,6 @@ pipelines:
         triggeredBy:
           resources:
             - imageDocker
-            - webhookIntExt
           steps: 
             - testJob1
         setup:
