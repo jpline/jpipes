@@ -18,15 +18,15 @@ resources:
     buildOn:
       tagPush: true
 
-  - name: utility_repo
-    type: gitRepo
-    repoPath: jpline/sample-script
-    configuration:
-      integrationName: varsha_github	
-      branches:
-        only: test
-    initialVersion:
-      sha: test
+  #- name: utility_repo1
+  #  type: gitRepo
+   # repoPath: jpline/sample-script
+   # configuration:
+   #   integrationName: varsha_github	
+   #   branches:
+   #     only: test
+   # initialVersion:
+    #  sha: test
       
   - name: imageDocker
     type: image
@@ -70,8 +70,6 @@ pipelines:
         requires:
           integrations:
             - dockerInt
-          resources:
-            - state_reso
         runtime:            
           type: image
           image:
@@ -230,6 +228,12 @@ pipelines:
         execution:
           onExecute:
             - printenv
+        runtime:            
+          type: image
+          image:
+            auto:
+              language: python
+              version: 3.6
   
       - name: utility_step1
         type: bash
@@ -240,12 +244,6 @@ pipelines:
           integrations:
             - pemkey
             - notifySlack
-        runtime:            
-          type: image
-          image:
-            auto:
-              language: python
-              version: 3.6
         execution:
           onExecute:
            # - docker pull drydock/u16node:master
