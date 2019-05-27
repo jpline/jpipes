@@ -241,8 +241,8 @@ pipelines:
       - name: utility_step
         type: bash
         triggeredBy:
-          resources:
-            - utility_repo
+          steps:
+            - step_pl2
         requires:
           integrations:
             - pemkey
