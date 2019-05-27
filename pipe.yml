@@ -71,10 +71,10 @@ pipelines:
           resources:
             - imageDocker_1
             - imagePython_2
-            - varsha_internalWebhook
           integrations:
             - notifySlack
             - varshaJira
+            - varsha_internalWebhook
         execution:
           onExecute:
             - test "$SECURE_ENV1" == "secret1"
