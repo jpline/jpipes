@@ -47,7 +47,7 @@ resources:
     configuration:
       integrationName: varsha_internalWebhook
     initialVersion:
-      payload: {"message":"Webhook processed from step"}
+      payload: "sample_one"
       
 pipelines:
   - name: Varsha_pipeline
