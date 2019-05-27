@@ -43,12 +43,12 @@ pipelines:
           timeoutSeconds: 360
         setup:
           runtime:            
-          type: image
-          image:
-            custom:
-              name: drydock/u16all
-              tag: v7.2.4
-              options: 'privileged: true'
+            type: image
+            image:
+              custom:
+                name: drydock/u16all
+                tag: v7.2.4
+                options: 'privileged: true'
           environmentVariables:
             normal:
               ENV1: value1
@@ -74,7 +74,7 @@ pipelines:
             - echo "ENV1=$ENV1"
             - echo "ENV2=$ENV2"
             - echo "ENV3=$ENV3"
-            - echo "ENV4=$ENV4"
+            - test "$ENV4" == "value3"
             - echo "STEP_TYPE=$STEP_TYPE"
             - echo "PIPELINE_NAME=$PIPELINE_NAME"
             - echo "STEP_NAME=$STEP_NAME"
