@@ -132,7 +132,8 @@ pipelines:
         triggeredBy:
           resources:
             - imageDocker
-          steps: testJob1
+          steps: 
+            - testJob1
         setup:
           environmentVariables:
             normal:
@@ -230,7 +231,7 @@ pipelines:
           onExecute:
             - printenv
   
-      - name: utility_step
+      - name: utility_step1
         type: bash
         triggeredBy:
           steps:
