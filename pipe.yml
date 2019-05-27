@@ -17,16 +17,6 @@ resources:
       sha: test
     buildOn:
       tagPush: true
-
-  #- name: utility_repo1
-  #  type: gitRepo
-   # repoPath: jpline/sample-script
-   # configuration:
-   #   integrationName: varsha_github	
-   #   branches:
-   #     only: test
-   # initialVersion:
-    #  sha: test
       
   - name: imageDocker
     type: image
