@@ -56,7 +56,6 @@ pipelines:
         triggeredBy:
           resources:
             - sample_scriptrepo
-            - utility_repo
         requires:
           integrations:
             - dockerInt
