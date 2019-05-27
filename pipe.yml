@@ -232,7 +232,6 @@ pipelines:
             - step_pl2
         requires:
           integrations:
-            - pemkey
             - notifySlack
         execution:
           onExecute:
