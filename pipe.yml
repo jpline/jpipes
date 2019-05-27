@@ -220,6 +220,7 @@ pipelines:
         triggeredBy:
           resources:
             - utility_repo
+            - webhookInt
           steps:
             - utility_u16
         execution:
