@@ -217,6 +217,7 @@ pipelines:
         requires:
           integrations:
             - notifySlack
+            - varsha_internalWebhook
         triggeredBy:
           resources:
             - utility_repo
