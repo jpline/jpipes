@@ -205,7 +205,7 @@ pipelines:
         type: bash
         configuration:
           timeoutSeconds: 360
-        #  nodePool: kermit_ubuntu18
+          nodePool: kermit_ubuntu18_pool
         requires:
           integrations:
             - notifySlack
