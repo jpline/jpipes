@@ -49,6 +49,13 @@ resources:
     initialVersion:
       payload: "sample_one"
       
+  - name: webhookIntExt
+    type: webhook
+    configuration:
+      integrationName: varsha_externalWebhook
+    initialVersion:
+      payload: "sample_one_external"
+      
 pipelines:
   - name: Varsha_pipeline
     steps:  
@@ -125,6 +132,7 @@ pipelines:
             - restore_cache my_file echo.sh
             
             - popd
+            
             - send_notification notifySlack
             - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
             - execute_command echo $res_utility_repo_resourcePath
@@ -154,6 +162,7 @@ pipelines:
             - utility_u16
           integrations:
             - notifySlack
+            - varsha_externalWebhook
         execution:
           onExecute:
             - printenv
@@ -203,11 +212,15 @@ pipelines:
             
             - popd
             
+            - write_output webhookIntExt "payload=updating_from_step"
+            
             - send_notification notifySlack
             
             - execute_command echo $res_utility_repo_resourcePath
           onComplete:
             - echo "Oh Yeah Done centOS 7!!"
+        outputResources:
+          - webhookIntExt
       
       - name: utility_u18
         type: bash
