@@ -154,11 +154,9 @@ pipelines:
             
             - pushd $res_utility_repo_resourcePath
             
-            #- save_run_state test.sh my_file
-            #- restore_run_state my_file test.sh
+            - save_run_state test.sh my_file
+            - restore_run_state my_file test.sh
             
-            - save_resource_state state_reso echo.sh my_file
-            - restore_resource_state state_reso my_file echo.sh
             - popd
             
             - bump_semver v1.0.1 major
@@ -227,8 +225,6 @@ pipelines:
             - save_run_state test.sh my_file
             - restore_run_state my_file test.sh
             
-            - save_resource_state state_reso echo.sh my_file
-            - restore_resource_state state_reso my_file echo.sh
             - popd
             
             - bump_semver v1.0.1 major
