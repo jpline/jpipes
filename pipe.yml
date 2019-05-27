@@ -42,6 +42,13 @@ pipelines:
         configuration:
           timeoutSeconds: 360
         setup:
+          runtime:            
+          type: image
+          image:
+            custom:
+              name: drydock/u16all
+              tag: v7.2.4
+              options: 'privileged: true'
           environmentVariables:
             normal:
               ENV1: value1
@@ -59,13 +66,7 @@ pipelines:
         requires:
           integrations:
             - dockerInt
-        #runtime:            
-        #  type: image
-        #  image:
-        #    custom:
-         #     name: drydock/u16all
-         #     tag: v7.2.4
-         #     options: 'privileged: true'
+        
         execution:
           onExecute:
             - printenv
@@ -217,12 +218,13 @@ pipelines:
         execution:
           onExecute:
             - printenv
-        #runtime:            
-        #  type: image
-        #  image:
-        #    auto:
-        #      language: python
-        #      version: 3.6
+        setup:
+          runtime:            
+            type: image
+            image:
+              auto:
+                language: python
+                version: 3.6
   
       - name: utility_step1
         type: bash
