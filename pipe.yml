@@ -48,7 +48,7 @@ resources:
       imageTag: latest
  
 pipelines:
-  - name: pipeline1
+  - name: pipeline_Varsha1
     steps:  
       - name: testJob1
         type: bash
@@ -230,7 +230,7 @@ pipelines:
             - restore_run_state my_file test.sh
             - restore_resource_state state_reso my_file echo.sh
        
-  - name: pipeline2
+  - name: pipeline_Varsha2
     steps:    
       - name: step_pl2
         type: bash
