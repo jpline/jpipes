@@ -71,8 +71,6 @@ pipelines:
           resources:
             - imageDocker_1
             - imagePython_2
-          steps:
-            - testJob1
           integrations:
             - notifySlack
             - varshaJira
