@@ -53,6 +53,13 @@ pipelines:
           resources:
             - utility_repo
             - imagePrivate
+        setup:
+          environmentVariables:
+            normal:
+              ENV1: value1
+              ENV2: value2
+            encrypted:
+              SECURE_ENV1: tN2V17Mv6/IX4kJnrUCPlXMLYpV7Q95mOmgvJffO10Uir9vrdDJlPE02CA5jRK6cQJJd+rhFP155neKH9R1prAPWSX0vF/06NX1JLSIx7JkEnAB73/2beSU+2cdevrGycYgkHCqAQbn7Xma32LaeZDHMiamSZsNLND23jTdR4PrFO6QTrSPW89/M9JNcqtog1CfEz+l2gADnagiMLNJU+pZgPz8BfVyWLOlANt4J3SyefbFjy1LTyr08APDoR8UyGfSgWl1WT91a3ZL1QNQlpOtRon73raS7R2nFLqUIrAHJUnA/HjvIqhgoCn/lX/KrsWJoKWTZBqERgA3AnbqeJw==
         requires:
           resources:
             - imageDocker_1
@@ -62,7 +69,7 @@ pipelines:
             - varshaJira
         execution:
           onExecute:
-            - docker pull drydock/u16node:master
+            - test "$SECURE_ENV1" == "secret1"
             - add_run_variable imageTag="firstTest"
             
             - pushd $res_utility_repo_resourcePath
