@@ -41,6 +41,13 @@ resources:
       integrationName: dockerInt
     initialVersion:
       imageTag: latest
+  
+  - name: webhookInt
+    type: webhook
+    configuration:
+      integrationName: varsha_internalWebhook
+    initialVersion:
+      payload: {"message":"Webhook processed from step"}
       
 pipelines:
   - name: Varsha_pipeline
@@ -64,6 +71,7 @@ pipelines:
           resources:
             - imageDocker_1
             - imagePython_2
+            - varsha_internalWebhook
           integrations:
             - notifySlack
             - varshaJira
@@ -130,8 +138,8 @@ pipelines:
            # - save_tests $res_utility_repo_resourcePath/shippable/testresults/testresults.xml
           onComplete:
             - echo "Oh Yeah Done ubuntu 16!"
-       # outputResources:
-        #  - imagePython_3
+        outputResources:
+          - webhookInt
             
       - name: utility_c7
         type: bash
