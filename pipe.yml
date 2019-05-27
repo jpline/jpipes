@@ -3,7 +3,7 @@ resources:
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
-      integrationName: github
+      integrationName: varsha_github	
       branches:
         except: test_*
       #  only: master_*
@@ -22,7 +22,7 @@ resources:
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
-      integrationName: github
+      integrationName: varsha_github	
       branches:
         only: test
     initialVersion:
