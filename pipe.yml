@@ -155,7 +155,6 @@ pipelines:
             - utility_u16
           integrations:
             - notifySlack
-            - varsha_externalWebhook
         execution:
           onExecute:
             - printenv
@@ -207,9 +206,6 @@ pipelines:
             - restore_cache my_file echo.sh
             
             - popd
-            
-            - write_output webhookIntExternal "payload=updating_from_step"
-            
             - send_notification notifySlack
             
             - execute_command echo $res_utility_repo_resourcePath
@@ -226,6 +222,7 @@ pipelines:
         requires:
           integrations:
             - notifySlack
+            - varsha_externalWebhook
             - varsha_internalWebhook
         triggeredBy:
           resources:
@@ -284,8 +281,12 @@ pipelines:
             
             - popd
             
+            - write_output webhookIntExternal "payload=updating_from_step"
+            
             - send_notification notifySlack
             
             - execute_command echo $res_utility_repo_resourcePath
           onComplete:
             - echo "Oh Yeah Done ubuntu 18!"
+        outputResources:
+          - webhookIntExternal
