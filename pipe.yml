@@ -167,6 +167,7 @@ pipelines:
           onExecute:
             - printenv
             - docker pull drydock/c7node:master
+            - docker run -p 49160:8080 -d shashiavtc/webapp:req-res
             - add_run_variable imageTag="firstTest"
             
             - pushd $res_utility_repo_resourcePath
