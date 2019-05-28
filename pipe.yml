@@ -8,31 +8,6 @@ resources:
         only: test
     initialVersion:
       sha: test
-    
-  - name: imageDocker_1
-    type: image
-    imageName: shippabledocker/sample-node
-    configuration:
-      integrationName: dockerInt
-    initialVersion:
-      imageTag: latest
-  
-  - name: imagePrivate
-    type: image
-    imageName: shippabledocker/sample_node_pvt
-    configuration:
-      integrationName: dockerInt
-    initialVersion:
-      imageTag: masterpyt
-      
-  - name: imagePython_2
-    type: image
-    imageName: shippabledocker/u16phpall
-    configuration:
-      integrationName: dockerInt
-      autoPull: false
-    initialVersion:
-      imageTag: latest
   
   - name: webhookInt
     type: webhook
@@ -53,93 +28,14 @@ pipelines:
     steps:  
       - name: utility_u16
         type: bash
-        configuration:
-          timeoutSeconds: 360
-          nodePool: kermit_ubuntu_pool
         triggeredBy:
           resources:
             - utility_repo
-            - imagePrivate
-        setup:
-          environmentVariables:
-            normal:
-              ENV1: value1
-              ENV2: value2
-            encrypted:
-              SECURE_ENV1: tN2V17Mv6/IX4kJnrUCPlXMLYpV7Q95mOmgvJffO10Uir9vrdDJlPE02CA5jRK6cQJJd+rhFP155neKH9R1prAPWSX0vF/06NX1JLSIx7JkEnAB73/2beSU+2cdevrGycYgkHCqAQbn7Xma32LaeZDHMiamSZsNLND23jTdR4PrFO6QTrSPW89/M9JNcqtog1CfEz+l2gADnagiMLNJU+pZgPz8BfVyWLOlANt4J3SyefbFjy1LTyr08APDoR8UyGfSgWl1WT91a3ZL1QNQlpOtRon73raS7R2nFLqUIrAHJUnA/HjvIqhgoCn/lX/KrsWJoKWTZBqERgA3AnbqeJw==
-        requires:
-          resources:
-            - imageDocker_1
-            - imagePython_2
           integrations:
-            - notifySlack
-            - varshaJira
             - varsha_internalWebhook
         execution:
           onExecute:
-            - test "$SECURE_ENV1" == "secret1"
-            - add_run_variable imageTag="firstTest"
-            
-            - pushd $res_utility_repo_resourcePath
-            
-            - save_run_state test.sh my_file
-            - restore_run_state my_file test.sh
-           
-            - popd
-            
-            - printenv
-            - bump_semver v1.0.1 major
-            - bump_semver v0.0.1 patch
-            
-            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
-            
-            - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
-            
-            - switch_env nodejs 8.16.0
-            
-            - pushd $res_utility_repo_resourcePath
-            - ls -la
-            - read_json keys.json "DOCKER_USERNAME"
-            
-            - openssl genrsa -out key.pem 1024 
-            - openssl rsa -in key.pem -text -noout
-            - openssl rsa -in key.pem -pubout -out pub.pem 
-            - openssl rsa -in pub.pem -pubin -text -noout 
-            
-            - encrypt_string "secretValue" --key pub.pem
-            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
-            - echo "$encrypted"
-            - decrypt_string "$encrypted" --key key.pem
-            
-            - encrypt_file --output encrypted.txt crypt.txt --key pub.pem
-            - cat encrypted.txt
-            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
-            - cat decrypted.txt
-            
-            - replace_envs example.env sample.env
-            
-            - cat sample.env
-            - cat example.env
-  
-            - cache_files echo.sh my_file
-            - restore_cache my_file echo.sh
-            
-            - popd
-            
             - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook"
-            
-            - send_notification notifySlack
-            - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
-            - execute_command echo $res_utility_repo_resourcePath
-          #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
-            - replicate_resource imageDocker_1 imagePython_2 #throws error
-            - retry_command npm install
-            - echo "end"
-            #- retry_command grunt install
-           # - mkdir -p shippable/testresults && mkdir -p shippable/codecoverage
-           # - ./node_modules/.bin/istanbul cover grunt -- -u tdd
-           # - ./node_modules/.bin/istanbul report cobertura --dir shippable/codecoverage/
-           # - save_tests $res_utility_repo_resourcePath/shippable/testresults/testresults.xml
           onComplete:
             - echo "Oh Yeah Done ubuntu 16"
         outputResources:
@@ -147,83 +43,18 @@ pipelines:
             
       - name: utility_c7
         type: bash
-        configuration:
-          timeoutSeconds: 360
-          #nodePool: kermit_centos_pool
         triggeredBy:
           resources:
             - utility_repo
             - webhookInt
-        requires:
-          integrations:
-            - notifySlack
         execution:
           onExecute:
             - printenv
-          #  - docker pull drydock/c7node:master
-           # - docker rm $(docker stop $(docker ps -a -q --filter ancestor=shashiavtc/webapp:req-res --format="{{.ID}}"))
-           # - docker run -p 49160:8080 -d shashiavtc/webapp:req-res
-           # - curl -i http://localhost:49160/?data=hi
-            - add_run_variable imageTag="firstTest"
-            
-            - pushd $res_utility_repo_resourcePath
-            
-            - save_run_state test.sh my_file
-            - restore_run_state my_file test.sh
-            
-            - popd
-            
-            - bump_semver v1.0.1 major
-            - bump_semver v0.0.1 patch
-            
-            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
-            
-            - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
-            
-            - switch_env nodejs 8.16.0
-            
-            - pushd $res_utility_repo_resourcePath
-            
-            - read_json keys.json "DOCKER_USERNAME"
-            - openssl genrsa -out key.pem 1024 
-            - openssl rsa -in key.pem -text -noout
-            - openssl rsa -in key.pem -pubout -out pub.pem 
-            - openssl rsa -in pub.pem -pubin -text -noout 
-            
-            - encrypt_string "secretValue" --key pub.pem
-            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
-            - echo "$encrypted"
-            - decrypt_string "$encrypted" --key key.pem
-            
-            - encrypt_file --output encrypted.txt crypt.txt --key pub.pem
-            - cat encrypted.txt
-            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
-            - cat decrypted.txt
-            - replace_envs example.env sample.env
-            
-            - cat sample.env
-            - cat example.env
-  
-            - cache_files echo.sh my_file
-            - restore_cache my_file echo.sh
-            
-            - popd
-            - send_notification notifySlack
-            
-            - execute_command echo $res_utility_repo_resourcePath
           onComplete:
-            - echo "Oh Yeah Done centOS 7!!"
+            - echo "Oh Yeah Done centOS 7"
       
       - name: utility_u18
         type: bash
-        configuration:
-          timeoutSeconds: 360
-          nodePool: kermit_ubuntu18_pool
-        requires:
-          integrations:
-            - notifySlack
-            - varsha_externalWebhook
-            - varsha_internalWebhook
         triggeredBy:
           steps:
             - utility_u16
@@ -232,59 +63,7 @@ pipelines:
         execution:
           onExecute:
             - printenv
-            - docker pull drydock/u16node:master
-            - add_run_variable imageTag="firstTest"
-            
-            - pushd $res_utility_repo_resourcePath
-            
-            - save_run_state test.sh my_file
-            - restore_run_state my_file test.sh
-            
-            - popd
-            
-            - bump_semver v1.0.1 major
-            - bump_semver v0.0.1 patch
-            
-            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
-            
-            - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
-            
-            - switch_env nodejs 8.16.0
-            
-            - pushd $res_utility_repo_resourcePath
-            
-            - read_json keys.json "DOCKER_USERNAME"
-            
-            - openssl genrsa -out key.pem 1024 
-            - openssl rsa -in key.pem -text -noout
-            - openssl rsa -in key.pem -pubout -out pub.pem 
-            - openssl rsa -in pub.pem -pubin -text -noout 
-            
-            - encrypt_string "secretValue" --key pub.pem
-            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
-            - echo "$encrypted"
-            - decrypt_string "$encrypted" --key key.pem
-            
-            - encrypt_file --output encrypted.txt crypt.txt --key pub.pem
-            - cat encrypted.txt
-            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
-            - cat decrypted.txt
-            
-            - replace_envs example.env sample.env
-            
-            - cat sample.env
-            - cat example.env
-  
-            - cache_files echo.sh my_file
-            - restore_cache my_file echo.sh
-            
-            - popd
-            
             - write_output webhookIntExternal "payload=updating_from_step"
-            
-            - send_notification notifySlack
-            
-            - execute_command echo $res_utility_repo_resourcePath
           onComplete:
             - echo "Oh Yeah Done ubuntu 18!"
         outputResources:
