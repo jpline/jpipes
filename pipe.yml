@@ -150,9 +150,10 @@ pipelines:
         triggeredBy:
           resources:
             - utility_repo
-        requires:
+            - webhookInt
           steps:
             - utility_u16
+        requires:
           integrations:
             - notifySlack
         execution:
@@ -227,7 +228,6 @@ pipelines:
         triggeredBy:
           resources:
             - utility_repo
-            - webhookInt
           steps:
             - utility_u16
         execution:
