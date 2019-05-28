@@ -1,5 +1,5 @@
 resources:
-  - name: utility_repo
+  - name: testutility_repo
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
@@ -9,14 +9,14 @@ resources:
     initialVersion:
       sha: test
   
-  - name: webhookInt
+  - name: testwebhookInt
     type: webhook
     configuration:
       integrationName: varsha_internalWebhook
     initialVersion:
       payload: "sample_one_update"
       
-  - name: webhookIntExternal
+  - name: testwebhookIntExternal
     type: webhook
     configuration:
       integrationName: varsha_externalWebhook
@@ -24,46 +24,46 @@ resources:
       payload: "data=test_update"
       
 pipelines:
-  - name: Varsha_pipeline
+  - name: testVarsha_pipeline
     steps:  
-      - name: utility_u16
+      - name: testutility_u16
         type: bash
         triggeredBy:
           resources:
-            - utility_repo
+            - testutility_repo
           integrations:
             - varsha_internalWebhook
         execution:
           onExecute:
-            - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook"
+            - write_output testwebhookInt "payload=updating_outputResource_from_step_for_Internalwebhook"
           onComplete:
             - echo "Oh Yeah Done ubuntu 16"
         outputResources:
           - webhookInt
             
-      - name: utility_c7
+      - name: testutility_c7
         type: bash
         triggeredBy:
           resources:
-            - utility_repo
-            - webhookInt
+            - testutility_repo
+            - testwebhookInt
         execution:
           onExecute:
             - printenv
           onComplete:
             - echo "Oh Yeah Done centOS 7"
       
-      - name: utility_u18
+      - name: testutility_u18
         type: bash
         triggeredBy:
           steps:
-            - utility_u16
+            - testutility_u16
           resources:
-            - utility_repo
+            - testutility_repo
         execution:
           onExecute:
             - printenv
-            - write_output webhookIntExternal "payload=updating_from_step"
+            - write_output testwebhookIntExternal "payload=updating_from_step"
           onComplete:
             - echo "Oh Yeah Done ubuntu 18!"
         outputResources:
