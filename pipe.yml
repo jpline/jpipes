@@ -52,7 +52,8 @@ pipelines:
         execution:
           onExecute:
             - printenv
-            - write_output testwebhookExternal "payload="data=hello""
+            - write_output testwebhookExternal "payload=hello"
+            - printenv
           onComplete:
             - echo "Oh Yeah Done!!"
         outputResources:
