@@ -37,7 +37,7 @@ pipelines:
 
       - name: dep_test
         type: bash
-        configurations:
+        configuration:
           nodePool: kermit_ubuntu18_pool
         triggeredBy:
           steps:
