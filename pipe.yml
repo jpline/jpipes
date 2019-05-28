@@ -212,7 +212,7 @@ pipelines:
             
             - popd
             
-            #- write_output webhookIntExternal "payload=updating_from_step"
+            - write_output webhookIntExternal "payload=updating_from_step"
             
             - send_notification notifySlack
             
