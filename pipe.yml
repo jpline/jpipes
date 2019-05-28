@@ -154,8 +154,6 @@ pipelines:
           resources:
             - utility_repo
             - webhookInt
-          steps:
-            - utility_u16
         requires:
           integrations:
             - notifySlack
@@ -227,6 +225,8 @@ pipelines:
             - varsha_externalWebhook
             - varsha_internalWebhook
         triggeredBy:
+          steps:
+            - utility_u16
           resources:
             - utility_repo
         execution:
