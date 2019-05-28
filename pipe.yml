@@ -34,14 +34,6 @@ resources:
     initialVersion:
       imageTag: latest
   
-  - name: imagePython_3
-    type: image
-    imageName: shippabledocker/u16phpall
-    configuration:
-      integrationName: dockerInt
-    initialVersion:
-      imageTag: latest
-  
   - name: webhookInt
     type: webhook
     configuration:
