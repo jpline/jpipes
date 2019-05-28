@@ -6,6 +6,13 @@ resources:
       integrationName: varsha_internalWebhook
     version:
       payload: "from_resource_internal"
+  
+  - name: testwebhookExternal
+    type: webhook
+    configuration:
+      integrationName: varsha_externalWebhook
+    version:
+      payload: "data=test_update"
       
 pipelines:
   - name: testVarsha_pipeline
@@ -47,3 +54,5 @@ pipelines:
             - printenv
           onComplete:
             - echo "Oh Yeah Done!!"
+        outputResources:
+          - testwebhookExternal
