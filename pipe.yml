@@ -140,7 +140,7 @@ pipelines:
            # - ./node_modules/.bin/istanbul report cobertura --dir shippable/codecoverage/
            # - save_tests $res_utility_repo_resourcePath/shippable/testresults/testresults.xml
           onComplete:
-            - echo "Oh Yeah Done ubuntu 16!"
+            - echo "Oh Yeah Done ubuntu 16"
         outputResources:
           - webhookInt
             
