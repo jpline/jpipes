@@ -37,3 +37,13 @@ pipelines:
           onComplete:
             - echo "Oh Yeah Done!"
 
+      - name: dep_outputWebhook
+        type: bash
+        triggeredBy:
+          steps:
+            - outputWebhook
+        execution:
+          onExecute:
+            - printenv
+          onComplete:
+            - echo "Oh Yeah Done!"
