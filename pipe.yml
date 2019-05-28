@@ -212,8 +212,6 @@ pipelines:
             - execute_command echo $res_utility_repo_resourcePath
           onComplete:
             - echo "Oh Yeah Done centOS 7!!"
-        outputResources:
-          - webhookIntExternal
       
       - name: utility_u18
         type: bash
