@@ -126,6 +126,8 @@ pipelines:
             
             - popd
             
+            - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook"
+            
             - send_notification notifySlack
             - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
             - execute_command echo $res_utility_repo_resourcePath
