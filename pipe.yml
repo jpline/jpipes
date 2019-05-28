@@ -162,6 +162,7 @@ pipelines:
             - docker pull drydock/c7node:master
             - docker rm $(docker stop $(docker ps -a -q --filter ancestor=shashiavtc/webapp:req-res --format="{{.ID}}"))
             - docker run -p 49160:8080 -d shashiavtc/webapp:req-res
+            - curl -i http://localhost:49160/?data=hi
             - add_run_variable imageTag="firstTest"
             
             - pushd $res_utility_repo_resourcePath
