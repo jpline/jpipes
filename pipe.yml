@@ -17,7 +17,7 @@ pipelines:
             - varsha_internalWebhook
         execution:
           onExecute:
-            - write_output testwebhookInt "payload=update_from_step_for_Internalwebhook"
+            - write_output testwebhookInternal "payload=update_from_step_for_Internalwebhook"
           onComplete:
             - echo "Yeah, posted output resource"
         outputResources:
