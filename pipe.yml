@@ -290,3 +290,11 @@ pipelines:
             - echo "Oh Yeah Done ubuntu 18!"
         outputResources:
           - webhookIntExternal
+          
+  - name: varsha_pipeline_test_for_long_pipeline_name_ui_testing_for_overlap
+    steps:  
+      - name: utility_u16_test_for_long_step_name_ui_testing_for_overlap
+        type: bash
+        execution:
+          onExecute:
+            - printenv
