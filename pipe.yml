@@ -39,14 +39,14 @@ resources:
     configuration:
       integrationName: varsha_internalWebhook
     initialVersion:
-      payload: "sample_one"
+      payload: "sample_one_update"
       
   - name: webhookIntExternal
     type: webhook
     configuration:
       integrationName: varsha_externalWebhook
     initialVersion:
-      payload: "data=test"
+      payload: "data=test_update"
       
 pipelines:
   - name: Varsha_pipeline
