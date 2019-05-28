@@ -6,7 +6,7 @@ resources:
       integrationName: varsha_github
       branches:
         only: test
-    initialVersion:
+    version:
       sha: test
     
   - name: imageDocker_1
@@ -14,7 +14,7 @@ resources:
     imageName: shippabledocker/sample-node
     configuration:
       integrationName: dockerInt
-    initialVersion:
+    version:
       imageTag: latest
   
   - name: imagePrivate
@@ -22,7 +22,7 @@ resources:
     imageName: shippabledocker/sample_node_pvt
     configuration:
       integrationName: dockerInt
-    initialVersion:
+    version:
       imageTag: masterpyt
       
   - name: imagePython_2
@@ -31,21 +31,21 @@ resources:
     configuration:
       integrationName: dockerInt
       autoPull: false
-    initialVersion:
+    version:
       imageTag: latest
   
   - name: webhookInt
     type: webhook
     configuration:
       integrationName: varsha_internalWebhook
-    initialVersion:
+    version:
       payload: "sample_one_update"
       
   - name: webhookIntExternal
     type: webhook
     configuration:
       integrationName: varsha_externalWebhook
-    initialVersion:
+    version:
       payload: "data=test_update"
       
 pipelines:
