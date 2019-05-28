@@ -126,7 +126,7 @@ pipelines:
             
             - popd
             
-            - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook"
+            - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook_again"
             
             - send_notification notifySlack
             - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
@@ -280,7 +280,7 @@ pipelines:
             
             - popd
             
-            - write_output webhookIntExternal "payload=updating_from_step"
+            - write_output webhookIntExternal "payload=updating_from_step_again"
             
             - send_notification notifySlack
             
