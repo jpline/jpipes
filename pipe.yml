@@ -18,19 +18,19 @@ pipelines:
         execution:
           onExecute:
             - printenv
-           # - write_output testwebhookInternal "payload=update_from_step_for_Internalwebhook_resource"
+            - write_output testwebhookInternal "payload=update_from_step" #_for_Internalwebhook_resource"
           onComplete:
             - echo "Yeah, posted output resource"
-        #outputResources:
-         # - testwebhookInternal
+        outputResources:
+          - testwebhookInternal
             
       - name: triggeredBy_webhookResource
         type: bash
         triggeredBy:
           resources:
             - testwebhookInternal
-          steps:
-            - outputWebhook
+         # steps:
+          #  - outputWebhook
         execution:
           onExecute:
             - printenv
