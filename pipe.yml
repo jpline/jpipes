@@ -6,13 +6,6 @@ resources:
       integrationName: varsha_internalWebhook
     version:
       payload: "from_resource_internal"
-  
-  - name: testwebhookExternal
-    type: webhook
-    configuration:
-      integrationName: varsha_externalWebhook
-    version:
-      payload: "from_resource_external"
       
 pipelines:
   - name: testVarsha_pipeline
@@ -36,8 +29,6 @@ pipelines:
         triggeredBy:
           resources:
             - testwebhookInternal
-         # steps:
-          #  - outputWebhook
         execution:
           onExecute:
             - printenv
@@ -54,5 +45,3 @@ pipelines:
             - printenv
           onComplete:
             - echo "Oh Yeah Done!!"
-        outputResources:
-          - testwebhookExternal
