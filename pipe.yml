@@ -37,6 +37,8 @@ pipelines:
 
       - name: dep_test
         type: bash
+        configurations:
+          nodePool: kermit_ubuntu18_pool
         triggeredBy:
           steps:
             - outputWebhook
