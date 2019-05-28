@@ -12,7 +12,7 @@ resources:
     configuration:
       integrationName: varsha_externalWebhook
     version:
-      payload: "data=test_update"
+      payload: "test_update"
       
 pipelines:
   - name: testVarsha_pipeline
