@@ -229,8 +229,6 @@ pipelines:
         triggeredBy:
           resources:
             - utility_repo
-          steps:
-            - utility_u16
         execution:
           onExecute:
             - printenv
