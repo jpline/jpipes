@@ -84,7 +84,7 @@ pipelines:
             - test "$ENV1" == "value1"
             - test "$ENV2" == "value2"
             
-            - echo "############################# IMAGE RESOURCE #####################################"
+            - echo "-------------------------------------------- IMAGE RESOURCE -------------------------------------------------"
             - add_run_variable imageTag="firstTest"
             
             - pushd $res_imagePython_2_resourcePath
@@ -92,9 +92,9 @@ pipelines:
             - add_pipeline_variable imageName="shippabledocker/ship_plv2pyt" imageTag="tip"
             
             - popd
-            - echo "############################# DONE WITH IMAGE RESOURCE #####################################"
+            - echo "------------------------------------------- DONE WITH IMAGE RESOURCE -----------------------------------------"
             
-            - echo "############################# GITREPO RESOURCE #####################################"
+            - echo "-------------------------------------------- GITREPO RESOURCE ----------------------------------------------"
             - pushd $res_utility_repo_resourcePath
             - save_run_state test.sh my_file
             
@@ -124,7 +124,7 @@ pipelines:
            # - restore_cache my_file echo.sh
             - popd
             
-            - echo "############################# DONE WITH GITREPO RESOURCE #####################################"
+            - echo "------------------------------------------ DONE WITH GITREPO RESOURCE --------------------------------------------------------------------------------"
             
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
