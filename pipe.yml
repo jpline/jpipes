@@ -159,6 +159,7 @@ pipelines:
         type: bash
         configuration:
           affinityGroup: u16grp
+          nodePool: kermit_ubuntu_pool
         triggeredBy:
           steps:
             - utility_u16
