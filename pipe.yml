@@ -5,7 +5,7 @@ resources:
     configuration:
       integrationName: varsha_github
       branches:
-        only: test
+        only: tes*
     version:
       sha: test
     
