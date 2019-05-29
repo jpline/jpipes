@@ -81,6 +81,8 @@ pipelines:
             - printenv
             - docker images
             - test "$SECURE_ENV1" == "secret1"
+            - test "$ENV1" == "value1"
+            - test "$ENV2" == "value2"
             
             - echo "############################# IMAGE RESOURCE #####################################"
             - add_run_variable imageTag="firstTest"
