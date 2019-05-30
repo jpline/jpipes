@@ -36,11 +36,12 @@ pipelines:
         type: bash
         requires:
           integrations:
-            - notifySlack
+            - varsha_slack 
         execution:
           onExecute:
+            - echo "test"
             - printenv
-            - send_notification 
+            - send_notification varsha_slack --payload "payloadFromStep" --pretext "pretext from step" --text "text from step" --recipient 
           onComplete:
             - echo "Oh Yeah Done affinity group"
 
