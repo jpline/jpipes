@@ -78,7 +78,6 @@ pipelines:
           onExecute:
             - printenv
             - docker images
-            - test "$SECURE_ENV1" == "secret1"
             - test "$ENV1" == "value1"
             - test "$ENV2" == "value2"
             
