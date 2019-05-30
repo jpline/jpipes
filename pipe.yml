@@ -46,6 +46,8 @@ pipelines:
 
       - name: build_ap
         type: build
+        configuration:
+          affinityGroup: ap
         payloadType: docker
         setup:
           build:
@@ -65,6 +67,8 @@ pipelines:
 
       - name: push_ap
         type: push
+        configuration:
+          affinityGroup: ap
         setup:
           push:
             targetRepo: docker-local
@@ -77,6 +81,8 @@ pipelines:
             
       - name: publish_ap
         type: publish
+        configuration:
+          affinityGroup: ap
         requires:
           integrations:
             - varsha_artifactory
