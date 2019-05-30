@@ -177,8 +177,7 @@ pipelines:
            # - popd
             
             - send_notification notifySlack
-            - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
-            
+           
           onComplete:
             - echo "Oh Yeah Done affinity group"
           
