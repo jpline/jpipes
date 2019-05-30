@@ -41,6 +41,7 @@ pipelines:
           onExecute:
             - echo "tesfftyt"
             - printenv
+            - jfrog rt u testjf2.sh varsha-ship 
             - send_notification varsha_slack #--payload "payloadFromStep" --pretext "pretext from step" --text "text from step" --recipient 
           onComplete:
             - echo "Oh Yeah Done affinity group"
