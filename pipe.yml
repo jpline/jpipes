@@ -20,7 +20,7 @@ resources:
     type: buildInfo
     version:
       buildName: $PIPELINE_NAME
-      buildNumber: $SRUN_NUMBER 
+      buildNumber: 1 # will be updated to $RUN_NUMBER after we have OUT in publish_ap step
      # targetRepo: test
       
   - name: promoteInfo_ap
