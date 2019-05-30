@@ -14,7 +14,7 @@ resources:
     configuration:
       integrationName: varsha_artifactory
     version:
-      pattern: "npm-dev-local/"
+      pattern: "example-repo-local/"
 
   - name: buildInfo_ap
     type: buildInfo
