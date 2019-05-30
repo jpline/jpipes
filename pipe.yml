@@ -56,13 +56,14 @@ pipelines:
             imageName: 34.66.110.173:8081/docker-local/ankul
             imageTag: $PIPELINE_NAME.$RUN_NUMBER
         triggeredBy:
+          resources:
+            - sampleScript_ap
           steps:
             - bash_ap
         requires:
           integrations:
             - varsha_artifactory
           resources:
-            - sampleScript_ap
             - file_ap
 
       - name: push_ap
