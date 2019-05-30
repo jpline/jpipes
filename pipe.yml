@@ -32,14 +32,14 @@ resources:
 pipelines:
   - name: VarshaTestPipeline
     steps:  
-      - name: bash_ap
+      - name: bash_ap5
         type: bash
         requires:
           integrations:
             - varsha_slack 
         execution:
           onExecute:
-            - echo "tesfftyt"bguygyiuyoi9 khkkg
+            - echo "tesfftyt"
             - printenv
             - send_notification varsha_slack #--payload "payloadFromStep" --pretext "pretext from step" --text "text from step" --recipient 
           onComplete:
