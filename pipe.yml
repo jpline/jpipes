@@ -53,6 +53,9 @@ pipelines:
             dockerFileName: Dockerfile
             imageName: 34.66.110.173:8081/docker-local/ankul
             imageTag: $PIPELINE_NAME.$RUN_NUMBER
+        triggeredBy:
+          steps:
+            - bash_ap
         requires:
           integrations:
             - varsha_artifactory
