@@ -9,7 +9,7 @@ resources:
     version:
       sha: master
   
-  - name: file_ap42
+  - name: file_ap
     type: file
     configuration:
       integrationName: varsha_artifactory
