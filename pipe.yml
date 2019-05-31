@@ -104,7 +104,7 @@ pipelines:
           nodePool: kermit_ubuntu18_pool
         setup:
           promote:
-            targetRepo: ankul_local_repo    
+            targetRepo: varsha_local_repo    
         requires:
           integrations:
             - varsha_artifactory         
