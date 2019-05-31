@@ -50,6 +50,7 @@ pipelines:
         type: build
         configuration:
           affinityGroup: ap
+          nodePool: kermit_ubuntu18_pool
         payloadType: docker
         setup:
           build:
@@ -72,6 +73,7 @@ pipelines:
         type: push
         configuration:
           affinityGroup: ap
+          nodePool: kermit_ubuntu18_pool
         setup:
           push:
             targetRepo: docker-local
@@ -86,6 +88,7 @@ pipelines:
         type: publish
         configuration:
           affinityGroup: ap
+          nodePool: kermit_ubuntu18_pool
         requires:
           integrations:
             - varsha_artifactory
