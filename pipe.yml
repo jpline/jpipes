@@ -61,14 +61,13 @@ pipelines:
         triggeredBy:
           resources:
             - sampleScript_ap
+            - file_ap
           steps:
             - bash_ap
         requires:
           integrations:
             - varsha_artifactory
-          resources:
-            - file_ap
-
+       
       - name: push_ap
         type: push
         configuration:
