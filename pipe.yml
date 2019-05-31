@@ -100,6 +100,8 @@ pipelines:
       
       - name: promote_ap
         type: promote
+        configuration:
+          nodePool: kermit_ubuntu18_pool
         setup:
           promote:
             targetRepo: ankul_local_repo    
