@@ -56,7 +56,7 @@ pipelines:
           build:
             dockerFileLocation: .
             dockerFileName: Dockerfile
-            imageName: example-repo-local.mill.jfrog.info/test
+            imageName: mill.jfrog.info:12010/example-repo-local/test
             imageTag: $PIPELINE_NAME.$RUN_NUMBER
         triggeredBy:
           resources:
