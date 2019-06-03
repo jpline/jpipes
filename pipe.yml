@@ -1,5 +1,5 @@
 resources:
-  - name: utility_repo
+  - name: utility_script
     type: gitRepo
     repoPath: jpline/sample-script
     configuration:
@@ -59,7 +59,7 @@ pipelines:
           nodePool: kermit_ubuntu_pool
         triggeredBy:
           resources:
-            - utility_repo
+            - utility_script
             - imagePrivate
         setup:
           environmentVariables:
@@ -92,7 +92,7 @@ pipelines:
             - echo "------------------------------------------- DONE WITH IMAGE RESOURCE -----------------------------------------"
             
             - echo "-------------------------------------------- GITREPO RESOURCE ----------------------------------------------"
-            - pushd $res_utility_repo_resourcePath
+            - pushd $res_utility_script_resourcePath
             - ls -la
             - save_run_state test.sh my_file
             
@@ -138,7 +138,7 @@ pipelines:
             - send_notification notifySlack
            # - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
             
-            - execute_command echo $res_utility_repo_resourcePath
+            - execute_command echo $res_utility_script_resourcePath
           #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
             - replicate_resource imageDocker_1 imagePython_2 #throws error
             
@@ -189,7 +189,7 @@ pipelines:
           #nodePool: kermit_centos_pool
         triggeredBy:
           resources:
-            - utility_repo
+            - utility_script
             - webhookInt
         requires:
           integrations:
@@ -203,7 +203,7 @@ pipelines:
            # - curl -i http://localhost:49160/?data=hi
             - add_run_variable imageTag="firstTest"
             
-            - pushd $res_utility_repo_resourcePath
+            - pushd $res_utility_script_resourcePath
             
             - save_run_state test.sh my_file
             - restore_run_state my_file test.sh
@@ -213,13 +213,13 @@ pipelines:
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
             
-            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
+            - compare_git --resource utility_script --commit-range HEAD~3..HEAD test.sh
             
-            - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
+            - update_commit_status utility_script --status processing --message "updated in utility step" --context $STEP_NAME
             
             - switch_env nodejs 8.16.0
             
-            - pushd $res_utility_repo_resourcePath
+            - pushd $res_utility_script_resourcePath
             
             - read_json packages.json "name"
             - openssl genrsa -out key.pem 1024 
@@ -272,7 +272,7 @@ pipelines:
             - docker pull drydock/u16node:master
             - add_run_variable imageTag="firstTest"
             
-            - pushd $res_utility_repo_resourcePath
+            - pushd $res_utility_script_resourcePath
             
             - save_run_state test.sh my_file
             - restore_run_state my_file test.sh
@@ -282,13 +282,13 @@ pipelines:
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
             
-            - compare_git --resource utility_repo --commit-range HEAD~3..HEAD test.sh
+            - compare_git --resource utility_script --commit-range HEAD~3..HEAD test.sh
             
-            - update_commit_status utility_repo --status processing --message "updated in utility step" --context $STEP_NAME
+            - update_commit_status utility_script --status processing --message "updated in utility step" --context $STEP_NAME
             
             - switch_env nodejs 8.16.0
             
-            - pushd $res_utility_repo_resourcePath
+            - pushd $res_utility_script_resourcePath
             
             - read_json packages.json "name"
             
@@ -321,7 +321,7 @@ pipelines:
             
             - send_notification notifySlack
             
-            - execute_command echo $res_utility_repo_resourcePath
+            - execute_command echo $res_utility_script_resourcePath
           onComplete:
             - echo "Oh Yeah Done ubuntu 18!"
         outputResources:
