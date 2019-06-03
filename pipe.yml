@@ -93,6 +93,7 @@ pipelines:
             
             - echo "-------------------------------------------- GITREPO RESOURCE ----------------------------------------------"
             - pushd $res_utility_repo_resourcePath
+            - ls -la
             - save_run_state test.sh my_file
             
             - read_json keys.json "DOCKER_USERNAME"
