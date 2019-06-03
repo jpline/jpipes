@@ -96,7 +96,7 @@ pipelines:
             - ls -la
             - save_run_state test.sh my_file
             
-            - read_json keys.json "DOCKER_USERNAME"
+            - read_json packages.json "name"
             
             - openssl genrsa -out key.pem 1024 
             - openssl rsa -in key.pem -text -noout
@@ -221,7 +221,7 @@ pipelines:
             
             - pushd $res_utility_repo_resourcePath
             
-            - read_json keys.json "DOCKER_USERNAME"
+            - read_json packages.json "name"
             - openssl genrsa -out key.pem 1024 
             - openssl rsa -in key.pem -text -noout
             - openssl rsa -in key.pem -pubout -out pub.pem 
@@ -290,7 +290,7 @@ pipelines:
             
             - pushd $res_utility_repo_resourcePath
             
-            - read_json keys.json "DOCKER_USERNAME"
+            - read_json packages.json "name"
             
             - openssl genrsa -out key.pem 1024 
             - openssl rsa -in key.pem -text -noout
