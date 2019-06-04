@@ -113,7 +113,22 @@ pipelines:
             - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
             - cat decrypted.txt
             
-            - replace_envs example.env sample.env
+            - read_json example.json "STEP_URL"
+            - read_json example.json "TEST"
+            - read_json sample.json "TEST"
+            - read_json sample.json "res_utility_repo_isPrerelease"
+            - read_json sample.json "STEP_URL"
+            
+            - replace_envs example.json sample.json
+            - read_json example.json "STEP_URL"
+            - read_json example.json "TEST"
+            - read_json example.json "SAMPLE"
+            - read_json sample.json "STEP_URL"
+            - read_json sample.json "TEST"
+            - read_json sample.json "BRANCH"
+            - read_json sample.json "res_utility_repo_isPrerelease"
+            - read_json sample.json "SAMPLE"
+            
             
             - cat sample.env
             - cat example.env
