@@ -126,10 +126,6 @@ pipelines:
             - echo "$BRANCH"
             - echo "$res_utility_scriptRepo_isPrerelease"
             - echo "$SAMPLE"
-            
-            
-            - printenv sample.env
-            - printenv example.env
   
             - cache_files echo.sh my_cache
            # - restore_cache my_file echo.sh
