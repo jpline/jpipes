@@ -93,6 +93,8 @@ pipelines:
             
             - echo "-------------------------------------------- GITREPO RESOURCE ----------------------------------------------"
             - pushd $res_utility_scriptRepo_resourcePath
+            - source example.env
+            - echo $TEST
             - ls -la
             - save_run_state test.sh my_file
             
