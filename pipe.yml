@@ -148,7 +148,7 @@ pipelines:
             
             - compare_git --resource utility_scriptRepo --commit-range HEAD~3..HEAD test.sh
             
-            - update_commit_status utility_scriptRepo --status failed --message "updated in utility step" --context jfrog_pipelines
+            - update_commit_status utility_scriptRepo --status failure --message "updated in utility step" --context jfrog_pipelines
             
             - switch_env nodejs 8.16.0
             
