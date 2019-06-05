@@ -8,7 +8,17 @@ resources:
         only: master
     version:
       sha: master
-    
+  
+  - name: utility_testRepo
+    type: gitRepo
+    repoPath: jpline/sample-script
+    configuration:
+      integrationName: varsha_github
+      branches:
+        only: test
+    version:
+      sha: test
+      
   - name: imageDocker_1
     type: image
     imageName: shippabledocker/sample-node
@@ -144,6 +154,7 @@ pipelines:
             
             - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook_1"
             
+            - write_output utility_testRepo "sha=ytdfqe67e732refy6e2e2yeffdwre62erfyqdhqwfd"
             - send_notification notifySlack
            # - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
             
@@ -163,6 +174,7 @@ pipelines:
             - echo "Oh Yeah Done ubuntu 16!"
         outputResources:
           - webhookInt
+          - utility_testRepo
       
       - name: dep_u16
         type: bash
