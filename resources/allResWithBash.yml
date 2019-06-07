@@ -1,1 +1,149 @@
+resources:
+  - name: ar_aql
+    type: Aql
+    configuration:
+      sourceArtifactory: varsha_artifactory
+      query: test
+      addedProperties:
+        key1: val1
+        key2: val2
+      mappings: 
+        - name: ar_mapping1
+          input: echo "hello"   
+          output: echo "done"  
+        - name: ar_mapping2
+          input:  echo "hello2"   
+          output: echo "done2"  
+  
+  - name: ar_buildInfo 
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: varsha_artifactory
+      buildName: arBuild
+      buildNumber: 123
+  
+  - name: ar_distributionRule
+    type: DistributionRule
+    configuration:
+      sourceArtifactory: example-docker-local 
+      serviceName: testservice
+      siteName: testsiteName
+      cityName: testCityName
+      countryCodes:
+        - +91
+        - +080
+  
+  - name: ar_fileSpec
+    type: FileSpec
+    configuration:      
+      sourceArtifactory: varsha_artifactory
+      pattern: docker
+      aql: ar_aql
+      target: ar_target
+      props: ar_props
+      recursive: false
+      flat: false
+      excludePatterns: virtual
+      archiveEntries: ar_archievEntries
+      buildName: buildDocker
+      buildNumber: $STEP_NUMBER
+      sortBy: name
+      sortOrder: ascending
+      limit: 120
+      offset: 12
+ 
+  - name: ar_gitRepo
+    type: GitRepo
+    configuration:
+      gitProvider: varsha_github
+      path: jpline/sample-script
+      files:
+        include: tes*
+        exclude: ech*
+      branches:
+        include: mast*
+        exclude: pip*
+      tags:
+        include: tag*
+        exclude: relea*
+      buildOn:
+         commit: true
+         pullRequestCreate: true
+         pullRequestClose: true
+         releaseCreate: true
+         tagCreate: true
+      shallowDepth: 3
+  
+  - name: ar_image
+    type: Image
+    configuration:
+       registry: varsha_docker
+       imageName: shippabledocker/sample-node
+       imageTag: latest
+       autoPull: true  # default false
+  
+  - name: ar_kubeCluster
+    type: KubeCluster
+    configuration:
+      integrationName: varsha_kube
+      kubernetesConfig: varsha_kube
+      bastionHostIP: 1.2.3.4
+      bastionUser: sshUser
+      bastionIntegrationName: varsha_sshKey
+  
+  - name: ar_releaseBundle
+    type: ReleaseBundle
+    configuration:
+      sourceArtifactory: varsha_artifactory
+      name: docker
+      version: v1.2.3
+      isSigned: true
+      
+  - name: ar_remoteFile
+    type: RemoteFile
+    configuration:      
+      source: <file integration>
+      fileLocation: /$HOME
+      fileName: steplet
+      fileDateTime: 06-Apr-2020
+  
+  - name: ar_vmCluster
+    type: VmCluster
+    configuration:
+      integrationName: varsha_sshKey
+      sshKey: sshKeyIntegration
+      targets:
+        - 1.2.3.4
+        - 1.2.3.5
+        - 1.2.3.6
+        
+  - name: ar_webhook
+    type: Webhook
+    configuration:
+      webhookName: varsha_webhook
+      payload: "testing from resource"
 
+pipelines:
+  - name: varsha_pipeline_ar
+    steps:
+      - name: input_res_bash
+        type: bash
+        triggeredBy:
+          resources:
+            - ar_aql
+            - ar_buildInfo 
+            - ar_distributionRule
+            - ar_fileSpec
+            - ar_gitRepo
+            - ar_image
+            - ar_kubeCluster
+            - ar_releaseBundle
+            - ar_remoteFile
+            - ar_vmCluster
+            - ar_webhook
+        execution:
+          onExecute:
+            - printenv
+            - ls -la
+          onComplete: 
+            - echo "Ah! done"
