@@ -25,13 +25,13 @@ resources:
   - name: ar_distributionRule
     type: DistributionRule
     configuration:
-      sourceArtifactory: example-docker-local 
+      sourceArtifactory: varsha_artifactory
       serviceName: testservice
       siteName: testsiteName
       cityName: testCityName
       countryCodes:
-        - +91
-        - +080
+        - test
+        - auto
   
   - name: ar_fileSpec
     type: FileSpec
@@ -46,7 +46,7 @@ resources:
       excludePatterns: virtual
       archiveEntries: ar_archievEntries
       buildName: buildDocker
-      buildNumber: $STEP_NUMBER
+      buildNumber: 100
       sortBy: name
       sortOrder: ascending
       limit: 120
