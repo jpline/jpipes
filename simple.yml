@@ -1,0 +1,71 @@
+resources:
+
+  - name: ar_buildInfo 
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactoryIntegration
+      buildName: myBuild
+      buildNumber: 123
+  
+  - name: ar_releaseBundle
+    type: ReleaseBundle
+    configuration:
+      sourceArtifactory: artifactoryIntegration
+      name: <string>
+      version: <string>
+      isSigned: <boolean>
+      
+  - name: ar_distributionRule
+    type: DistributionRule
+    configuration:
+      sourceArtifactory: <string>      
+      serviceName: <string>
+      siteName: <string>
+      cityName: <string>
+      countryCodes:
+        - <string>
+        - <string>
+
+  - name: ar_vmCluster
+    type: VmCluster
+    configuration:
+      integrationName: sshKeyIntegration
+      sshKey: sshKeyIntegration
+      targets:
+        - 1.2.3.4
+        - 1.2.3.5
+        - 1.2.3.6
+  
+  - name: ar_aql
+    type: artifactoryQuery
+    type: Aql
+    configuration:
+      integrationName: artifactoryIntegration
+      sourceArtifactory: artifactoryIntegration
+      query: <string>
+      addedProperties:
+        key1: val1
+        key2: val2
+      mappings: 
+        - name: mapping1
+          input:    
+          output: 
+        - name: mapping2
+          input:    
+          output: 
+
+pipelines:
+  - name: varsha_pipeline_ar
+    steps:
+      - name: input_res_bash
+        type: bash
+        triggeredBy:
+          resources:
+            - someStateResource
+            - someVersionResource
+        execution:
+          onExecute:
+            - ls -la
+          onComplete: 
+            - echo "Ah! done"
+
