@@ -102,8 +102,8 @@ resources:
   - name: ar_remoteFile
     type: RemoteFile
     configuration:      
-      source: <file integration>
-      fileLocation: /$HOME
+      source: varsha_file
+      fileLocation: $HOME
       fileName: steplet
       fileDateTime: 06-Apr-2020
   
