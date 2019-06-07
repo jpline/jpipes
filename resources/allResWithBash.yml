@@ -110,7 +110,6 @@ resources:
   - name: ar_vmCluster
     type: VmCluster
     configuration:
-      integrationName: varsha_sshKey
       sshKey: varsha_sshKey
       targets:
         - 1.2.3.4
@@ -128,22 +127,23 @@ pipelines:
     steps:
       - name: input_res_bash
         type: Bash
-        triggeredBy:
-          resources:
-            - ar_aql
-            - ar_buildInfo 
-            - ar_distributionRule
-            - ar_fileSpec
-            - ar_gitRepo
-            - ar_image
-            - ar_kubeCluster
-            - ar_releaseBundle
-            - ar_remoteFile
-            - ar_vmCluster
-            - ar_webhook
+        configuration:
+          inputResources:
+            - name: ar_aql
+            - name: ar_buildInfo 
+            - name: ar_distributionRule
+            - name: ar_fileSpec
+            - name: ar_gitRepo
+            - name: ar_image
+            - name: ar_kubeCluster
+            - name: ar_releaseBundle
+            - name: ar_remoteFile
+            - name: ar_vmCluster
+            - name: ar_webhook
         execution:
           onExecute:
             - printenv
             - ls -la
           onComplete: 
             - echo "Ah! done"
+      
