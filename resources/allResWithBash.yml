@@ -158,7 +158,8 @@ pipelines:
             image:
               auto:
                 language: nodejs
-                versions: 10.15.3
+                versions: 
+                  - 10.15.3
         execution:
           onExecute:
             - printenv
