@@ -221,7 +221,7 @@ pipelines:
       #      - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook_1"
             
        #     - write_output utility_testRepo "branches=testing123"
-            - send_notification varsha_slack
+          #  - send_notification varsha_slack
            # - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
             
             - execute_command echo $res_ar_gitRepo_resourcePath
