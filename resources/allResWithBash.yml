@@ -136,6 +136,9 @@ pipelines:
       - name: input_res_bash
         type: Bash
         configuration:
+          environmentVariables:
+            ENV1: value1
+            ENV2: value2
           integrations:
             - name: varsha_slack
           inputResources:
@@ -150,21 +153,33 @@ pipelines:
             - name: ar_remoteFile
             - name: ar_vmCluster
             - name: ar_webhook
+          runtime:            
+            type: image
+            image:
+              auto:
+                language: nodejs
+                versions: 10.15.3
         execution:
           onExecute:
             - printenv
             - docker images
-           # - test "$ENV1" == "value1"
-            #- test "$ENV2" == "value2"
+            - test "$ENV1" == "value1"
+            - test "$ENV2" == "value2"
+            - echo imageTag=$imageTag
             
             - echo "-------------------------------------------- IMAGE RESOURCE -------------------------------------------------"
             - add_run_variable imageTag="firstTest"
-            
+            - echo imageTag=$imageTag
+            - echo imageName=$imageName
             - pushd $res_ar_image_resourcePath
-            
+            - echo imageTag=$imageTag
+            - echo imageName=$imageName
             - add_pipeline_variable imageName="shippabledocker/ship_plv2pyt" imageTag="tip"
-            
+            - echo imageName=$imageName
+            - echo imageTag=$imageTag
             - popd
+            - echo imageTag=$imageTag
+            - echo imageName=$imageName
             - echo "------------------------------------------- DONE WITH IMAGE RESOURCE -----------------------------------------"
             
             - echo "-------------------------------------------- GITREPO RESOURCE ----------------------------------------------"
