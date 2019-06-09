@@ -132,7 +132,7 @@ pipelines:
             - name: ar_aql
             - name: ar_buildInfo 
             - name: ar_distributionRule
-            - name: ar_fileSpec
+           # - name: ar_fileSpec
             - name: ar_gitRepo
             - name: ar_image
             - name: ar_kubeCluster
