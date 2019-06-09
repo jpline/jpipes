@@ -82,6 +82,14 @@ resources:
        imageTag: latest
        autoPull: true  # default false
   
+  - name: ar_image_python
+    type: Image
+    configuration:
+       registry: varsha_docker
+       imageName: shippabledocker/sample-python
+       imageTag: latest
+       autoPull: true  # default false
+       
   - name: ar_kubeCluster
     type: KubeCluster
     configuration:
@@ -128,6 +136,8 @@ pipelines:
       - name: input_res_bash
         type: Bash
         configuration:
+          integrations:
+            - name: varsha_slack
           inputResources:
             - name: ar_aql
             - name: ar_buildInfo 
@@ -144,13 +154,13 @@ pipelines:
           onExecute:
             - printenv
             - docker images
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
+           # - test "$ENV1" == "value1"
+            #- test "$ENV2" == "value2"
             
             - echo "-------------------------------------------- IMAGE RESOURCE -------------------------------------------------"
             - add_run_variable imageTag="firstTest"
             
-            - pushd $res_imagePython_2_resourcePath
+            - pushd $res_ar_image_resourcePath
             
             - add_pipeline_variable imageName="shippabledocker/ship_plv2pyt" imageTag="tip"
             
@@ -158,7 +168,7 @@ pipelines:
             - echo "------------------------------------------- DONE WITH IMAGE RESOURCE -----------------------------------------"
             
             - echo "-------------------------------------------- GITREPO RESOURCE ----------------------------------------------"
-            - pushd $res_utility_scriptRepo_resourcePath
+            - pushd $res_ar_gitRepo_resourcePath
             - source example.env
             - echo $TEST
             - ls -la
@@ -184,13 +194,13 @@ pipelines:
             - echo "$STEP_URL"
             - echo "$SAMPLE"
             - echo "$TEST"
-            - echo "$res_utility_scriptRepo_isPrerelease"
+            - echo "$res_ar_gitRepo_isPrerelease"
             
             - replace_envs example.json sample.json
             - echo "$STEP_URL"
             - echo "$TEST"
             - echo "$BRANCH"
-            - echo "$res_utility_scriptRepo_isPrerelease"
+            - echo "$res_ar_gitRepo_isPrerelease"
             - echo "$SAMPLE"
   
             - cache_files echo.sh my_cache
@@ -202,21 +212,21 @@ pipelines:
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
             
-            - compare_git --resource utility_scriptRepo --commit-range HEAD~3..HEAD test.sh
+            - compare_git --resource ar_gitRepo --commit-range HEAD~3..HEAD test.sh
             
-            - update_commit_status utility_scriptRepo --status failure --message "updated in utility step" --context jfrog_pipelines
+            - update_commit_status ar_gitRepo --status failure --message "updated in utility step" --context jfrog_pipelines
             
             - switch_env nodejs 8.16.0
             
-            - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook_1"
+      #      - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook_1"
             
-            - write_output utility_testRepo "branches=testing123"
-            - send_notification notifySlack
+       #     - write_output utility_testRepo "branches=testing123"
+            - send_notification varsha_slack
            # - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
             
-            - execute_command echo $res_utility_scriptRepo_resourcePath
+            - execute_command echo $res_ar_gitRepo_resourcePath
           #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
-            - replicate_resource imageDocker_1 imagePython_2 #throws error
+            - replicate_resource ar_image ar_image_python #throws error
             
             - printenv
             - docker images
