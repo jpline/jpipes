@@ -212,7 +212,7 @@ pipelines:
             - bump_semver v1.0.1 major
             - bump_semver v0.0.1 patch
             
-            - compare_git --resource ar_gitRepo --commit-range HEAD~3..HEAD test.sh
+            - compare_git --resource ar_gitRepo --commit-range HEAD~1..HEAD echo.sh
             
             - update_commit_status ar_gitRepo --status failure --message "updated in utility step" --context jfrog_pipelines
             
