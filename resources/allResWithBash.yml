@@ -238,4 +238,5 @@ pipelines:
            # - save_tests $res_utility_scriptRepo_resourcePath/shippable/testresults/testresults.xml
           onComplete: 
             - echo "Ah! done"
+            - send_notification varsha_slack
       
