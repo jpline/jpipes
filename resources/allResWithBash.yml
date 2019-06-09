@@ -226,7 +226,7 @@ pipelines:
             
             - execute_command echo $res_ar_gitRepo_resourcePath
           #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
-            - replicate_resource ar_image ar_image_python #throws error
+           # - replicate_resource ar_image ar_image_python #throws error
             
             - printenv
             - docker images
