@@ -683,9 +683,7 @@ pipelines:
       - name: ns_push_image
         type: PushArtifactoryPackage
         configuration:
-          targetRepo: docker
-          publish: false
-          scan: false
+          targetRepo: docker_push_image
           integrations:
             - name: varsha_artifactory
           inputSteps:
