@@ -1,1 +1,184 @@
+resources:
+  - name: ns_aql
+    type: Aql
+    configuration:
+      sourceArtifactory: varsha_artifactory
+      query: 'items.find({"$and":[{"artifact.module.build.name":{"$eq":"native_pipeline"}},{"artifact.module.build.number":{"$eq":"8"}}]})'     
+      #addedProperties:
+      #  FOO: "value1a value1b"
+      #  BAR: "value2a value2b"
+      mappings:
+        - name: "a"
+          input: "regex"
+          output: "$1/$2"
+        - name: "b"
+          input: "regex"
+          output: "$2/$1"
+          
+  - name: ns_image
+    type: Image
+    configuration:
+      imageName: shippabledocker/sample-node
+      registry: varsha_docker
+      autoPull: true
+      imageTag: latest
+      
+  - name: ns_dockerbuild_gitRepo
+    type: GitRepo
+    configuration:
+      path: jpline/sample_script
+      gitProvider: varsha_github
+      
+  - name: ns_buildInfo
+    type: buildInfo
+    version:
+      buildName: app
+      buildNumber: 1
+     
+  - name: ns_distributionRule
+    type: DistributionRule
+    configuration:
+      sourceArtifactory: varsha_artifactory
+      cityName: "*"
+      serviceName: "*"
+      siteName: "*"
+      countryCodes:
+        - "CN"
+        
+  - name: ns_releaseBundle
+    type: ReleaseBundle
+    configuration:
+      sourceArtifactory: varsha_artifactory
+      name: test_2
+      version: v1.1.3
 
+  - name: ns_releaseBundle2
+    type: ReleaseBundle
+    configuration:
+      sourceArtifactory: varsha_artifactory
+      name: test
+      version: foo
+      isSigned: false
+      
+  - name: ns_distributionRule2
+    type: DistributionRule
+    version:
+      cityName: "Beng"
+      serviceName: "lol"
+      siteName: "test"
+      countryCodes:
+        countryCodeCount: 3
+        countryCode01: "test"
+        countryCode02: "lol"
+        countryCode03: "bol"
+   
+pipelines:
+  - name: varsha_ns
+    steps:
+      - name: ns_bash
+        type: Bash
+        configuration:
+          environmentVariables:
+            foo: bar
+          integrations:
+            - name: varsha_artifactory
+          outputResources:
+            - name: ns_aql
+          inputResources:
+            - name: ns_dockerbuild_gitRepo
+              trigger: false
+            - name: ns_image
+        execution:
+          onExecute:
+            - printenv
+           
+     - name: ns_build_image
+       type: DockerBuild
+       payloadType: docker
+       configuration:
+         dockerFileLocation: .
+         dockerFileName: Dockerfile
+         dockerImageName: mill.jfrog.info:12052/docker/varsha-samplescript
+         dockerImageTag: $PIPELINE_NAME.$RUN_NUMBER
+         integrations:
+           - name: varsha_artifactory
+         inputResources:
+           - name: ns_dockerbuild_gitRepo
+            
+     - name: ns_push_image
+       type: pushArtifactoryPackage
+       configuration:
+         targetRepo: docker
+         publish: false
+         scan: false
+         integrations:
+           - name: varsha_artifactory
+         inputSteps:
+           - name: ns_build_image
+
+     - name: ns_publish_build
+       type: PublishBuildInfo
+       configuration:
+         integrations:
+           - varsha_artifactory
+         steps:
+           - ns_push_image
+         outputResources:
+           - ns_buildInfo
+            
+      - name: ns_scan
+        type: XrayScan
+        configuration:
+          buildName: varsha_jpipes
+          buildNumber: 1
+          integrations:
+            - name: varsha_artifactory
+          inputSteps:
+            - name: ns_sign
+     
+      - name: ns_sign
+        type: SignReleaseBundle
+        configuration:
+          inputResources:
+            - name: releaseBundle
+          integrations:
+            - name: varsha_artifactory
+          outputResources:
+            - name: releaseBundle2
+  
+      - name: ns_distribute
+        type: DistributeReleaseBundle
+        #execution:
+        #  onSuccess:
+        #    - echo hi
+        configuration:
+          dryRun: false
+          #releaseBundleName: test_release
+          #releaseBundleVersion: v1.0.1
+          integrations:
+            - name: varsha_artifactory
+          inputResources:
+            - name: ns_distributionRule
+            - name: ns_releaseBundle2
+
+      - name: ns_bundle
+        Step: CreateReleaseBundle
+        configuration:
+          affinityGroup: test
+          releaseBundleName: kermit_test_new_aql
+          releaseBundleVersion: v1.1.0
+          dryRun: false
+          sign: false
+          description: "test description"
+          integrations:
+            - name: varsha_artifactory
+          inputResources:
+            - name: ns_aql
+          outputResources:
+            - name: ns_releaseBundle
+          releaseNotes:
+            syntax: markdown
+            content: |
+              ## Heading
+                * Bullet
+                * Points
