@@ -671,7 +671,7 @@ pipelines:
         configuration:
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: mill.jfrog.info:12052/docker/varsha-samplescript
+          dockerImageName: 34.66.110.173:8081/varsha-test/node
           dockerImageTag: $PIPELINE_NAME.$RUN_NUMBER
           integrations:
             - name: varsha_artifactory
@@ -683,7 +683,7 @@ pipelines:
       - name: ns_push_image
         type: PushArtifactoryPackage
         configuration:
-          targetRepo: docker_push_image
+          targetRepo: varsha-test
           integrations:
             - name: varsha_artifactory
           inputSteps:
@@ -702,7 +702,7 @@ pipelines:
       - name: ns_promote_build
         type: PromoteBuild
         configuration:
-          targetRepo: promote_docker_test
+          targetRepo: promote_docker_testvarsha
           integrations:
             - name: varsha_artifactory
           inputSteps:
