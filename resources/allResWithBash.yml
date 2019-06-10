@@ -267,7 +267,6 @@ pipelines:
             - name: ar_aql
           inputSteps:
             - name: utility_cmds_bash
-              trigger: false
         execution:
           onExecute: 
             - printenv
