@@ -28,7 +28,7 @@ resources:
   - name: ns_dockerbuild_gitRepo
     type: GitRepo
     configuration:
-      path: jpline/sample_script
+      path: jpline/sample-script
       gitProvider: varsha_github
       
   - name: ns_buildInfo
@@ -71,7 +71,7 @@ resources:
       serviceName: "luru"
       siteName: "test"
       countryCodes:
-        - 3
+        - "3"
         - "91"
         - "141"
         - "67"
