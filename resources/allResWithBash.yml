@@ -159,6 +159,7 @@ pipelines:
               auto:
                 language: nodejs
                 versions: 
+                  - 8.16.0
                   - 10.15.3
         execution:
           onExecute:
