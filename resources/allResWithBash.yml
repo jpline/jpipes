@@ -742,12 +742,8 @@ pipelines:
           integrations:
             - name: varsha_artifactory
           outputResources:
-            - name: releaseBundle2
+            - name: ns_releaseBundle2
             
-      
-     
-      
-  
       - name: ns_distribute
         type: DistributeReleaseBundle
         #execution:
