@@ -33,10 +33,11 @@ resources:
       
   - name: ns_buildInfo
     type: BuildInfo
-    version:
-      buildName: app
-      buildNumber: 1
-     
+    configuration:
+      sourceArtifactory: varsha_artifactory
+      buildName: varsha_ns
+      buildNumber: 123
+
   - name: ns_distributionRule
     type: DistributionRule
     configuration:
@@ -363,7 +364,6 @@ pipelines:
           onExecute: 
             - printenv
           onComplete: 
-            - echo "Ah! done"
             - send_notification varsha_slack
             
       - name: as_bashDistributionRule
