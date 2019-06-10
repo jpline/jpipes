@@ -696,11 +696,11 @@ pipelines:
         type: PublishBuildInfo
         configuration:
           integrations:
-            - varsha_artifactory
+            - name: varsha_artifactory
           inputSteps:
-            - ns_push_image
+            - name: ns_push_image
           outputResources:
-            - ns_buildInfo
+            - name: ns_buildInfo
       
       - name: ns_promote_build
         type: PromoteBuild
