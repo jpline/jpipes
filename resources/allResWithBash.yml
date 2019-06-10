@@ -668,7 +668,6 @@ pipelines:
            
       - name: ns_build_image
         type: DockerBuild
-        payloadType: docker
         configuration:
           dockerFileLocation: .
           dockerFileName: Dockerfile
@@ -682,7 +681,7 @@ pipelines:
             - name: ns_bash
             
       - name: ns_push_image
-        type: pushArtifactoryPackage
+        type: PushArtifactoryPackage
         configuration:
           targetRepo: docker
           publish: false
