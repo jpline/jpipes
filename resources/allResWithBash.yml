@@ -256,3 +256,157 @@ pipelines:
             - echo "Ah! done"
             - send_notification varsha_slack
       
+      - name: as_bashAql
+        type: Bash
+        configuration:
+          integrations:
+            - name: varsha_slack
+          inputResources:
+            - name: ar_aql
+        execution:
+          onExecute: 
+            - printenv
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
+
+      - name: as_bashBuildInfo
+        type: Bash
+        configuration:
+          integrations:
+            - name: varsha_slack
+          inputResources:
+            - name: ar_buildInfo 
+        execution:
+          onExecute: 
+            - printenv
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
+            
+      - name: as_bashDistributionRule
+        type: Bash
+        configuration:
+          integrations:
+            - name: varsha_slack
+          inputResources:
+            - name: ar_distributionRule
+        execution:
+          onExecute: 
+            - printenv
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
+           
+      - name: as_bashFileSpec
+        type: Bash
+        configuration:
+          integrations:
+            - name: varsha_slack
+          inputResources:
+            - name: ar_fileSpec
+        execution:
+          onExecute: 
+            - printenv
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
+            
+      - name: as_bashGitRepo
+        type: Bash
+        configuration:
+          integrations:
+            - name: varsha_slack
+          inputResources:
+            - name: ar_gitRepo
+        execution:
+          onExecute: 
+            - printenv
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
+           
+      - name: as_bashImage
+        type: Bash
+        configuration:
+          integrations:
+            - name: varsha_slack
+          inputResources:
+            - name: ar_image
+        execution:
+          onExecute: 
+            - printenv
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
+            
+      - name: as_bashKubeCluster
+        type: Bash
+        configuration:
+          integrations:
+            - name: varsha_slack
+          inputResources:
+            - name: ar_kubeCluster
+        execution:
+          onExecute: 
+            - printenv
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
+            
+      - name: as_bashReleaseBundle
+        type: Bash
+        configuration:
+          integrations:
+            - name: varsha_slack
+          inputResources:
+            - name: ar_releaseBundle
+        execution:
+          onExecute: 
+            - printenv
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
+            
+      - name: as_bashRemoteFile
+        type: Bash
+        configuration:
+          integrations:
+            - name: varsha_slack
+          inputResources:
+            - name: ar_remoteFile
+        execution:
+          onExecute: 
+            - printenv
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
+            
+      - name: as_bashVmCluster
+        type: Bash
+        configuration:
+          integrations:
+            - name: varsha_slack
+          inputResources:
+            - name: ar_vmCluster
+        execution:
+          onExecute: 
+            - printenv
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
+            
+      - name: as_bashWebhook
+        type: Bash
+        configuration:
+          integrations:
+            - name: varsha_slack
+          inputResources:
+            - name: ar_webhook
+        execution:
+          onExecute: 
+            - printenv
+            - send_notification varsha_slack
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
