@@ -37,7 +37,14 @@ resources:
       sourceArtifactory: varsha_artifactory
       buildName: varsha_ns
       buildNumber: 123
-
+  
+  - name: ns_promotedInfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: varsha_artifactory
+      buildName: promote_docker_test
+      buildNumber: 1
+      
   - name: ns_distributionRule
     type: DistributionRule
     configuration:
@@ -671,6 +678,8 @@ pipelines:
             - name: varsha_artifactory
           inputResources:
             - name: ns_dockerbuild_gitRepo
+          inputSteps:
+            - name: ns_bash
             
       - name: ns_push_image
         type: pushArtifactoryPackage
@@ -688,30 +697,56 @@ pipelines:
         configuration:
           integrations:
             - varsha_artifactory
-          steps:
+          inputSteps:
             - ns_push_image
           outputResources:
             - ns_buildInfo
-            
-      - name: ns_scan
-        type: XrayScan
+      
+      - name: ns_promote_build
+        type: PromoteBuild
         configuration:
-          buildName: varsha_jpipes
-          buildNumber: 1
+          targetRepo: promote_docker_test
           integrations:
             - name: varsha_artifactory
           inputSteps:
-            - name: ns_sign
-     
+            - name: ns_publish_build
+          outputResources:
+            - name: ns_promotedInfo
+      
+      - name: ns_new_release_bundle
+        type: CreateReleaseBundle
+        configuration:
+          releaseBundleName: test_new_releaseb
+          releaseBundleVersion: v1.0.0
+          dryRun: false
+          sign: false
+          description: "test description"
+          integrations:
+            - name: varsha_artifactory
+          inputResources:
+            - name: ns_promotedInfo
+          outputResources:
+            - name: ns_releaseBundle
+          releaseNotes:
+            syntax: markdown
+            content: |
+              ## Heading
+                * Bullet
+                * Points
+      
       - name: ns_sign
         type: SignReleaseBundle
         configuration:
           inputResources:
-            - name: releaseBundle
+            - name: ns_releaseBundle
           integrations:
             - name: varsha_artifactory
           outputResources:
             - name: releaseBundle2
+            
+      
+     
+      
   
       - name: ns_distribute
         type: DistributeReleaseBundle
@@ -728,24 +763,12 @@ pipelines:
             - name: ns_distributionRule
             - name: ns_releaseBundle2
 
-      - name: ns_bundle
-        Step: CreateReleaseBundle
-        configuration:
-          affinityGroup: test
-          releaseBundleName: kermit_test_new_aql
-          releaseBundleVersion: v1.1.0
-          dryRun: false
-          sign: false
-          description: "test description"
-          integrations:
-            - name: varsha_artifactory
-          inputResources:
-            - name: ns_aql
-          outputResources:
-            - name: ns_releaseBundle
-          releaseNotes:
-            syntax: markdown
-            content: |
-              ## Heading
-                * Bullet
-                * Points
+#       - name: ns_scan
+#         type: XrayScan
+#         configuration:
+#           buildName: varsha_jpipes
+#           buildNumber: 1
+#           integrations:
+#             - name: varsha_artifactory
+#           inputSteps:
+#             - name: ns_sign
