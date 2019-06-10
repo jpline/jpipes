@@ -638,7 +638,9 @@ pipelines:
             - send_notification varsha_slack
  
  ################################## ---------------------------------- NATIVE STEPS ---------------------------------- ##################################
-            
+    
+  - name: varsha_ns
+    steps:        
       - name: ns_bash
         type: Bash
         configuration:
@@ -656,39 +658,39 @@ pipelines:
           onExecute:
             - printenv
            
-     - name: ns_build_image
-       type: DockerBuild
-       payloadType: docker
-       configuration:
-         dockerFileLocation: .
-         dockerFileName: Dockerfile
-         dockerImageName: mill.jfrog.info:12052/docker/varsha-samplescript
-         dockerImageTag: $PIPELINE_NAME.$RUN_NUMBER
-         integrations:
-           - name: varsha_artifactory
-         inputResources:
-           - name: ns_dockerbuild_gitRepo
+      - name: ns_build_image
+        type: DockerBuild
+        payloadType: docker
+        configuration:
+          dockerFileLocation: .
+          dockerFileName: Dockerfile
+          dockerImageName: mill.jfrog.info:12052/docker/varsha-samplescript
+          dockerImageTag: $PIPELINE_NAME.$RUN_NUMBER
+          integrations:
+            - name: varsha_artifactory
+          inputResources:
+            - name: ns_dockerbuild_gitRepo
             
-     - name: ns_push_image
-       type: pushArtifactoryPackage
-       configuration:
-         targetRepo: docker
-         publish: false
-         scan: false
-         integrations:
-           - name: varsha_artifactory
-         inputSteps:
-           - name: ns_build_image
+      - name: ns_push_image
+        type: pushArtifactoryPackage
+        configuration:
+          targetRepo: docker
+          publish: false
+          scan: false
+          integrations:
+            - name: varsha_artifactory
+          inputSteps:
+            - name: ns_build_image
 
-     - name: ns_publish_build
-       type: PublishBuildInfo
-       configuration:
-         integrations:
-           - varsha_artifactory
-         steps:
-           - ns_push_image
-         outputResources:
-           - ns_buildInfo
+      - name: ns_publish_build
+        type: PublishBuildInfo
+        configuration:
+          integrations:
+            - varsha_artifactory
+          steps:
+            - ns_push_image
+          outputResources:
+            - ns_buildInfo
             
       - name: ns_scan
         type: XrayScan
