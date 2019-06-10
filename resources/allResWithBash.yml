@@ -264,7 +264,7 @@ pipelines:
           inputResources:
             - name: ar_aql
           inputSteps:
-            - input_res_bash
+            - name: input_res_bash
         execution:
           onExecute: 
             - printenv
@@ -280,7 +280,7 @@ pipelines:
           inputResources:
             - name: ar_buildInfo 
           inputSteps:
-            - as_bashAql
+            - name: as_bashAql
         execution:
           onExecute: 
             - printenv
@@ -296,7 +296,7 @@ pipelines:
           inputResources:
             - name: ar_distributionRule
           inputSteps:
-            - as_bashAql
+            - name: as_bashAql
         execution:
           onExecute: 
             - printenv
@@ -312,7 +312,7 @@ pipelines:
           inputResources:
             - name: ar_fileSpec
           inputSteps:
-            - as_bashAql
+            - name: as_bashAql
         execution:
           onExecute: 
             - printenv
@@ -328,7 +328,7 @@ pipelines:
           inputResources:
             - name: ar_gitRepo
           inputSteps:
-            - as_bashAql
+            - name: as_bashAql
         execution:
           onExecute: 
             - printenv
@@ -344,7 +344,7 @@ pipelines:
           inputResources:
             - name: ar_image
           inputSteps:
-            - as_bashAql
+            - name: as_bashAql
         execution:
           onExecute: 
             - printenv
@@ -360,7 +360,7 @@ pipelines:
           inputResources:
             - name: ar_kubeCluster
           inputSteps:
-            - as_bashAql
+            - name: as_bashAql
         execution:
           onExecute: 
             - printenv
@@ -376,7 +376,7 @@ pipelines:
           inputResources:
             - name: ar_releaseBundle
           inputSteps:
-            - as_bashAql
+            - name: as_bashAql
         execution:
           onExecute: 
             - printenv
@@ -392,7 +392,7 @@ pipelines:
           inputResources:
             - name: ar_remoteFile
           inputSteps:
-            - as_bashAql
+            - name: as_bashAql
         execution:
           onExecute: 
             - printenv
@@ -408,7 +408,7 @@ pipelines:
           inputResources:
             - name: ar_vmCluster
           inputSteps:
-            - as_bashAql
+            - name: as_bashAql
         execution:
           onExecute: 
             - printenv
@@ -424,7 +424,7 @@ pipelines:
           inputResources:
             - name: ar_webhook
           inputSteps:
-            - as_bashAql
+            - name: as_bashAql
         execution:
           onExecute: 
             - printenv
