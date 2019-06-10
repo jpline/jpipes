@@ -1,71 +1,30 @@
 resources:
 
-  - name: ar_buildInfo 
-    type: BuildInfo
+  - name: samples_gitRepo
+    type: GitRepo
     configuration:
-      sourceArtifactory: artifactoryIntegration
-      buildName: myBuild
-      buildNumber: 123
-  
-  - name: ar_releaseBundle
-    type: ReleaseBundle
-    configuration:
-      sourceArtifactory: artifactoryIntegration
-      name: <string>
-      version: <string>
-      isSigned: <boolean>
-      
-  - name: ar_distributionRule
-    type: DistributionRule
-    configuration:
-      sourceArtifactory: <string>      
-      serviceName: <string>
-      siteName: <string>
-      cityName: <string>
-      countryCodes:
-        - <string>
-        - <string>
-
-  - name: ar_vmCluster
-    type: VmCluster
-    configuration:
-      integrationName: sshKeyIntegration
-      sshKey: sshKeyIntegration
-      targets:
-        - 1.2.3.4
-        - 1.2.3.5
-        - 1.2.3.6
-  
-  - name: ar_aql
-    type: artifactoryQuery
-    type: Aql
-    configuration:
-      integrationName: artifactoryIntegration
-      sourceArtifactory: artifactoryIntegration
-      query: <string>
-      addedProperties:
-        key1: val1
-        key2: val2
-      mappings: 
-        - name: mapping1
-          input:    
-          output: 
-        - name: mapping2
-          input:    
-          output: 
+      path: jpline/sample-script
+      gitProvider: varsha_github
 
 pipelines:
-  - name: varsha_pipeline_ar
+  - name: varsha_2steps
     steps:
-      - name: input_res_bash
-        type: bash
-        triggeredBy:
-          resources:
-            - someStateResource
-            - someVersionResource
+      - name: simple_bash
+        type: Bash
+        configuration:
+          inputResources:
+            - name: samples_gitRepo
         execution:
-          onExecute:
-            - ls -la
+          onExecute: 
+            - printenv
+            
+      - name: dep_simple
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: simple_bash
+        execution:
+          onExecute: 
+            - printenv
           onComplete: 
             - echo "Ah! done"
-
