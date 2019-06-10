@@ -32,7 +32,7 @@ resources:
       gitProvider: varsha_github
       
   - name: ns_buildInfo
-    type: buildInfo
+    type: BuildInfo
     version:
       buildName: app
       buildNumber: 1
@@ -64,15 +64,16 @@ resources:
       
   - name: ns_distributionRule2
     type: DistributionRule
-    version:
+    configuration:
+      sourceArtifactory: varsha_artifactory
       cityName: "Beng"
-      serviceName: "lol"
+      serviceName: "luru"
       siteName: "test"
       countryCodes:
-        countryCodeCount: 3
-        countryCode01: "test"
-        countryCode02: "lol"
-        countryCode03: "bol"
+        - 3
+        - "91"
+        - "141"
+        - "67"
         
   - name: ar_aql
     type: Aql
