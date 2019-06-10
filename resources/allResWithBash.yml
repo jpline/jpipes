@@ -147,6 +147,7 @@ pipelines:
             - name: ar_distributionRule
            # - name: ar_fileSpec
             - name: ar_gitRepo
+              trigger: false
             - name: ar_image
             - name: ar_kubeCluster
             - name: ar_releaseBundle
@@ -266,7 +267,7 @@ pipelines:
             - name: ar_aql
           inputSteps:
             - name: input_res_bash
-              trigger: false
+             # trigger: false
         execution:
           onExecute: 
             - printenv
