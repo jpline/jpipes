@@ -544,11 +544,16 @@ pipelines:
           runtime:            
             type: image
             image:
-              auto:
-                language: nodejs
-                versions: 
-                  - 8.16.0
-                  - 10.15.3
+              custom:
+                name: drydock/u16java
+                tag: master
+                options: 'boo=far'
+                autoPull: true
+#               auto:
+#                 language: nodejs
+#                 versions: 
+#                   - 8.16.0
+#                   - 10.15.3
         execution:
           onExecute:
             - printenv
