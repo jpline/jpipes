@@ -534,7 +534,7 @@ pipelines:
            # - name: ar_distributionRule
            # - name: ar_fileSpec
             - name: ar_gitRepo
-              trigger: false
+             # trigger: false
            # - name: ar_image
            # - name: ar_kubeCluster
             #- name: ar_releaseBundle
@@ -547,8 +547,8 @@ pipelines:
               custom:
                 name: drydock/u16java
                 tag: master
-                options: ''
-               # autoPull: true
+              #  options: ''
+              #  autoPull: false
 #               auto:
 #                 language: java
 #                 versions: 
