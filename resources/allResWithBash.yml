@@ -1,87 +1,5 @@
 resources:
-
-  - name: ns_aql
-    type: Aql
-    configuration:
-      sourceArtifactory: varsha_artifactory
-      query: 'items.find({"$and":[{"artifact.module.build.name":{"$eq":"native_pipeline"}},{"artifact.module.build.number":{"$eq":"8"}}]})'     
-      #addedProperties:
-      #  FOO: "value1a value1b"
-      #  BAR: "value2a value2b"
-      mappings:
-        - name: "a"
-          input: "regex"
-          output: "$1/$2"
-        - name: "b"
-          input: "regex"
-          output: "$2/$1"
-          
-  - name: ns_image
-    type: Image
-    configuration:
-      imageName: shippabledocker/sample-node
-      registry: varsha_docker
-      autoPull: true
-      imageTag: latest
-      
-  - name: ns_dockerbuild_gitRepo
-    type: GitRepo
-    configuration:
-      path: jpline/sample-script
-      gitProvider: varsha_github
-      
-  - name: ns_buildInfo
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: varsha_artifactory
-      buildName: varsha_ns
-      buildNumber: 123
-  
-  - name: ns_promotedInfo
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: varsha_artifactory
-      buildName: promote_docker_test
-      buildNumber: 1
-      
-  - name: ns_distributionRule
-    type: DistributionRule
-    configuration:
-      sourceArtifactory: varsha_artifactory
-      cityName: "*"
-      serviceName: "*"
-      siteName: "*"
-      countryCodes:
-        - "CN"
-        
-  - name: ns_releaseBundle
-    type: ReleaseBundle
-    configuration:
-      sourceArtifactory: varsha_artifactory
-      name: test_2
-      version: v1.1.3
-
-  - name: ns_releaseBundle2
-    type: ReleaseBundle
-    configuration:
-      sourceArtifactory: varsha_artifactory
-      name: test
-      version: foo
-      isSigned: false
-      
-  - name: ns_distributionRule2
-    type: DistributionRule
-    configuration:
-      sourceArtifactory: varsha_artifactory
-      cityName: "Beng"
-      serviceName: "luru"
-      siteName: "test"
-      countryCodes:
-        - "3"
-        - "91"
-        - "141"
-        - "67"
-        
+    
   - name: ar_aql
     type: Aql
     configuration:
@@ -560,219 +478,96 @@ pipelines:
             - mvn --version
             - ant -version 
             - gradle --version 
-#             - test "$ENV1" == "value1"
-#             - test "$ENV2" == "value2"
-# #             - echo imageTag=$imageTag
+            - test "$ENV1" == "value1"
+            - test "$ENV2" == "value2"
+            - echo imageTag=$imageTag
             
-# #             - echo "-------------------------------------------- IMAGE RESOURCE -------------------------------------------------"
-# #             - add_run_variable imageTag="firstTest"
-# #             - echo imageTag=$imageTag
-# #             - echo imageName=$imageName
-# #             - pushd $res_ar_image_resourcePath
-# #             - echo imageTag=$imageTag
-# #             - echo imageName=$imageName
-# #             - add_pipeline_variable imageName="shippabledocker/ship_plv2pyt" imageTag="tip"
-# #             - echo imageName=$imageName
-# #             - echo imageTag=$imageTag
-# #             - popd
-# #             - echo imageTag=$imageTag
-# #             - echo imageName=$imageName
-# #             - echo "------------------------------------------- DONE WITH IMAGE RESOURCE -----------------------------------------"
+            - echo "-------------------------------------------- IMAGE RESOURCE -------------------------------------------------"
+            - add_run_variable imageTag="firstTest"
+            - echo imageTag=$imageTag
+            - echo imageName=$imageName
+            - pushd $res_ar_image_resourcePath
+            - echo imageTag=$imageTag
+            - echo imageName=$imageName
+            - add_pipeline_variable imageName="shippabledocker/ship_plv2pyt" imageTag="tip"
+            - echo imageName=$imageName
+            - echo imageTag=$imageTag
+            - popd
+            - echo imageTag=$imageTag
+            - echo imageName=$imageName
+            - echo "------------------------------------------- DONE WITH IMAGE RESOURCE -----------------------------------------"
             
-#             - echo "-------------------------------------------- GITREPO RESOURCE ----------------------------------------------"
-#             - pushd $res_ar_gitRepo_resourcePath
-#             - source example.env
-#             - echo $TEST
-#             - ls -la
-#             - save_run_state test.sh my_file
+            - echo "-------------------------------------------- GITREPO RESOURCE ----------------------------------------------"
+            - pushd $res_ar_gitRepo_resourcePath
+            - source example.env
+            - echo $TEST
+            - ls -la
+            - save_run_state test.sh my_file
             
-#             - read_json packages.json "name"
+            - read_json packages.json "name"
             
-# #             - openssl genrsa -out key.pem 1024 
-# #             - openssl rsa -in key.pem -text -noout
-# #             - openssl rsa -in key.pem -pubout -out pub.pem 
-# #             - openssl rsa -in pub.pem -pubin -text -noout 
+            - openssl genrsa -out key.pem 1024 
+            - openssl rsa -in key.pem -text -noout
+            - openssl rsa -in key.pem -pubout -out pub.pem 
+            - openssl rsa -in pub.pem -pubin -text -noout 
             
-# #             - encrypt_string "secretValue" --key pub.pem
-# #             - encrypted=$(encrypt_string "secretValue" --key pub.pem)
-# #             - echo "$encrypted"
-# #             - decrypt_string "$encrypted" --key key.pem
+            - encrypt_string "secretValue" --key pub.pem
+            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
+            - echo "$encrypted"
+            - decrypt_string "$encrypted" --key key.pem
             
-# #             - encrypt_file --output encrypted.txt crypt.txt --key pub.pem
-# #             - cat encrypted.txt
-# #             - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
-# #             - cat decrypted.txt
+            - encrypt_file --output encrypted.txt crypt.txt --key pub.pem
+            - cat encrypted.txt
+            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
+            - cat decrypted.txt
             
-#             - echo "$STEP_URL"
-#             - echo "$SAMPLE"
-#             - echo "$TEST"
-#             - echo "$res_ar_gitRepo_isPrerelease"
+            - echo "$STEP_URL"
+            - echo "$SAMPLE"
+            - echo "$TEST"
+            - echo "$res_ar_gitRepo_isPrerelease"
             
-#             - replace_envs example.json sample.json
-#             - echo "$STEP_URL"
-#             - echo "$TEST"
-#             - echo "$BRANCH"
-#             - echo "$res_ar_gitRepo_isPrerelease"
-#             - echo "$SAMPLE"
+            - replace_envs example.json sample.json
+            - echo "$STEP_URL"
+            - echo "$TEST"
+            - echo "$BRANCH"
+            - echo "$res_ar_gitRepo_isPrerelease"
+            - echo "$SAMPLE"
   
-#             - cache_files echo.sh my_cache
-#            # - restore_cache my_file echo.sh
-#             - popd
+            - cache_files echo.sh my_cache
+           # - restore_cache my_file echo.sh
+            - popd
             
-#             - echo "------------------------------------------ DONE WITH GITREPO RESOURCE --------------------------------------------------------------------------------"
+            - echo "------------------------------------------ DONE WITH GITREPO RESOURCE --------------------------------------------------------------------------------"
             
-#             - bump_semver v1.0.1 major
-#             - bump_semver v0.0.1 patch
+            - bump_semver v1.0.1 major
+            - bump_semver v0.0.1 patch
             
-#             - compare_git --resource ar_gitRepo --commit-range HEAD~1..HEAD echo.sh
+            - compare_git --resource ar_gitRepo --commit-range HEAD~1..HEAD echo.sh
             
-#             - update_commit_status ar_gitRepo --status failure --message "updated in utility step" --context jfrog_pipelines
+            - update_commit_status ar_gitRepo --status failure --message "updated in utility step" --context jfrog_pipelines
             
-#             - switch_env nodejs 8.16.0
+            - switch_env nodejs 8.16.0
             
-#             - node -v
-#       #      - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook_1"
+            - node -v
+      #      - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook_1"
             
-#        #     - write_output utility_testRepo "branches=testing123"
-#           #  - send_notification varsha_slack
-#            # - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
+       #     - write_output utility_testRepo "branches=testing123"
+          #  - send_notification varsha_slack
+           # - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
             
-#             - execute_command echo $res_ar_gitRepo_resourcePath
-#           #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
-#            # - replicate_resource ar_image ar_image_python #throws error
+            - execute_command echo $res_ar_gitRepo_resourcePath
+          #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
+           # - replicate_resource ar_image ar_image_python #throws error
             
-#             - printenv
-#             - docker images
+            - printenv
+            - docker images
             
-#             #- retry_command grunt install
-#            # - mkdir -p shippable/testresults && mkdir -p shippable/codecoverage
-#            # - ./node_modules/.bin/istanbul cover grunt -- -u tdd
-#            # - ./node_modules/.bin/istanbul report cobertura --dir shippable/codecoverage/
-#            # - save_tests $res_utility_scriptRepo_resourcePath/shippable/testresults/testresults.xml
+            #- retry_command grunt install
+           # - mkdir -p shippable/testresults && mkdir -p shippable/codecoverage
+           # - ./node_modules/.bin/istanbul cover grunt -- -u tdd
+           # - ./node_modules/.bin/istanbul report cobertura --dir shippable/codecoverage/
+           # - save_tests $res_utility_scriptRepo_resourcePath/shippable/testresults/testresults.xml
           onComplete: 
             - echo "Ah! done"
             - send_notification varsha_slack
  
- ################################## ---------------------------------- NATIVE STEPS ---------------------------------- ##################################
-    
-  - name: varsha_ns
-    steps:        
-      - name: ns_bash
-        type: Bash
-        configuration:
-          environmentVariables:
-            foo: bar
-          integrations:
-            - name: varsha_artifactory
-          outputResources:
-            - name: ns_aql
-          inputResources:
-            - name: ns_dockerbuild_gitRepo
-              trigger: false
-            - name: ns_image
-        execution:
-          onExecute:
-            - printenv
-           
-      - name: ns_build_image
-        type: DockerBuild
-        configuration:
-          dockerFileLocation: .
-          dockerFileName: Dockerfile
-          dockerImageName: 34.66.110.173:8081/varsha-test/node
-          dockerImageTag: latest
-          integrations:
-            - name: varsha_artifactory
-          inputResources:
-            - name: ns_dockerbuild_gitRepo
-          inputSteps:
-            - name: ns_bash
-            
-      - name: ns_push_image
-        type: PushArtifactoryPackage
-        configuration:
-          targetRepo: varsha-test
-          integrations:
-            - name: varsha_artifactory
-          inputSteps:
-            - name: ns_build_image
-
-      - name: ns_publish_build
-        type: PublishBuildInfo
-        configuration:
-          integrations:
-            - name: varsha_artifactory
-          inputSteps:
-            - name: ns_push_image
-          outputResources:
-            - name: ns_buildInfo
-      
-      - name: ns_promote_build
-        type: PromoteBuild
-        configuration:
-          targetRepo: promote_docker_testvarsha
-          integrations:
-            - name: varsha_artifactory
-          inputResources:
-            - name: ns_buildInfo
-          inputSteps:
-            - name: ns_publish_build
-          outputResources:
-            - name: ns_promotedInfo
-      
-      - name: ns_new_release_bundle
-        type: CreateReleaseBundle
-        configuration:
-          releaseBundleName: test_new_releaseb
-          releaseBundleVersion: v1.0.0
-          dryRun: false
-          sign: false
-          description: "test description"
-          integrations:
-            - name: varsha_artifactory
-          inputResources:
-            - name: ns_promotedInfo
-          outputResources:
-            - name: ns_releaseBundle
-          releaseNotes:
-            syntax: markdown
-            content: |
-              ## Heading
-                * Bullet
-                * Points
-      
-      - name: ns_sign
-        type: SignReleaseBundle
-        configuration:
-          
-          inputResources:
-            - name: ns_releaseBundle
-          integrations:
-            - name: varsha_artifactory
-          outputResources:
-            - name: ns_releaseBundle2
-            
-      - name: ns_distribute
-        type: DistributeReleaseBundle
-        #execution:
-        #  onSuccess:
-        #    - echo hi
-        configuration:
-          dryRun: false
-          #releaseBundleName: test_release
-          #releaseBundleVersion: v1.0.1
-          integrations:
-            - name: varsha_artifactory
-          inputResources:
-            - name: ns_distributionRule
-            - name: ns_releaseBundle2
-
-#       - name: ns_scan
-#         type: XrayScan
-#         configuration:
-#           buildName: varsha_jpipes
-#           buildNumber: 1
-#           integrations:
-#             - name: varsha_artifactory
-#           inputSteps:
-#             - name: ns_sign
