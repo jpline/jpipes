@@ -4,6 +4,8 @@ pipelines:
       - name: ns_bash
         type: Bash
         configuration:
+          affinityGroup: dockergroupU18
+          nodePool: varsha_u18
           environmentVariables:
             foo: bar
           integrations:
@@ -21,6 +23,8 @@ pipelines:
       - name: ns_build_image
         type: DockerBuild
         configuration:
+          affinityGroup: dockergroupU18
+          nodePool: varsha_u18
           dockerFileLocation: .
           dockerFileName: Dockerfile
           dockerImageName: 34.66.110.173:8081/varsha-test/node
@@ -35,6 +39,8 @@ pipelines:
       - name: ns_push_image
         type: PushArtifactoryPackage
         configuration:
+          affinityGroup: dockergroupU18
+          nodePool: varsha_u18
           targetRepo: varsha-test
           integrations:
             - name: varsha_artifactory
@@ -44,6 +50,8 @@ pipelines:
       - name: ns_publish_build
         type: PublishBuildInfo
         configuration:
+          affinityGroup: dockergroupU18
+          nodePool: varsha_u18
           integrations:
             - name: varsha_artifactory
           inputSteps:
@@ -54,6 +62,8 @@ pipelines:
       - name: ns_promote_build
         type: PromoteBuild
         configuration:
+          affinityGroup: dockergroupU18
+          nodePool: varsha_u18
           targetRepo: promote_docker_testvarsha
           integrations:
             - name: varsha_artifactory
@@ -67,6 +77,8 @@ pipelines:
       - name: ns_new_release_bundle
         type: CreateReleaseBundle
         configuration:
+          affinityGroup: dockergroupU18
+          nodePool: varsha_u18
           releaseBundleName: test_new_releaseb
           releaseBundleVersion: v1.0.0
           dryRun: false
@@ -88,7 +100,8 @@ pipelines:
       - name: ns_sign
         type: SignReleaseBundle
         configuration:
-          
+          affinityGroup: dockergroupU18
+          nodePool: varsha_u18
           inputResources:
             - name: ns_releaseBundle
           integrations:
@@ -102,6 +115,8 @@ pipelines:
         #  onSuccess:
         #    - echo hi
         configuration:
+          affinityGroup: dockergroupU18
+          nodePool: varsha_u18
           dryRun: false
           #releaseBundleName: test_release
           #releaseBundleVersion: v1.0.1
@@ -114,6 +129,8 @@ pipelines:
 #       - name: ns_scan
 #         type: XrayScan
 #         configuration:
+#           affinityGroup: dockergroupU18
+#           nodePool: varsha_u18
 #           buildName: varsha_jpipes
 #           buildNumber: 1
 #           integrations:
