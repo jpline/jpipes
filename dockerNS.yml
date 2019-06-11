@@ -138,7 +138,6 @@ pipelines:
 #           inputSteps:
 #             - name: ns_sign
 
-
 resources:
 
   - name: ns_aql
@@ -182,7 +181,7 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: varsha_artifactory
-      buildName: promote_docker_test
+      buildName: promote_docker_testvarsha
       buildNumber: 1
       
   - name: ns_distributionRule
