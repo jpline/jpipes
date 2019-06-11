@@ -547,18 +547,18 @@ pipelines:
               custom:
                 name: drydock/u16java
                 tag: master
-                options: 'boo=far'
+                options: ''
                 autoPull: true
 #               auto:
-#                 language: nodejs
+#                 language: java
 #                 versions: 
-#                   - 8.16.0
-#                   - 10.15.3
+#                   - openjdk11
         execution:
           onExecute:
             - printenv
             - docker images
-            - node -v
+            - java -version
+            - mvn 
             - test "$ENV1" == "value1"
             - test "$ENV2" == "value2"
             - echo imageTag=$imageTag
