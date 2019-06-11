@@ -152,18 +152,18 @@ pipelines:
           #  - name: ar_fileSpec #failing since no correct data for this
             - name: ar_gitRepo
              # trigger: false
-            - name: ar_image
+            #- name: ar_image
             - name: ar_kubeCluster
             - name: ar_releaseBundle
             - name: ar_remoteFile
             - name: ar_vmCluster
             - name: ar_webhook
-#           runtime:            
-#             type: image
-#             image:
-#               custom:
-#                 name: drydock/u16java
-#                 tag: master
+          runtime:            
+            type: image
+            image:
+              custom:
+                name: drydock/u16java
+                tag: master
               #  options: ''
               #  autoPull: false
 #               auto:
