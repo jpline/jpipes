@@ -672,7 +672,7 @@ pipelines:
           dockerFileLocation: .
           dockerFileName: Dockerfile
           dockerImageName: 34.66.110.173:8081/varsha-test/node
-          dockerImageTag: $PIPELINE_NAME.$RUN_NUMBER
+          dockerImageTag: latest
           integrations:
             - name: varsha_artifactory
           inputResources:
