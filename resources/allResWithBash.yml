@@ -533,7 +533,7 @@ pipelines:
            # - name: ar_buildInfo 
            # - name: ar_distributionRule
            # - name: ar_fileSpec
-            - name: ar_gitRepo
+            - name: as_bashGitRepo
              # trigger: false
            # - name: ar_image
            # - name: ar_kubeCluster
