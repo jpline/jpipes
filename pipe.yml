@@ -1,349 +1,41 @@
-resources:
-  - name: utility_scriptRepo
-    type: gitRepo
-    repoPath: jpline/sample-script
-    configuration:
-      integrationName: varsha_github
-      branches:
-        only: master
-    version:
-      sha: master
-  
-  - name: utility_testRepo
-    type: gitRepo
-    repoPath: jpline/sample-script
-    configuration:
-      integrationName: varsha_github
-      branches:
-        only: test
-    version:
-      sha: test
-      
-  - name: imageDocker_1
-    type: image
-    imageName: shippabledocker/sample-node
-    configuration:
-      integrationName: dockerInt
-    version:
-      imageTag: latest
-  
-  - name: imagePrivate
-    type: image
-    imageName: shippabledocker/sample_node_pvt
-    configuration:
-      integrationName: dockerInt
-    version:
-      imageTag: masterpyt
-      
-  - name: imagePython_2
-    type: image
-    imageName: shippabledocker/u16phpall
-    configuration:
-      integrationName: dockerInt
-      #autoPull: false
-    version:
-      imageTag: test7.1
-  
-  - name: webhookInt
-    type: webhook
-    configuration:
-      integrationName: varsha_internalWebhook
-    version:
-      payload: "sample_one_update"
-      
-  - name: webhookIntExternal
-    type: webhook
-    configuration:
-      integrationName: varsha_externalWebhook
-    version:
-      payload: "data=test_update"
-      
 pipelines:
-  - name: Varsha_pipeline
-    steps:  
-      - name: utility_u16
-        type: bash
+  - name: varsha_gitRepo
+    steps:
+      - name: input_git_bash
+        type: Bash
         configuration:
-          timeoutSeconds: 360
-          affinityGroup: u16grp
-          nodePool: kermit_ubuntu_pool
-        triggeredBy:
-          resources:
-            - utility_scriptRepo
-            - imagePrivate
-        setup:
-          environmentVariables:
-            normal:
-              ENV1: value1
-              ENV2: value2
-        requires:
-          resources:
-            - imageDocker_1
-            - imagePython_2
+          nodePool: varsha_u16
           integrations:
-            - notifySlack
-            - varshaJira
-            - varsha_internalWebhook
+            - name: varsha_slack
+          inputResources:
+            - name: ip_gitRepo
+          runtime:            
+            type: image
+            image:
+              custom:
+                name: drydock/u16java
+                tag: master
         execution:
           onExecute:
             - printenv
             - docker images
-            - test "$ENV1" == "value1"
-            - test "$ENV2" == "value2"
+            - java -version
+            - mvn --version
+            - ant -version 
+            - gradle --version 
+          onComplete: 
+            - echo "Ah! done"
+            - send_notification varsha_slack
             
-            - echo "-------------------------------------------- IMAGE RESOURCE -------------------------------------------------"
-            - add_run_variable imageTag="firstTest"
-            
-            - pushd $res_imagePython_2_resourcePath
-            
-            - add_pipeline_variable imageName="shippabledocker/ship_plv2pyt" imageTag="tip"
-            
-            - popd
-            - echo "------------------------------------------- DONE WITH IMAGE RESOURCE -----------------------------------------"
-            
-            - echo "-------------------------------------------- GITREPO RESOURCE ----------------------------------------------"
-            - pushd $res_utility_scriptRepo_resourcePath
-            - source example.env
-            - echo $TEST
-            - ls -la
-            - save_run_state test.sh my_file
-            
-            - read_json packages.json "name"
-            
-            - openssl genrsa -out key.pem 1024 
-            - openssl rsa -in key.pem -text -noout
-            - openssl rsa -in key.pem -pubout -out pub.pem 
-            - openssl rsa -in pub.pem -pubin -text -noout 
-            
-            - encrypt_string "secretValue" --key pub.pem
-            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
-            - echo "$encrypted"
-            - decrypt_string "$encrypted" --key key.pem
-            
-            - encrypt_file --output encrypted.txt crypt.txt --key pub.pem
-            - cat encrypted.txt
-            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
-            - cat decrypted.txt
-            
-            - echo "$STEP_URL"
-            - echo "$SAMPLE"
-            - echo "$TEST"
-            - echo "$res_utility_scriptRepo_isPrerelease"
-            
-            - replace_envs example.json sample.json
-            - echo "$STEP_URL"
-            - echo "$TEST"
-            - echo "$BRANCH"
-            - echo "$res_utility_scriptRepo_isPrerelease"
-            - echo "$SAMPLE"
-  
-            - cache_files echo.sh my_cache
-           # - restore_cache my_file echo.sh
-            - popd
-            
-            - echo "------------------------------------------ DONE WITH GITREPO RESOURCE --------------------------------------------------------------------------------"
-            
-            - bump_semver v1.0.1 major
-            - bump_semver v0.0.1 patch
-            
-            - compare_git --resource utility_scriptRepo --commit-range HEAD~3..HEAD test.sh
-            
-            - update_commit_status utility_scriptRepo --status failure --message "updated in utility step" --context jfrog_pipelines
-            
-            - switch_env nodejs 8.16.0
-            
-            - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook_1"
-            
-            - write_output utility_testRepo "branches=testing123"
-            - send_notification notifySlack
-           # - send_notification varshaJira --project-id TES --type Bug --description "test api step_id=$STEP_ID" --summary "no issue" 
-            
-            - execute_command echo $res_utility_scriptRepo_resourcePath
-          #  - retry_command "git clone git@bitbucket.org:shiptest-rc-me/testprivate.git" #worked
-            - replicate_resource imageDocker_1 imagePython_2 #throws error
-            
-            - printenv
-            - docker images
-            
-            #- retry_command grunt install
-           # - mkdir -p shippable/testresults && mkdir -p shippable/codecoverage
-           # - ./node_modules/.bin/istanbul cover grunt -- -u tdd
-           # - ./node_modules/.bin/istanbul report cobertura --dir shippable/codecoverage/
-           # - save_tests $res_utility_scriptRepo_resourcePath/shippable/testresults/testresults.xml
-          onComplete:
-            - echo "Oh Yeah Done ubuntu 16!"
-        outputResources:
-          - webhookInt
-          - utility_testRepo
-      
-      - name: dep_u16
-        type: bash
-        configuration:
-          affinityGroup: u16grp
-          nodePool: kermit_ubuntu_pool
-        triggeredBy:
-          steps:
-            - utility_u16
-        requires:
-          integrations:
-            - notifySlack
-            - varshaJira
-        execution:
-          onExecute:
-           # - pushd $res_utility_scriptRepo_resourcePath
-
-            - restore_run_state my_file test.sh
-
-            - restore_cache my_cache echo.sh
-            
-           # - popd
-            
-            - send_notification notifySlack
-           
-          onComplete:
-            - echo "Oh Yeah Done affinity group"
-          
-      - name: utility_c7
-        type: bash
-        configuration:
-          timeoutSeconds: 360
-          #nodePool: kermit_centos_pool
-        triggeredBy:
-          resources:
-            - utility_scriptRepo
-            - webhookInt
-        requires:
-          integrations:
-            - notifySlack
-        execution:
-          onExecute:
-            - printenv
-          #  - docker pull drydock/c7node:master
-           # - docker rm $(docker stop $(docker ps -a -q --filter ancestor=shashiavtc/webapp:req-res --format="{{.ID}}"))
-           # - docker run -p 49160:8080 -d shashiavtc/webapp:req-res
-           # - curl -i http://localhost:49160/?data=hi
-            - add_run_variable imageTag="firstTest"
-            
-            - pushd $res_utility_scriptRepo_resourcePath
-            
-            - save_run_state test.sh my_file
-            - restore_run_state my_file test.sh
-            
-            - popd
-            
-            - bump_semver v1.0.1 major
-            - bump_semver v0.0.1 patch
-            
-            - compare_git --resource utility_scriptRepo --commit-range HEAD~3..HEAD test.sh
-            
-            - update_commit_status utility_scriptRepo --status processing --message "updated in utility step" --context $STEP_NAME
-            
-            - switch_env nodejs 8.16.0
-            
-            - pushd $res_utility_scriptRepo_resourcePath
-            
-            - read_json packages.json "name"
-            - openssl genrsa -out key.pem 1024 
-            - openssl rsa -in key.pem -text -noout
-            - openssl rsa -in key.pem -pubout -out pub.pem 
-            - openssl rsa -in pub.pem -pubin -text -noout 
-            
-            - encrypt_string "secretValue" --key pub.pem
-            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
-            - echo "$encrypted"
-            - decrypt_string "$encrypted" --key key.pem
-            
-            - encrypt_file --output encrypted.txt crypt.txt --key pub.pem
-            - cat encrypted.txt
-            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
-            - cat decrypted.txt
-            - replace_envs example.env sample.env
-            
-            - cat sample.env
-            - cat example.env
-  
-            - cache_files echo.sh my_file
-            - restore_cache my_file echo.sh
-            
-            - popd
-            - send_notification notifySlack
-            
-            - execute_command echo $res_utility_scriptRepo_resourcePath
-          onComplete:
-            - echo "Oh Yeah Done centOS 7!!"
-      
-      - name: utility_u18
-        type: bash
-        configuration:
-          timeoutSeconds: 360
-          nodePool: kermit_ubuntu18_pool
-        requires:
-          integrations:
-            - notifySlack
-            - varsha_externalWebhook
-            - varsha_internalWebhook
-        triggeredBy:
-          steps:
-            - utility_u16
-          resources:
-            - utility_scriptRepo
-        execution:
-          onExecute:
-            - printenv
-            - docker pull drydock/u16node:master
-            - add_run_variable imageTag="firstTest"
-            
-            - pushd $res_utility_scriptRepo_resourcePath
-            
-            - save_run_state test.sh my_file
-            - restore_run_state my_file test.sh
-            
-            - popd
-            
-            - bump_semver v1.0.1 major
-            - bump_semver v0.0.1 patch
-            
-            - compare_git --resource utility_scriptRepo --commit-range HEAD~3..HEAD test.sh
-            
-            - update_commit_status utility_scriptRepo --status processing --message "updated in utility step" --context $STEP_NAME
-            
-            - switch_env nodejs 8.16.0
-            
-            - pushd $res_utility_scriptRepo_resourcePath
-            
-            - read_json packages.json "name"
-            
-            - openssl genrsa -out key.pem 1024 
-            - openssl rsa -in key.pem -text -noout
-            - openssl rsa -in key.pem -pubout -out pub.pem 
-            - openssl rsa -in pub.pem -pubin -text -noout 
-            
-            - encrypt_string "secretValue" --key pub.pem
-            - encrypted=$(encrypt_string "secretValue" --key pub.pem)
-            - echo "$encrypted"
-            - decrypt_string "$encrypted" --key key.pem
-            
-            - encrypt_file --output encrypted.txt crypt.txt --key pub.pem
-            - cat encrypted.txt
-            - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
-            - cat decrypted.txt
-            
-            - replace_envs example.env sample.env
-            
-            - cat sample.env
-            - cat example.env
-  
-            - cache_files echo.sh my_file
-            - restore_cache my_file echo.sh
-            
-            - popd
-            
-            - write_output webhookIntExternal "payload=updating_from_step_again_1"
-            
-            - send_notification notifySlack
-            
-            - execute_command echo $res_utility_scriptRepo_resourcePath
-          onComplete:
-            - echo "Oh Yeah Done ubuntu 18!"
-        outputResources:
-          - webhookIntExternal
+resources:
+  - name: ip_gitRepo
+    type: GitRepo
+    configuration:
+      gitProvider: varsha_github
+      path: jpline/sample-script
+      buildOn:
+         commit: true
+         pullRequestCreate: true
+         pullRequestClose: true
+         releaseCreate: true
+         tagCreate: true
