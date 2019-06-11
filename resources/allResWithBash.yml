@@ -144,7 +144,7 @@ pipelines:
           integrations:
             - name: varsha_slack
           outputResources:
-            - 
+            - name: out_image
           inputResources:
             - name: ar_aql
             - name: ar_buildInfo 
