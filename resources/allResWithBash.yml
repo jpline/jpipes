@@ -140,22 +140,21 @@ resources:
     configuration:
       gitProvider: varsha_github
       path: jpline/sample-script
-      files:
-        include: tes*
-        exclude: ech*
-      branches:
-        include: mast*
-        exclude: pip*
-      tags:
-        include: tag*
-        exclude: relea*
+#       files:
+#         include: tes*
+#         exclude: ech*
+#       branches:
+#         include: mast*
+#         exclude: pip*
+#       tags:
+#         include: tag*
+#         exclude: relea*
       buildOn:
          commit: true
          pullRequestCreate: true
          pullRequestClose: true
          releaseCreate: true
          tagCreate: true
-      shallowDepth: 3
   
   - name: ar_image
     type: Image
@@ -533,7 +532,7 @@ pipelines:
            # - name: ar_buildInfo 
            # - name: ar_distributionRule
            # - name: ar_fileSpec
-            - name: as_bashGitRepo
+            - name: ar_gitRepo
              # trigger: false
            # - name: ar_image
            # - name: ar_kubeCluster
