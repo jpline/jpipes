@@ -446,18 +446,18 @@ pipelines:
           integrations:
             - name: varsha_slack
           inputResources:
-           # - name: ar_aql
-           # - name: ar_buildInfo 
-           # - name: ar_distributionRule
-           # - name: ar_fileSpec
+            - name: ar_aql
+            - name: ar_buildInfo 
+            - name: ar_distributionRule
+            - name: ar_fileSpec
             - name: ar_gitRepo
              # trigger: false
-           # - name: ar_image
-           # - name: ar_kubeCluster
-            #- name: ar_releaseBundle
-            #- name: ar_remoteFile
-            #- name: ar_vmCluster
-            #- name: ar_webhook
+            - name: ar_image
+            - name: ar_kubeCluster
+            - name: ar_releaseBundle
+            - name: ar_remoteFile
+            - name: ar_vmCluster
+            - name: ar_webhook
           runtime:            
             type: image
             image:
