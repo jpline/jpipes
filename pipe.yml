@@ -4,7 +4,7 @@ pipelines:
       - name: input_git_bash
         type: Bash
         configuration:
-          nodePool: varsha_u16
+          nodePool: varsha_u18
         execution:
           onExecute:
             - printenv
