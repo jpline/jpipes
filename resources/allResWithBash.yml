@@ -558,7 +558,9 @@ pipelines:
             - printenv
             - docker images
             - java -version
-            - mvn 
+            - mvn --version
+            - ant -version 
+            - gradle --version 
             - test "$ENV1" == "value1"
             - test "$ENV2" == "value2"
             - echo imageTag=$imageTag
