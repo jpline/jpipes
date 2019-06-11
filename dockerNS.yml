@@ -32,32 +32,37 @@ pipelines:
           integrations:
             - name: varsha_artifactory
           inputResources:
-            - name: ns_dockerbuild_gitRepo
+            - name: ns_dockerbuild_gitRepo #required
+#             - name: ns_image #optional if base image is private
+#             - name: ns_fileSpec #optional
           inputSteps:
             - name: ns_bash
-            
-      - name: ns_push_image
-        type: PushArtifactoryPackage
+#           #outputResources: #should not have output, nothing should be output here 
+           
+      - name: ns_push_docker
+        type: DockerPush
         configuration:
           affinityGroup: dockergroupU18
           nodePool: varsha_u18
-          targetRepo: varsha-test
+          targetRepository: varsha-test #required
           integrations:
-            - name: varsha_artifactory
+            - name: varsha_artifactory #required
           inputSteps:
-            - name: ns_build_image
-
-      - name: ns_publish_build
-        type: PublishBuildInfo
-        configuration:
-          affinityGroup: dockergroupU18
-          nodePool: varsha_u18
-          integrations:
-            - name: varsha_artifactory
-          inputSteps:
-            - name: ns_push_image
+            - name: ns_build_image #required
           outputResources:
-            - name: ns_buildInfo
+            - name: ns_buildInfo # required if autoPublishBuildInfo is true. 
+
+#       - name: ns_publish_build
+#         type: PublishBuildInfo
+#         configuration:
+#           affinityGroup: dockergroupU18
+#           nodePool: varsha_u18
+#           integrations:
+#             - name: varsha_artifactory
+#           inputSteps:
+#             - name: ns_push_image
+#           outputResources:
+#             - name: ns_buildInfo
       
       - name: ns_promote_build
         type: PromoteBuild
