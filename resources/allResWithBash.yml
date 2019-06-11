@@ -553,6 +553,7 @@ pipelines:
           onExecute:
             - printenv
             - docker images
+            - node -v
             - test "$ENV1" == "value1"
             - test "$ENV2" == "value2"
             - echo imageTag=$imageTag
@@ -623,6 +624,7 @@ pipelines:
             
             - switch_env nodejs 8.16.0
             
+            - node -v
       #      - write_output webhookInt "payload=updating_outputResource_from_step_for_Internalwebhook_1"
             
        #     - write_output utility_testRepo "branches=testing123"
