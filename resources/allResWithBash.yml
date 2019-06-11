@@ -707,6 +707,8 @@ pipelines:
             - name: varsha_artifactory
           inputResources:
             - name: ns_buildInfo
+          inputSteps:
+            - name: ns_publish_build
           outputResources:
             - name: ns_promotedInfo
       
