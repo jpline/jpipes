@@ -7,7 +7,7 @@ pipelines:
           nodePool: varsha_u16
           runtime:            
             type: image
-            image:
+            #image:
               #custom:
               #  name: drydock/u16java
                # tag: master
