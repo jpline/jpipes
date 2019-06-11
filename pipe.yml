@@ -8,9 +8,9 @@ pipelines:
           runtime:            
             type: image
             image:
-              custom:
-                name: drydock/u16java
-                tag: master
+              #custom:
+              #  name: drydock/u16java
+               # tag: master
         execution:
           onExecute:
             - printenv
