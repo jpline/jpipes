@@ -1,4 +1,3 @@
-
 resources:
 
   - name: ns_aql
@@ -523,6 +522,7 @@ pipelines:
       - name: input_res_bash
         type: Bash
         configuration:
+          nodePool: varsha_u16
           environmentVariables:
             ENV1: value1
             ENV2: value2
@@ -743,6 +743,7 @@ pipelines:
       - name: ns_sign
         type: SignReleaseBundle
         configuration:
+          
           inputResources:
             - name: ns_releaseBundle
           integrations:
