@@ -563,22 +563,22 @@ pipelines:
             - gradle --version 
             - test "$ENV1" == "value1"
             - test "$ENV2" == "value2"
-            - echo imageTag=$imageTag
+#             - echo imageTag=$imageTag
             
-            - echo "-------------------------------------------- IMAGE RESOURCE -------------------------------------------------"
-            - add_run_variable imageTag="firstTest"
-            - echo imageTag=$imageTag
-            - echo imageName=$imageName
-            - pushd $res_ar_image_resourcePath
-            - echo imageTag=$imageTag
-            - echo imageName=$imageName
-            - add_pipeline_variable imageName="shippabledocker/ship_plv2pyt" imageTag="tip"
-            - echo imageName=$imageName
-            - echo imageTag=$imageTag
-            - popd
-            - echo imageTag=$imageTag
-            - echo imageName=$imageName
-            - echo "------------------------------------------- DONE WITH IMAGE RESOURCE -----------------------------------------"
+#             - echo "-------------------------------------------- IMAGE RESOURCE -------------------------------------------------"
+#             - add_run_variable imageTag="firstTest"
+#             - echo imageTag=$imageTag
+#             - echo imageName=$imageName
+#             - pushd $res_ar_image_resourcePath
+#             - echo imageTag=$imageTag
+#             - echo imageName=$imageName
+#             - add_pipeline_variable imageName="shippabledocker/ship_plv2pyt" imageTag="tip"
+#             - echo imageName=$imageName
+#             - echo imageTag=$imageTag
+#             - popd
+#             - echo imageTag=$imageTag
+#             - echo imageName=$imageName
+#             - echo "------------------------------------------- DONE WITH IMAGE RESOURCE -----------------------------------------"
             
             - echo "-------------------------------------------- GITREPO RESOURCE ----------------------------------------------"
             - pushd $res_ar_gitRepo_resourcePath
