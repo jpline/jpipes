@@ -152,7 +152,7 @@ pipelines:
           #  - name: ar_fileSpec #failing since no correct data for this
             - name: ar_gitRepo
              # trigger: false
-            #- name: ar_image
+            - name: ar_image
             - name: ar_kubeCluster
             - name: ar_releaseBundle
             - name: ar_remoteFile
