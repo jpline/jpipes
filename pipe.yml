@@ -5,10 +5,6 @@ pipelines:
         type: Bash
         configuration:
           nodePool: varsha_u16
-          integrations:
-            - name: varsha_slack
-          inputResources:
-            - name: ip_gitRepo
           runtime:            
             type: image
             image:
@@ -23,19 +19,3 @@ pipelines:
             - mvn --version
             - ant -version 
             - gradle --version 
-          onComplete: 
-            - echo "Ah! done"
-            - send_notification varsha_slack
-            
-resources:
-  - name: ip_gitRepo
-    type: GitRepo
-    configuration:
-      gitProvider: varsha_github
-      path: jpline/sample-script
-      buildOn:
-         commit: true
-         pullRequestCreate: true
-         pullRequestClose: true
-         releaseCreate: true
-         tagCreate: true
