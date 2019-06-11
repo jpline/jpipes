@@ -518,7 +518,7 @@ pipelines:
 
   - name: varsha_ar_in_a_bash
     steps:
-      - name: input_res_bash
+      - name: input_img_bash
         type: Bash
         configuration:
           nodePool: varsha_u16
