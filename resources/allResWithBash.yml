@@ -705,8 +705,8 @@ pipelines:
           targetRepo: promote_docker_testvarsha
           integrations:
             - name: varsha_artifactory
-          inputSteps:
-            - name: ns_publish_build
+          inputResources:
+            - name: ns_buildInfo
           outputResources:
             - name: ns_promotedInfo
       
