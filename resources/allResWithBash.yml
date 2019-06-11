@@ -138,7 +138,7 @@ pipelines:
       - name: input_img_bash
         type: Bash
         configuration:
-          nodePool: varsha_u16
+          nodePool: varsha_u18
           environmentVariables:
             ENV1: value1
             ENV2: value2
