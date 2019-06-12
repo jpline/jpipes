@@ -165,7 +165,7 @@ pipelines:
                 name: drydock/u16java
                 tag: master
               #  options: ''
-              #  autoPull: false
+               # autoPull: false
 #               auto:
 #                 language: java
 #                 versions: 
